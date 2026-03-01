@@ -174,14 +174,9 @@
         </label>
       </div>
 
-      <!--
-        Replace these URLs with your Stripe Payment Links:
-        data-mac-url  = Stripe Payment Link for macOS
-        data-linux-url = Stripe Payment Link for Linux
-      -->
-      <a href="#" class="btn-buy" id="buy-btn"
-         data-mac-url="#"
-         data-linux-url="#">Buy Now</a>
+      <a href="https://buy.stripe.com/test_fZu8wQ85D8pLcU58mt8N202" class="btn-buy" id="buy-btn"
+         data-mac-url="https://buy.stripe.com/test_fZu8wQ85D8pLcU58mt8N202"
+         data-linux-url="https://buy.stripe.com/test_6oUfZi85D21n8DP5ah8N201">Buy Now</a>
     </div>
   </div>
 
@@ -189,10 +184,20 @@
   (function () {
     var radios = document.querySelectorAll('input[name="platform"]');
     var btn = document.getElementById("buy-btn");
+
+    function updateLink() {
+      var selected = document.querySelector('input[name="platform"]:checked');
+      if (selected) {
+        btn.href = selected.value === "mac" ? btn.dataset.macUrl : btn.dataset.linuxUrl;
+      }
+    }
+
+    // Set the correct link on page load
+    updateLink();
+
+    // Update when the user changes selection
     radios.forEach(function (r) {
-      r.addEventListener("change", function () {
-        btn.href = r.value === "mac" ? btn.dataset.macUrl : btn.dataset.linuxUrl;
-      });
+      r.addEventListener("change", updateLink);
     });
   })();
   </script>
