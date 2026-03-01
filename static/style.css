@@ -256,6 +256,47 @@ section {
   margin: 0 auto;
 }
 
+/* ---- Knowledge Base section ---- */
+
+.kb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.kb-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+}
+
+.kb-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.kb-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.kb-item p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.kb-note {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 32px;
+  font-style: italic;
+}
+
 /* ---- Pricing ---- */
 
 .pricing-cards {
@@ -457,6 +498,13 @@ footer .footer-links {
     grid-template-columns: 1fr;
     gap: 24px;
   }
+
+  .kb-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .kb-item { padding: 22px 18px; }
 
   .pricing-card { padding: 28px 20px; }
   .pricing-card .price { font-size: 36px; }
