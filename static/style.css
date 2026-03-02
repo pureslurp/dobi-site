@@ -327,6 +327,15 @@ section {
 
 /* ---- Pricing ---- */
 
+#pricing {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+#pricing .section-subtitle {
+  margin-bottom: 28px;
+}
+
 .pricing-cards {
   max-width: 440px;
   margin: 0 auto;
@@ -336,45 +345,45 @@ section {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 36px 28px;
+  padding: 28px 28px 24px;
   text-align: center;
 }
 
 .pricing-card h3 {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .pricing-card .platform {
   font-size: 13px;
   color: var(--text-dim);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .pricing-card .price {
-  font-size: 44px;
+  font-size: 40px;
   font-weight: 800;
   color: var(--accent);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .pricing-card .price-note {
   font-size: 13px;
   color: var(--text-dim);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .pricing-card ul {
   list-style: none;
   text-align: left;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .pricing-card li {
   font-size: 14px;
   color: var(--text-dim);
-  padding: 6px 0;
+  padding: 5px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -407,7 +416,7 @@ section {
 /* UPDATED: Fulfillment note (simplified) */
 .fulfillment-note {
   max-width: 440px;
-  margin: 36px auto 0;
+  margin: 24px auto 0;
   padding: 14px 20px;
   background: var(--surface2);
   border: 1px solid var(--border);
@@ -598,7 +607,7 @@ footer .footer-links {
 .platform-select {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   justify-content: center;
 }
 
