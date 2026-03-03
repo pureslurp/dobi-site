@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DoBi — Your Offline AI Survival Expert</title>
-<meta name="description" content="DoBi is a fully offline AI survival assistant. Plug in the SSD, ask anything about survival. No internet required. Ships with 20,000+ pages of expert material and lets you upload your own PDFs to build a personal knowledge base.">
+<meta name="description" content="DoBi is a fully offline AI survival assistant. Download it, get it on a plug-and-play SSD, or order a pre-built mini PC. No internet required. Includes 20,000+ pages of expert material and lets you upload your own PDFs to build a personal knowledge base.">
 <link rel="stylesheet" href="static/style.css">
 <link rel="icon" href="static/dobi-avatar.png">
 </head>
@@ -30,13 +30,13 @@
   <h1>Meet <span class="highlight">DoBi</span></h1>
   <p class="tagline">Your offline AI survival expert.</p>
   <p class="hero-detail">
-    A plug-and-play AI assistant that runs entirely on your machine &mdash;
-    no internet, no cloud, no subscriptions. Built on a powerful pre-trained AI model
+    A fully offline AI assistant that runs entirely on your machine.
+    No internet, no cloud, no subscriptions. Built on a powerful pre-trained AI model
     and enhanced with over <strong>20,000 pages</strong> of expert survival
-    material &mdash; and you can expand it anytime by uploading your own PDFs.
+    material. You can expand it anytime by uploading your own PDFs.
+    Available as a download, a plug-and-play SSD, or a pre-built mini computer.
   </p>
-  <a href="#pricing" class="hero-cta">Get DoBi &mdash; $199</a>
-  <!-- UPDATED: Shipping context below CTA -->
+  <a href="#pricing" class="hero-cta">See Options</a>
 </div>
 
 <!-- Features -->
@@ -50,7 +50,7 @@
     <div class="feature-card">
       <div class="feature-icon">&#128274;</div>
       <h3>100% Offline</h3>
-      <p>No internet, no cloud, no phone-home. Everything runs locally on your machine from a portable SSD. Your data stays yours.</p>
+      <p>No internet, no cloud, no phone-home. Everything runs locally on your machine. Your data stays yours.</p>
     </div>
 
     <div class="feature-card">
@@ -61,8 +61,8 @@
 
     <div class="feature-card">
       <div class="feature-icon">&#9889;</div>
-      <h3>Plug and Play</h3>
-      <p>Plug the SSD into any Mac or Linux machine. DoBi opens right in your browser. When new versions are released, you'll be notified with updated files and simple instructions &mdash; free for every owner.</p>
+      <h3>One-Click Launch</h3>
+      <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click on any Mac or Linux machine. When new versions are released, you'll be notified with updated files and simple instructions, free for every owner.</p>
     </div>
 
     <div class="feature-card">
@@ -92,16 +92,15 @@
     <p class="section-subtitle">Three steps. No internet. No accounts. No nonsense.</p>
 
     <div class="steps">
-      <!-- UPDATED: Fulfillment transparency details -->
       <div class="step">
         <div class="step-number">1</div>
-        <h3>Order Your SSD</h3>
-        <p>Pick Mac or Linux and we'll ship a pre-loaded 1&nbsp;TB portable SSD straight to your door.</p>
+        <h3>Choose Your Edition</h3>
+        <p>Download the DoBi&nbsp;OS ZIP, order a pre-loaded SSD, or inquire about a DoBi&nbsp;Nitro mini&nbsp;PC. Pick whatever fits your setup.</p>
       </div>
       <div class="step">
         <div class="step-number">2</div>
-        <h3>Plug It In</h3>
-        <p>Connect the SSD to any compatible machine. DoBi auto-configures in about a minute on first run.</p>
+        <h3>One Click to Launch</h3>
+        <p>No matter which option you choose, DoBi starts with a single click. It auto-configures for your hardware in about a minute on first run.</p>
       </div>
       <div class="step">
         <div class="step-number">3</div>
@@ -136,7 +135,7 @@
       <div class="kb-item">
         <div class="kb-icon">&#128274;</div>
         <h3>Private &amp; Manageable</h3>
-        <p>All processing happens locally &mdash; your files never leave the SSD. View everything in your knowledge base, remove what you don't need, and add new material whenever you want.</p>
+        <p>All processing happens locally. Your files never leave your machine. View everything in your knowledge base, remove what you don't need, and add new material whenever you want.</p>
       </div>
     </div>
 
@@ -146,67 +145,123 @@
 
 <!-- Pricing -->
 <section id="pricing">
-  <h2 class="section-title">Get DoBi</h2>
-  <p class="section-subtitle">One SSD. One price. No subscriptions, no recurring fees, no hidden costs. It's yours forever.</p>
+  <h2 class="section-title">Choose Your Edition</h2>
+  <p class="section-subtitle">One-time purchase. No subscriptions, no recurring fees, no hidden costs. It's yours forever.</p>
 
   <div class="pricing-cards">
+
+    <!-- DoBi OS -->
     <div class="pricing-card">
-      <h3>DoBi Survival Assistant &mdash; V1.0</h3>
-      <p class="platform">1 TB Portable SSD &mdash; Mac or Linux</p>
+      <h3>DoBi OS</h3>
+      <p class="platform">Downloadable ZIP for Mac or Linux</p>
+      <div class="price">$99</div>
+      <p class="price-note">One-time purchase &bull; Instant download</p>
+      <ul>
+        <li>Download a ZIP, extract (~25GB), and one-click to run</li>
+        <li>All three AI model tiers included</li>
+        <li>Use your own storage (no hardware shipped)</li>
+        <li>Instant access after purchase</li>
+      </ul>
+
+      <div class="platform-select">
+        <label class="platform-option">
+          <input type="radio" name="platform-os" value="mac" checked>
+          <span>Mac</span>
+        </label>
+        <label class="platform-option">
+          <input type="radio" name="platform-os" value="linux">
+          <span>Linux</span>
+        </label>
+      </div>
+
+      <a href="#" class="btn-buy" id="buy-btn-os"
+         data-mac-url="YOUR_STRIPE_LINK_OS_MAC"
+         data-linux-url="YOUR_STRIPE_LINK_OS_LINUX">Buy Now</a>
+    </div>
+
+    <!-- DoBi (Most Popular) -->
+    <div class="pricing-card featured">
+      <span class="popular-badge">Most Popular</span>
+      <h3>DoBi</h3>
+      <p class="platform">1 TB Portable SSD for Mac or Linux</p>
       <div class="price">$199</div>
       <p class="price-note">One-time purchase &bull; Free shipping</p>
       <ul>
         <li>1 TB portable SSD, pre-loaded and ready to go</li>
         <li>All three AI model tiers included</li>
-        <li>20,000+ pages of survival knowledge &mdash; expandable with your own PDFs</li>
-        <li>Auto-detects your hardware for best performance</li>
-        <li>Works offline &mdash; forever</li>
-        <li>Free updates &mdash; new versions delivered with simple instructions</li>
+        <li>Plug into any Mac or Linux and go instantly</li>
+        <li>ships within 5&ndash;7 business days</li>
       </ul>
 
       <div class="platform-select">
         <label class="platform-option">
-          <input type="radio" name="platform" value="mac" checked>
+          <input type="radio" name="platform-ssd" value="mac" checked>
           <span>Mac</span>
         </label>
         <label class="platform-option">
-          <input type="radio" name="platform" value="linux">
+          <input type="radio" name="platform-ssd" value="linux">
           <span>Linux</span>
         </label>
       </div>
 
-      <a href="https://buy.stripe.com/test_fZu8wQ85D8pLcU58mt8N202" class="btn-buy" id="buy-btn"
+      <a href="https://buy.stripe.com/test_fZu8wQ85D8pLcU58mt8N202" class="btn-buy" id="buy-btn-ssd"
          data-mac-url="https://buy.stripe.com/test_fZu8wQ85D8pLcU58mt8N202"
          data-linux-url="https://buy.stripe.com/test_6oUfZi85D21n8DP5ah8N201">Buy Now</a>
     </div>
+
+    <!-- DoBi Nitro -->
+    <div class="pricing-card">
+      <h3>DoBi Nitro</h3>
+      <p class="platform">Pre-Built Mini PC, Built to Order</p>
+      <div class="price">$599+</div>
+      <p class="price-note">Custom-built to order &bull; By inquiry</p>
+      <ul>
+        <li>Dedicated mini PC with DoBi pre-installed</li>
+        <li>All three AI model tiers included</li>
+        <li>Hardware optimized for the best DoBi experience</li>
+        <li>Custom-built to your needs. Just plug in power.</li>
+      </ul>
+
+      <a href="contact.html" class="btn-inquiry">Request a Quote</a>
+    </div>
+
   </div>
 
   <script>
   (function () {
-    var radios = document.querySelectorAll('input[name="platform"]');
-    var btn = document.getElementById("buy-btn");
+    // DoBi OS platform selector
+    var osRadios = document.querySelectorAll('input[name="platform-os"]');
+    var osBtn = document.getElementById("buy-btn-os");
 
-    function updateLink() {
-      var selected = document.querySelector('input[name="platform"]:checked');
-      if (selected) {
-        btn.href = selected.value === "mac" ? btn.dataset.macUrl : btn.dataset.linuxUrl;
+    function updateOsLink() {
+      var selected = document.querySelector('input[name="platform-os"]:checked');
+      if (selected && osBtn) {
+        osBtn.href = selected.value === "mac" ? osBtn.dataset.macUrl : osBtn.dataset.linuxUrl;
       }
     }
 
-    // Set the correct link on page load
-    updateLink();
+    updateOsLink();
+    osRadios.forEach(function (r) { r.addEventListener("change", updateOsLink); });
 
-    // Update when the user changes selection
-    radios.forEach(function (r) {
-      r.addEventListener("change", updateLink);
-    });
+    // DoBi SSD platform selector
+    var ssdRadios = document.querySelectorAll('input[name="platform-ssd"]');
+    var ssdBtn = document.getElementById("buy-btn-ssd");
+
+    function updateSsdLink() {
+      var selected = document.querySelector('input[name="platform-ssd"]:checked');
+      if (selected && ssdBtn) {
+        ssdBtn.href = selected.value === "mac" ? ssdBtn.dataset.macUrl : ssdBtn.dataset.linuxUrl;
+      }
+    }
+
+    updateSsdLink();
+    ssdRadios.forEach(function (r) { r.addEventListener("change", updateSsdLink); });
   })();
   </script>
 
-  <!-- UPDATED: Shipping & Fulfillment disclaimer -->
   <div class="fulfillment-note">
     <h3>Shipping &amp; Fulfillment</h3>
-    <p>Every DoBi ships within <strong>5&ndash;7 business days</strong> from Michigan, USA. Each unit comes with a premium 1&nbsp;TB portable SSD selected for the best current availability and value&mdash;always reliable, fast, and 100% compatible with Mac or Linux. We hand-prepare every unit; no specific SSD model is guaranteed, but quality and performance are. Standard manufacturer SSD warranties apply. No returns on pre-loaded software&mdash;if DoBi doesn&rsquo;t work on your hardware, <a href="contact.html">contact us</a> within 30 days for a full refund.</p>
+    <p><strong>DoBi&nbsp;OS</strong> is available as an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5&ndash;7 business days</strong> from Michigan, USA. Each unit comes with a premium 1&nbsp;TB portable SSD, hand-prepared and 100% compatible with Mac or Linux. <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. If DoBi doesn&rsquo;t work on your hardware, <a href="contact.html">reach out</a> within 30&nbsp;days for a full refund.</p>
   </div>
 </section>
 
