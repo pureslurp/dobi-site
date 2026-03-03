@@ -9,6 +9,9 @@
   --text: #e0e0e0;
   --text-dim: #888;
   --border: #2a2a4a;
+  --user-bg: #0f3460;
+  --bot-bg: #1e2d4a;
+  --input-bg: #16213e;
 }
 
 html {
@@ -690,6 +693,559 @@ footer .footer-links {
   accent-color: var(--accent);
 }
 
+/* ---- App Demo Section ---- */
+
+#demo {
+  max-width: none;
+  background: var(--bg);
+  padding: 80px 24px;
+}
+
+#demo .section-title,
+#demo .section-subtitle {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Window frame */
+.demo-window {
+  max-width: 1060px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+.demo-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #0d0d1a;
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.demo-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.demo-dot.red { background: #ff5f56; }
+.demo-dot.yellow { background: #ffbd2e; }
+.demo-dot.green { background: #27c93f; }
+
+.demo-titlebar-text {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* App container inside window */
+.demo-app {
+  display: flex;
+  flex-direction: column;
+  height: 560px;
+  background: var(--bg);
+}
+
+/* Header bar */
+.demo-header {
+  padding: 10px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.demo-hamburger {
+  color: var(--text-dim);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.demo-header-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.demo-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.demo-model-badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  background: var(--surface2);
+  border-radius: 10px;
+  color: var(--text-dim);
+}
+
+.demo-model-badge::after {
+  content: " \25BE";
+  font-size: 9px;
+}
+
+.demo-subtitle {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-left: auto;
+}
+
+.demo-new-chat {
+  padding: 5px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* App body (sidebar + main) */
+.demo-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.demo-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.demo-search-wrap {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.demo-search {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-dim);
+  font-size: 12px;
+  font-family: inherit;
+}
+
+.demo-conv-list {
+  flex: 1;
+  overflow: hidden;
+  padding: 6px;
+}
+
+.demo-conv-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  border-left: 3px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.demo-conv-item.active {
+  background: var(--surface2);
+  border-left-color: var(--accent);
+}
+
+.demo-conv-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.demo-conv-meta {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* KB section in sidebar */
+.demo-kb-section {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  position: relative;
+  transition: box-shadow 0.35s ease;
+}
+
+.demo-kb-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.demo-kb-arrow {
+  font-size: 9px;
+  transition: transform 0.2s;
+}
+
+.demo-kb-arrow.open {
+  transform: rotate(180deg);
+}
+
+.demo-kb-body {
+  display: none;
+  flex-direction: column;
+  padding: 0 10px 10px;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+.demo-kb-body.open {
+  display: flex;
+}
+
+.demo-kb-sub-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 4px 4px;
+}
+
+.demo-kb-cat-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-dim);
+  padding: 5px 6px 3px;
+  margin-top: 2px;
+  border-radius: 5px;
+}
+
+.demo-kb-cat-arrow {
+  font-size: 9px;
+}
+
+.demo-kb-file {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.demo-kb-file-icon {
+  flex-shrink: 0;
+  color: var(--accent-dim);
+  font-size: 13px;
+}
+
+.demo-kb-file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.demo-kb-file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+  font-size: 11px;
+}
+
+.demo-kb-file-meta {
+  font-size: 9px;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
+
+.demo-kb-file-delete {
+  color: var(--text-dim);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.demo-kb-dropzone {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin: 6px 0;
+}
+
+.demo-kb-dropzone-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+  display: block;
+}
+
+/* Main content area */
+.demo-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.demo-chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demo-chat-content {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demo-chat-content.active {
+  display: flex;
+}
+
+.demo-msg {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 16px;
+  border-radius: 12px;
+  line-height: 1.6;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.demo-msg.demo-user {
+  background: var(--user-bg);
+  border-bottom-right-radius: 4px;
+}
+
+.demo-msg.demo-bot {
+  background: var(--bot-bg);
+  border-bottom-left-radius: 4px;
+}
+
+.demo-msg.demo-bot strong {
+  font-weight: 600;
+}
+
+.demo-msg.demo-bot ol,
+.demo-msg.demo-bot ul {
+  margin: 6px 0;
+  padding-left: 22px;
+}
+
+.demo-msg.demo-bot li {
+  margin: 3px 0;
+}
+
+.demo-rag-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--accent-dim);
+  margin-bottom: 6px;
+}
+
+.demo-sources {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* Input bar */
+.demo-input-area {
+  padding: 12px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.demo-input-form {
+  display: flex;
+  gap: 8px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.demo-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  color: var(--text-dim);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.demo-send {
+  padding: 0 18px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+/* Tab pills */
+.demo-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  max-width: 1060px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+}
+
+.demo-tab {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+
+.demo-tab:hover {
+  border-color: var(--accent-dim);
+  color: var(--text);
+}
+
+.demo-tab.active {
+  background: var(--accent);
+  color: #111;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Tab blurb */
+.demo-tab-blurb {
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-dim);
+  margin: 12px auto 0;
+  max-width: 1060px;
+}
+
+/* ---- Focus highlight / dim system ---- */
+.demo-sidebar,
+.demo-main {
+  position: relative;
+  transition: opacity 0.35s ease;
+}
+
+/* Floating annotation label */
+.demo-annotation {
+  position: absolute;
+  z-index: 10;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #111;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+/* Annotation positions */
+.demo-kb-section .demo-annotation {
+  top: -12px;
+  right: 8px;
+}
+
+.demo-main .demo-annotation {
+  top: 8px;
+  left: 16px;
+}
+
+/* Glow on highlighted region */
+.demo-body.focus-chat .demo-main,
+.demo-body.focus-sidebar .demo-sidebar {
+  box-shadow: inset 0 0 0 2px rgba(83, 215, 105, 0.35), 0 0 24px rgba(83, 215, 105, 0.08);
+}
+
+/* Dim non-featured region */
+.demo-body.focus-chat .demo-sidebar {
+  opacity: 0.4;
+}
+
+.demo-body.focus-sidebar .demo-main {
+  opacity: 0.4;
+}
+
+/* KB focus: glow KB section + main, dim conv list */
+.demo-body.focus-kb .demo-kb-section,
+.demo-body.focus-kb .demo-main {
+  box-shadow: inset 0 0 0 2px rgba(83, 215, 105, 0.35), 0 0 24px rgba(83, 215, 105, 0.08);
+}
+
+.demo-body.focus-kb .demo-conv-list,
+.demo-body.focus-kb .demo-search-wrap {
+  opacity: 0.4;
+  transition: opacity 0.35s ease;
+}
+
+/* Show annotation labels when focused */
+.demo-body.focus-chat .demo-main .demo-annotation,
+.demo-body.focus-sidebar .demo-sidebar .demo-annotation,
+.demo-body.focus-kb .demo-kb-section .demo-annotation {
+  opacity: 1;
+}
+
 /* ---- Responsive ---- */
 
 @media (max-width: 768px) {
@@ -762,4 +1318,63 @@ footer .footer-links {
   .form-group input,
   .form-group select,
   .form-group textarea { padding: 11px 14px; font-size: 14px; }
+
+  /* Demo section responsive */
+  #demo { padding: 48px 12px; }
+
+  .demo-sidebar { display: none; }
+
+  .demo-app { height: 500px; }
+
+  .demo-titlebar { padding: 8px 14px; }
+  .demo-dot { width: 10px; height: 10px; }
+
+  .demo-header { padding: 8px 12px; gap: 8px; }
+  .demo-header .demo-subtitle { display: none; }
+  .demo-header .demo-new-chat { display: none; }
+  .demo-header .demo-model-badge { font-size: 10px; padding: 2px 6px; }
+  .demo-header-avatar { width: 24px; height: 24px; }
+  .demo-logo { font-size: 17px; }
+
+  .demo-chat { padding: 12px; gap: 10px; }
+  .demo-msg { font-size: 13px; padding: 10px 12px; }
+  .demo-msg.demo-bot ol,
+  .demo-msg.demo-bot ul { padding-left: 18px; }
+  .demo-msg.demo-bot li { font-size: 12px; }
+
+  .demo-input-area { padding: 8px 12px; }
+  .demo-input { font-size: 13px; padding: 8px 12px; }
+  .demo-send { font-size: 13px; padding: 0 14px; }
+
+  .demo-tabs { gap: 6px; }
+  .demo-tab { padding: 7px 14px; font-size: 13px; }
+
+  .demo-tab-blurb { font-size: 13px; }
+
+  /* Remove focus glow/dim on mobile */
+  .demo-annotation { display: none; }
+  .demo-body.focus-chat .demo-sidebar,
+  .demo-body.focus-kb .demo-conv-list,
+  .demo-body.focus-kb .demo-search-wrap { opacity: 1; }
+  .demo-body.focus-chat .demo-main,
+  .demo-body.focus-sidebar .demo-sidebar,
+  .demo-body.focus-kb .demo-sidebar,
+  .demo-body.focus-kb .demo-main,
+  .demo-body.focus-kb .demo-kb-section { box-shadow: none; }
+
+  /* Conversations tab: show sidebar full-width, hide chat */
+  .demo-body.focus-sidebar .demo-sidebar {
+    display: flex;
+    width: 100%;
+    opacity: 1;
+  }
+  .demo-body.focus-sidebar .demo-main {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .demo-tab { padding: 6px 10px; font-size: 12px; }
+  .demo-tab-blurb { font-size: 12px; }
+  .demo-titlebar-text { font-size: 11px; }
 }
