@@ -337,8 +337,12 @@ section {
 }
 
 .pricing-cards {
-  max-width: 440px;
+  max-width: 1000px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
 }
 
 .pricing-card {
@@ -347,6 +351,55 @@ section {
   border-radius: 14px;
   padding: 28px 28px 24px;
   text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card .btn-buy,
+.pricing-card .btn-inquiry {
+  margin-top: auto;
+}
+
+.pricing-card.featured {
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 24px rgba(83, 215, 105, 0.12);
+  transform: scale(1.03);
+}
+
+.popular-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn-inquiry {
+  display: inline-block;
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid var(--accent);
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-inquiry:hover {
+  background: var(--accent);
+  color: #111;
 }
 
 .pricing-card h3 {
@@ -378,6 +431,7 @@ section {
   list-style: none;
   text-align: left;
   margin-bottom: 20px;
+  flex: 1;
 }
 
 .pricing-card li {
@@ -413,9 +467,9 @@ section {
   color: #fff;
 }
 
-/* UPDATED: Fulfillment note (simplified) */
+/* Fulfillment note */
 .fulfillment-note {
-  max-width: 440px;
+  max-width: 1000px;
   margin: 24px auto 0;
   padding: 14px 20px;
   background: var(--surface2);
@@ -685,8 +739,17 @@ footer .footer-links {
 
   .kb-item { padding: 22px 18px; }
 
+  .pricing-cards {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+  }
+
   .pricing-card { padding: 28px 20px; }
   .pricing-card .price { font-size: 36px; }
+
+  .pricing-card.featured {
+    transform: none;
+  }
 
   .step-detail { max-width: 100%; }
 
