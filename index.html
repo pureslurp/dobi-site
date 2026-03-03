@@ -143,6 +143,285 @@
   </div>
 </section>
 
+<!-- App Demo -->
+<section id="demo">
+  <h2 class="section-title">See DoBi in Action</h2>
+  <p class="section-subtitle">A real look at the interface. Browse conversations, ask questions, and manage your knowledge base&nbsp;&mdash; all offline.</p>
+
+  <div class="demo-window">
+    <div class="demo-titlebar">
+      <div class="demo-dots">
+        <span class="demo-dot red"></span>
+        <span class="demo-dot yellow"></span>
+        <span class="demo-dot green"></span>
+      </div>
+      <span class="demo-titlebar-text">DoBi &mdash; Offline Survival Assistant</span>
+    </div>
+
+    <div class="demo-app">
+      <!-- Header -->
+      <div class="demo-header">
+        <span class="demo-hamburger">&#9776;</span>
+        <img src="static/dobi-avatar.png" alt="DoBi" class="demo-header-avatar">
+        <span class="demo-logo">DoBi</span>
+        <span class="demo-model-badge">Full (8B)</span>
+        <span class="demo-subtitle">Offline Survival Assistant</span>
+        <span class="demo-new-chat">New Chat</span>
+      </div>
+
+      <div class="demo-body">
+        <!-- Sidebar -->
+        <div class="demo-sidebar">
+          <div class="demo-search-wrap">
+            <div class="demo-search">Search conversations...</div>
+          </div>
+
+          <div class="demo-conv-list" id="demo-conv-list">
+            <div class="demo-conv-item" data-demo-conv="0">
+              <div class="demo-conv-title">How do I preserve and store foo...</div>
+              <div class="demo-conv-meta">just now &middot; 4 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">How do I make my home more s...</div>
+              <div class="demo-conv-meta">just now &middot; 4 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">How do I heat my house and coo...</div>
+              <div class="demo-conv-meta">just now &middot; 6 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">How do I ration my food, water, ...</div>
+              <div class="demo-conv-meta">just now &middot; 2 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">How can I protect my home with...</div>
+              <div class="demo-conv-meta">just now &middot; 2 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">How do I handle toilets and tras...</div>
+              <div class="demo-conv-meta">just now &middot; 6 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">How can I get or save power for l...</div>
+              <div class="demo-conv-meta">just now &middot; 2 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">What should I do in the first few...</div>
+              <div class="demo-conv-meta">just now &middot; 2 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="none">
+              <div class="demo-conv-title">What can I use from home if I ru...</div>
+              <div class="demo-conv-meta">just now &middot; 2 msg</div>
+            </div>
+            <div class="demo-conv-item" data-demo-conv="1">
+              <div class="demo-conv-title">How can I safely purify and stor...</div>
+              <div class="demo-conv-meta">just now &middot; 2 msg</div>
+            </div>
+          </div>
+
+          <!-- KB section — collapsed state (tabs 0-1) -->
+          <div class="demo-kb-section" id="demo-kb-collapsed">
+            <div class="demo-kb-toggle">
+              <span>Knowledge Base</span>
+              <span class="demo-kb-arrow">&#9660;</span>
+            </div>
+          </div>
+
+          <!-- KB section — expanded state (tab 2) -->
+          <div class="demo-kb-section" id="demo-kb-expanded" style="display:none;">
+            <span class="demo-annotation" id="demo-annot-kb">Upload Your PDFs</span>
+            <div class="demo-kb-toggle">
+              <span>Knowledge Base</span>
+              <span class="demo-kb-arrow open">&#9660;</span>
+            </div>
+            <div class="demo-kb-body open">
+              <div class="demo-kb-sub-label">
+                <span>Included</span>
+                <span class="demo-kb-arrow">&#9660;</span>
+              </div>
+
+              <div class="demo-kb-sub-label" style="margin-top:6px">Your Uploads</div>
+              <div class="demo-kb-dropzone">
+                <span class="demo-kb-dropzone-icon">&#128196;</span>
+                Drop a PDF here or click to upload
+              </div>
+              <div class="demo-kb-file">
+                <span class="demo-kb-file-icon">&#128196;</span>
+                <div class="demo-kb-file-info">
+                  <div class="demo-kb-file-name">My Emergency Plan.pdf</div>
+                  <div class="demo-kb-file-meta">2.4 MB &middot; just now</div>
+                </div>
+                <span class="demo-kb-file-delete">&times;</span>
+              </div>
+              <div class="demo-kb-file">
+                <span class="demo-kb-file-icon">&#128196;</span>
+                <div class="demo-kb-file-info">
+                  <div class="demo-kb-file-name">Family Medical Reference.pdf</div>
+                  <div class="demo-kb-file-meta">5.1 MB &middot; just now</div>
+                </div>
+                <span class="demo-kb-file-delete">&times;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="demo-main">
+          <span class="demo-annotation" id="demo-annot-main">Chat Interface</span>
+          <div class="demo-chat">
+
+            <!-- Tab 0: Chat (Preserve Food example) -->
+            <div class="demo-chat-content active" data-demo-tab="0">
+              <div class="demo-msg demo-user">How do I preserve and store food long-term without fancy equipment?</div>
+              <div class="demo-msg demo-bot">
+                Preserving and storing food long-term doesn't require fancy equipment! Here are some simple, effective methods to help you preserve and store your food:
+                <ol>
+                  <li><strong>Canning:</strong> This is a popular method for preserving fruits, vegetables, meats, and soups. You'll need a large pot, jars with lids and bands, and a canning funnel. Sterilize the jars, fill them with prepared food, and seal them while they're still hot.</li>
+                  <li><strong>Dehydrating:</strong> Remove moisture from foods like fruits, vegetables, meats, and herbs using low-temperature heat (150&deg;F &ndash; 200&deg;F) or air circulation. You can use a dehydrator or your oven on the lowest temperature setting with the door slightly open.</li>
+                  <li><strong>Fermenting:</strong> Fermenting creates lactic acid, which acts as a natural preservative. This method works well for vegetables, fruits, and dairy products like yogurt and sauerkraut.</li>
+                  <li><strong>Pickling:</strong> Soak food in a brine solution (vinegar, salt, water) to create an acidic environment that inhibits bacterial growth. This method is great for vegetables, fruits, and meats.</li>
+                  <li><strong>Freezing:</strong> Freeze foods like meats, fish, fruits, and vegetables at 0&deg;F (&minus;18&deg;C) or lower. Use freezer bags, airtight containers, or vacuum-sealed bags to prevent moisture and air from entering.</li>
+                  <li><strong>Smoking:</strong> Smoke food over low heat (100&deg;F &ndash; 200&deg;F) for several hours to preserve it. This method works well for meats like bacon, ham, and fish.</li>
+                  <li><strong>Root Cellaring:</strong> Store root vegetables like potatoes, carrots, and beets in a cool, dark place with high humidity (around 80&ndash;90%). You can use a basement or garage.</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- Tab 1: Conversations (Purify Water example) -->
+            <div class="demo-chat-content" data-demo-tab="1">
+              <div class="demo-msg demo-user">How can I safely purify and store drinking water?</div>
+              <div class="demo-msg demo-bot">
+                According to the text, here are some steps you can follow to safely purify and store drinking water:
+                <br><br><strong>Purification Methods:</strong>
+                <ol>
+                  <li><strong>Boiling:</strong> Bring the water to a rolling boil for 1 full minute.</li>
+                  <li><strong>Chlorination:</strong> Add 8 drops (1/8 teaspoon) of unscented chlorine bleach per gallon of clear water, stir, and let stand for 30 minutes.</li>
+                  <li><strong>Distillation:</strong> Fill a pot halfway with water, tie a cup to the handle on the lid, boil for 20 minutes, and collect the distilled vapor.</li>
+                </ol>
+                <strong>Storage Containers:</strong>
+                <ol>
+                  <li>Use food-grade water storage containers from surplus or camping supplies stores.</li>
+                  <li>Sanitize the containers by immersing them in a solution of 1 tablespoon of chlorine bleach per gallon of water for 2 minutes before filling with water.</li>
+                </ol>
+                <strong>Additional Tips:</strong>
+                <ol>
+                  <li>Add 4 drops of unscented chlorine bleach per gallon as a preservative to ensure the water remains safe to drink for at least one year.</li>
+                  <li>Store containers in a cool, dark place to prevent degradation.</li>
+                  <li>Label and date each container so you can keep track of how long it has been stored.</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- Tab 2: Knowledge Base -->
+            <div class="demo-chat-content" data-demo-tab="2">
+              <div class="demo-msg demo-user">My daughter has an infected wound. Based on our family medical reference file, what antibiotics are safe for her?</div>
+              <div class="demo-msg demo-bot">
+                <div class="demo-rag-badge">knowledge base</div>
+                According to your <strong>Family Medical Reference.pdf</strong>, your daughter has a documented <strong>penicillin allergy</strong> (noted as causing hives and swelling). Here are the safe alternatives listed in her file:
+                <br><br><strong>Safe Antibiotic Options:</strong>
+                <ol>
+                  <li><strong>Azithromycin (Z-Pack):</strong> Your file notes this was previously prescribed for her with no adverse reaction. Suitable for skin and soft-tissue infections.</li>
+                  <li><strong>Clindamycin:</strong> Listed as a recommended alternative in her allergy notes. Effective against many wound-related bacteria.</li>
+                  <li><strong>Trimethoprim-Sulfamethoxazole (Bactrim):</strong> Noted as safe in her records. Commonly used for skin infections including MRSA.</li>
+                </ol>
+                <strong>Antibiotics to Avoid:</strong>
+                <ul>
+                  <li><strong>All penicillins</strong> (amoxicillin, ampicillin) &mdash; documented allergy.</li>
+                  <li><strong>Cephalosporins</strong> &mdash; your file flags a potential cross-reactivity risk given her penicillin sensitivity.</li>
+                </ul>
+                <strong>From Her File:</strong> Her last allergic reaction was at age 6 (amoxicillin for an ear infection &mdash; resulted in hives within 2 hours). Her pediatrician recommended carrying this information in any emergency kit.
+                <div class="demo-sources">Sources: Family Medical Reference.pdf (0.96)</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Input bar -->
+          <div class="demo-input-area">
+            <div class="demo-input-form">
+              <div class="demo-input">Ask a survival question...</div>
+              <span class="demo-send">Send</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab pills -->
+  <div class="demo-tabs">
+    <button class="demo-tab active" data-demo-target="0">Chat</button>
+    <button class="demo-tab" data-demo-target="1">Conversations</button>
+    <button class="demo-tab" data-demo-target="2">Knowledge Base</button>
+  </div>
+  <p class="demo-tab-blurb" id="demo-blurb">Ask your question directly to DoBi.</p>
+
+  <script>
+  (function () {
+    var tabs = document.querySelectorAll(".demo-tab");
+    var contents = document.querySelectorAll(".demo-chat-content");
+    var convItems = document.querySelectorAll(".demo-conv-item");
+    var kbCollapsed = document.getElementById("demo-kb-collapsed");
+    var kbExpanded = document.getElementById("demo-kb-expanded");
+    var demoBody = document.querySelector(".demo-body");
+    var blurb = document.getElementById("demo-blurb");
+    var annotKb = document.getElementById("demo-annot-kb");
+    var annotMain = document.getElementById("demo-annot-main");
+
+    var focusClasses = ["focus-chat", "focus-sidebar", "focus-kb"];
+    var blurbs = [
+      "Ask your question directly to DoBi.",
+      "DoBi saves past conversation history and makes it searchable.",
+      "Users can upload their own PDFs to enhance DoBi\u2019s answers."
+    ];
+
+    function activate(tabIdx) {
+      var idx = parseInt(tabIdx, 10);
+
+      // Update tab pills
+      tabs.forEach(function (t) {
+        t.classList.toggle("active", t.dataset.demoTarget === tabIdx);
+      });
+
+      // Update chat content
+      contents.forEach(function (c) {
+        c.classList.toggle("active", c.dataset.demoTab === tabIdx);
+      });
+
+      // Update sidebar conversation highlights
+      convItems.forEach(function (ci) {
+        ci.classList.toggle("active", ci.dataset.demoConv === tabIdx);
+      });
+
+      // Toggle KB expanded/collapsed
+      if (idx === 2) {
+        kbCollapsed.style.display = "none";
+        kbExpanded.style.display = "";
+      } else {
+        kbCollapsed.style.display = "";
+        kbExpanded.style.display = "none";
+      }
+
+      // Apply focus class to demo-body
+      focusClasses.forEach(function (cls) { demoBody.classList.remove(cls); });
+      demoBody.classList.add(focusClasses[idx]);
+
+      // Update blurb
+      blurb.textContent = blurbs[idx];
+    }
+
+    // Initial state
+    activate("0");
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(this.dataset.demoTarget);
+      });
+    });
+  })();
+  </script>
+</section>
+
 <!-- Pricing -->
 <section id="pricing">
   <h2 class="section-title">Choose Your Edition</h2>
