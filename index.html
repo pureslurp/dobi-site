@@ -64,7 +64,7 @@
     <div class="feature-card">
       <div class="feature-icon">&#9889;</div>
       <h3>One-Click Launch</h3>
-      <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click on any Mac or Linux machine. Ongoing updates and improvements are included with your purchase and delivered as simple file updates with step-by-step instructions.</p>
+        <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click on any Mac, Linux, or Windows machine. Ongoing updates and improvements are included with your purchase and delivered as simple file updates with step-by-step instructions.</p>
     </div>
 
     <div class="feature-card">
@@ -440,7 +440,7 @@
     <!-- DoBi OS -->
     <div class="pricing-card">
       <h3>DoBi OS</h3>
-      <p class="platform">Downloadable ZIP for Mac or Linux</p>
+      <p class="platform">Downloadable ZIP for Mac, Linux, or Windows</p>
       <div class="price">$89</div>
       <p class="price-note">One-time purchase &bull; Instant download</p>
       <ul>
@@ -451,60 +451,79 @@
       </ul>
 
       <div class="platform-select">
-        <label class="platform-option">
-          <input type="radio" name="platform-os" value="mac" checked>
-          <span>Mac</span>
-        </label>
-        <label class="platform-option">
-          <input type="radio" name="platform-os" value="linux">
-          <span>Linux</span>
-        </label>
+        <div class="platform-row">
+          <label class="platform-option">
+            <input type="radio" name="platform-os" value="mac" checked>
+            <span>Mac</span>
+          </label>
+          <label class="platform-option">
+            <input type="radio" name="platform-os" value="linux">
+            <span>Linux</span>
+          </label>
+        </div>
+        <div class="platform-row">
+          <label class="platform-option platform-option-full platform-option-disabled">
+            <input type="radio" name="platform-os" value="windows" disabled>
+            <span>Windows <span class="coming-soon">(Coming Soon)</span></span>
+          </label>
+        </div>
       </div>
 
       <a href="#" class="btn-buy" id="buy-btn-os"
          data-mac-url="YOUR_STRIPE_LINK_OS_MAC"
-         data-linux-url="YOUR_STRIPE_LINK_OS_LINUX">Buy Now</a>
+         data-linux-url="YOUR_STRIPE_LINK_OS_LINUX"
+         data-windows-url="YOUR_STRIPE_LINK_OS_WINDOWS"
+         onclick="event.preventDefault(); showInstallModal(); return false;">Buy Now</a>
     </div>
 
     <!-- DoBi (Most Popular) -->
     <div class="pricing-card featured">
       <span class="popular-badge">Most Popular</span>
       <h3>DoBi</h3>
-      <p class="platform">1 TB Portable SSD for Mac or Linux</p>
+      <p class="platform">1 TB Portable SSD for Mac, Linux, or Windows</p>
       <div class="price">$199</div>
       <p class="price-note">One-time purchase &bull; Plus shipping</p>
       <ul>
         <li>1 TB portable SSD, pre-loaded and ready to go</li>
         <li>All three AI model tiers included</li>
-        <li>Plug into any Mac or Linux and go instantly</li>
+        <li>Plug into any Mac, Linux, or Windows and go instantly</li>
         <li>ships within 5&ndash;7 business days</li>
       </ul>
 
       <div class="platform-select">
-        <label class="platform-option">
-          <input type="radio" name="platform-ssd" value="mac" checked>
-          <span>Mac</span>
-        </label>
-        <label class="platform-option">
-          <input type="radio" name="platform-ssd" value="linux">
-          <span>Linux</span>
-        </label>
+        <div class="platform-row">
+          <label class="platform-option">
+            <input type="radio" name="platform-ssd" value="mac" checked>
+            <span>Mac</span>
+          </label>
+          <label class="platform-option">
+            <input type="radio" name="platform-ssd" value="linux">
+            <span>Linux</span>
+          </label>
+        </div>
+        <div class="platform-row">
+          <label class="platform-option platform-option-full platform-option-disabled">
+            <input type="radio" name="platform-ssd" value="windows" disabled>
+            <span>Windows <span class="coming-soon">(Coming Soon)</span></span>
+          </label>
+        </div>
       </div>
 
       <a href="https://buy.stripe.com/test_fZu8wQ85D8pLcU58mt8N202" class="btn-buy" id="buy-btn-ssd"
          data-mac-url="https://buy.stripe.com/test_fZu8wQ85D8pLcU58mt8N202"
-         data-linux-url="https://buy.stripe.com/test_6oUfZi85D21n8DP5ah8N201">Buy Now</a>
+         data-linux-url="https://buy.stripe.com/test_6oUfZi85D21n8DP5ah8N201"
+         data-windows-url="YOUR_STRIPE_LINK_SSD_WINDOWS">Buy Now</a>
     </div>
 
     <!-- DoBi Nitro -->
     <div class="pricing-card">
       <h3>DoBi Nitro</h3>
-      <p class="platform">Pre-Built Mini PC, Built to Order</p>
+      <p class="platform">Pre-Built Mini PC, Built to Order. No limits.</p>
       <div class="price">$699+</div>
       <p class="price-note">Custom-built to order &bull; By inquiry</p>
       <ul>
         <li>Dedicated mini PC with DoBi pre-installed</li>
-        <li>All three AI model tiers included</li>
+        <li>Advanced AI model tiers available</li>
         <li>Hardware optimized for the best DoBi experience</li>
         <li>Custom-built to your needs. Just plug in power.</li>
       </ul>
@@ -523,7 +542,13 @@
     function updateOsLink() {
       var selected = document.querySelector('input[name="platform-os"]:checked');
       if (selected && osBtn) {
-        osBtn.href = selected.value === "mac" ? osBtn.dataset.macUrl : osBtn.dataset.linuxUrl;
+        if (selected.value === "mac") {
+          osBtn.href = osBtn.dataset.macUrl;
+        } else if (selected.value === "linux") {
+          osBtn.href = osBtn.dataset.linuxUrl;
+        } else if (selected.value === "windows") {
+          osBtn.href = osBtn.dataset.windowsUrl;
+        }
       }
     }
 
@@ -537,18 +562,97 @@
     function updateSsdLink() {
       var selected = document.querySelector('input[name="platform-ssd"]:checked');
       if (selected && ssdBtn) {
-        ssdBtn.href = selected.value === "mac" ? ssdBtn.dataset.macUrl : ssdBtn.dataset.linuxUrl;
+        if (selected.value === "mac") {
+          ssdBtn.href = ssdBtn.dataset.macUrl;
+        } else if (selected.value === "linux") {
+          ssdBtn.href = ssdBtn.dataset.linuxUrl;
+        } else if (selected.value === "windows") {
+          ssdBtn.href = ssdBtn.dataset.windowsUrl;
+        }
       }
     }
 
     updateSsdLink();
     ssdRadios.forEach(function (r) { r.addEventListener("change", updateSsdLink); });
   })();
+
+  // Installation type modal
+  function showInstallModal() {
+    var modal = document.getElementById("install-modal");
+    if (modal) {
+      modal.classList.add("modal-active");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function hideInstallModal() {
+    var modal = document.getElementById("install-modal");
+    if (modal) {
+      modal.classList.remove("modal-active");
+      document.body.style.overflow = "";
+    }
+  }
+
+  function proceedToPurchase(installType) {
+    var osBtn = document.getElementById("buy-btn-os");
+    if (osBtn) {
+      var selected = document.querySelector('input[name="platform-os"]:checked');
+      if (selected) {
+        var baseUrl = "";
+        if (selected.value === "mac") {
+          baseUrl = osBtn.dataset.macUrl;
+        } else if (selected.value === "linux") {
+          baseUrl = osBtn.dataset.linuxUrl;
+        } else if (selected.value === "windows") {
+          baseUrl = osBtn.dataset.windowsUrl;
+        }
+        
+        // Add install type as query parameter if needed
+        if (baseUrl && installType) {
+          var separator = baseUrl.includes("?") ? "&" : "?";
+          window.location.href = baseUrl + separator + "install=" + installType;
+        } else if (baseUrl) {
+          window.location.href = baseUrl;
+        }
+      }
+    }
+    hideInstallModal();
+  }
+
+  // Modal event listeners
+  document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById("install-modal");
+    var closeBtn = modal ? modal.querySelector(".modal-close") : null;
+    var overlay = modal ? modal.querySelector(".modal-overlay") : null;
+    var installOptions = modal ? modal.querySelectorAll(".install-option") : [];
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", hideInstallModal);
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", hideInstallModal);
+    }
+
+    installOptions.forEach(function(option) {
+      option.addEventListener("click", function() {
+        var installType = this.dataset.installType;
+        proceedToPurchase(installType);
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && modal && modal.classList.contains("modal-active")) {
+        hideInstallModal();
+      }
+    });
+  });
   </script>
 
   <div class="fulfillment-note">
     <h3>Shipping &amp; Fulfillment</h3>
-    <p><strong>DoBi&nbsp;OS</strong> is available as an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5&ndash;7 business days</strong> from Michigan, USA. Each unit comes with a premium 1&nbsp;TB portable SSD, hand-prepared and 100% compatible with Mac or Linux. <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. If DoBi doesn&rsquo;t work on your hardware, <a href="contact.html">reach out</a> within 30&nbsp;days for a full refund.</p>
+    <p><strong>DoBi&nbsp;OS</strong> is available as an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5&ndash;7 business days</strong> from Michigan, USA. Each unit comes with a premium 1&nbsp;TB portable SSD, hand-prepared and 100% compatible with Mac, Linux, or Windows. <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. If DoBi doesn&rsquo;t work on your hardware, <a href="contact.html">reach out</a> within 30&nbsp;days for a full refund.</p>
   </div>
 </section>
 
@@ -561,6 +665,28 @@
   </div>
   <p>&copy; 2026 DoBi. All rights reserved.</p>
 </footer>
+
+<!-- Installation Type Modal -->
+<div id="install-modal" class="modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>Choose Installation Type</h3>
+    <p class="modal-subtitle">Where do you plan to install DoBi OS?</p>
+    <div class="install-options">
+      <button class="install-option" data-install-type="pc">
+        <div class="install-icon">&#128187;</div>
+        <div class="install-label">On My PC</div>
+        <div class="install-desc">Install directly on your computer</div>
+      </button>
+      <button class="install-option" data-install-type="ssd">
+        <div class="install-icon">&#128190;</div>
+        <div class="install-label">On an SSD</div>
+        <div class="install-desc">Install on a portable SSD drive</div>
+      </button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

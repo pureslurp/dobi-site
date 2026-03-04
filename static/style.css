@@ -690,8 +690,14 @@ footer .footer-links {
 
 .platform-select {
   display: flex;
+  flex-direction: column;
   gap: 12px;
   margin-bottom: 16px;
+}
+
+.platform-row {
+  display: flex;
+  gap: 12px;
   justify-content: center;
 }
 
@@ -711,6 +717,28 @@ footer .footer-links {
   transition: border-color 0.15s, color 0.15s;
 }
 
+.platform-option-full {
+  flex: 1;
+  max-width: 100%;
+}
+
+.platform-option-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.platform-option-disabled input {
+  cursor: not-allowed;
+}
+
+.coming-soon {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.7;
+  font-style: italic;
+}
+
 .platform-option:has(input:checked) {
   border-color: var(--accent);
   color: var(--accent);
@@ -718,6 +746,152 @@ footer .footer-links {
 
 .platform-option input {
   accent-color: var(--accent);
+}
+
+/* ---- Installation Modal ---- */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.modal-active {
+  display: flex;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+
+.modal-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.modal-subtitle {
+  font-size: 15px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.install-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.install-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  background: var(--surface2);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  text-align: center;
+  width: 100%;
+}
+
+.install-option:hover {
+  border-color: var(--accent);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+
+.install-option:active {
+  transform: translateY(0);
+}
+
+.install-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.install-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.install-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.install-note {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(83, 215, 105, 0.12);
+  border: 1px solid rgba(83, 215, 105, 0.3);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--accent);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.install-note strong {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* ---- App Demo Section ---- */
@@ -1398,10 +1572,40 @@ footer .footer-links {
   .demo-body.focus-sidebar .demo-main {
     display: none;
   }
+
+  /* Modal responsive */
+  .modal-content {
+    padding: 24px 20px;
+    width: 95%;
+  }
+
+  .modal-content h3 {
+    font-size: 20px;
+  }
+
+  .install-option {
+    padding: 20px 16px;
+  }
+
+  .install-icon {
+    font-size: 32px;
+  }
+
+  .install-label {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 420px) {
   .demo-tab { padding: 6px 10px; font-size: 12px; }
   .demo-tab-blurb { font-size: 12px; }
   .demo-titlebar-text { font-size: 11px; }
+
+  .modal-content {
+    padding: 20px 16px;
+  }
+
+  .modal-content h3 {
+    font-size: 18px;
+  }
 }
