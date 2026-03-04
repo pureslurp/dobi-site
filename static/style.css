@@ -441,7 +441,7 @@ section {
 .pricing-card .platform {
   font-size: 13px;
   color: var(--text-dim);
-  margin-bottom: 14px;
+  margin-bottom: 0px;
 }
 
 .pricing-card .price {
