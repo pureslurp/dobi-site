@@ -136,6 +136,29 @@ section {
   line-height: 1.5;
 }
 
+.peace-banner .peace-main {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  font-style: normal;
+}
+
+.peace-banner .peace-sub {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.peace-banner .peace-identity {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  font-style: normal;
+  margin-top: 16px;
+}
+
 /* ---- Hero ---- */
 
 .hero {
@@ -169,6 +192,38 @@ section {
 
 .hero h1 .highlight {
   color: var(--accent);
+}
+
+.hero .hero-epiphany {
+  font-size: 17px;
+  color: var(--accent);
+  font-style: italic;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.hero .hero-simple {
+  font-size: 19px;
+  color: var(--text);
+  margin-bottom: 16px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.hero .hero-secure {
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  letter-spacing: 0.3px;
 }
 
 .hero .tagline {
@@ -216,6 +271,141 @@ section {
   color: var(--text-dim);
   font-weight: 500;
   letter-spacing: 0.2px;
+}
+
+/* ---- Value Stack Section ---- */
+
+.value-stack-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.value-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.value-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.value-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-dim);
+}
+
+.value-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.value-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.value-item p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.value-stack-note {
+  text-align: center;
+  font-size: 15px;
+  color: var(--accent);
+  font-weight: 500;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  background: rgba(83, 215, 105, 0.08);
+  border: 1px solid rgba(83, 215, 105, 0.2);
+  border-radius: 10px;
+}
+
+/* ---- Chaos Section ---- */
+
+.chaos-section {
+  max-width: none;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+  border-top: 2px solid var(--accent-dim);
+  border-bottom: 2px solid var(--accent-dim);
+  padding: 100px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chaos-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(83, 215, 105, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.chaos-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.chaos-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.chaos-subtitle {
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 24px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.chaos-question {
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 36px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.chaos-cta {
+  display: inline-block;
+  padding: 18px 48px;
+  background: var(--accent);
+  color: #111;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  letter-spacing: 0.3px;
+}
+
+.chaos-cta:hover {
+  background: var(--accent-dim);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(83, 215, 105, 0.3);
 }
 
 /* ---- Features grid ---- */
@@ -1464,8 +1654,27 @@ footer .footer-links {
   }
 
   .hero h1 { font-size: 32px; }
+  .hero .hero-epiphany { font-size: 15px; }
+  .hero .hero-simple { font-size: 17px; }
+  .hero .hero-secure { font-size: 14px; }
   .hero .tagline { font-size: 17px; }
   .hero .hero-detail { font-size: 15px; }
+  
+  .chaos-title { font-size: 32px; }
+  .chaos-subtitle { font-size: 18px; }
+  .chaos-question { font-size: 17px; }
+  .chaos-cta { padding: 16px 36px; font-size: 16px; }
+  
+  .value-stack-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .value-item { padding: 20px 16px; }
+  
+  .peace-banner .peace-main { font-size: 18px; }
+  .peace-banner .peace-sub { font-size: 16px; }
+  .peace-banner .peace-identity { font-size: 14px; }
 
   .hero-cta {
     padding: 14px 32px;
