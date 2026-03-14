@@ -408,6 +408,16 @@ section {
   box-shadow: 0 8px 24px rgba(83, 215, 105, 0.3);
 }
 
+.chaos-tagline {
+  font-size: 15px;
+  color: var(--text-dim);
+  opacity: 0.85;
+  font-style: italic;
+  padding-top: 22px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 /* ---- Features grid ---- */
 
 .features-grid {
@@ -1664,6 +1674,7 @@ footer .footer-links {
   .chaos-subtitle { font-size: 18px; }
   .chaos-question { font-size: 17px; }
   .chaos-cta { padding: 16px 36px; font-size: 16px; }
+  .chaos-tagline { font-size: 15px; }
   
   .value-stack-grid {
     grid-template-columns: 1fr;
