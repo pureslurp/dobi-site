@@ -1033,6 +1033,64 @@ footer .footer-links {
   margin-bottom: 24px;
 }
 
+.checkout-zip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.checkout-zip-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.checkout-zip-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.checkout-zip-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
+}
+
+.checkout-zip-error {
+  font-size: 14px;
+  color: #f87171;
+  margin: 0;
+}
+
+.checkout-zip-submit {
+  margin-top: 8px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--accent);
+  color: #0a0a0a;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.checkout-zip-submit:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.checkout-zip-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .install-options {
   display: flex;
   flex-direction: column;
