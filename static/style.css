@@ -1039,6 +1039,12 @@ footer .footer-links {
 
 /* ---- Embedded checkout page (checkout.html) ---- */
 
+/* Brief freeze while Stripe Embedded focuses the iframe (avoids visible scroll-then-snap). */
+html.checkout-viewport-locked {
+  overflow: hidden;
+  height: 100%;
+}
+
 body.checkout-page .checkout-main {
   max-width: 720px;
   margin: 0 auto;

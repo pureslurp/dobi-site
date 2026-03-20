@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout — DoBi</title>
 <meta name="description" content="Complete your DoBi SSD purchase securely with Stripe.">
-<link rel="stylesheet" href="static/style.css?v=checkout2">
+<link rel="stylesheet" href="static/style.css?v=checkout3">
 <link rel="icon" href="static/dobi-avatar.png">
 </head>
 <body class="checkout-page">
@@ -257,14 +257,33 @@
         showEmbed();
         var el = document.getElementById("checkout");
         if (el) checkout.mount("#checkout");
-        // Stripe focuses the email field inside the iframe, which scrolls the window. Re-assert
-        // the top so users see the heading first; short delays beat async focus inside the iframe.
-        function scrollCheckoutPageToTop() {
-          window.scrollTo(0, 0);
-        }
-        scrollCheckoutPageToTop();
-        setTimeout(scrollCheckoutPageToTop, 120);
-        setTimeout(scrollCheckoutPageToTop, 350);
+        // Stripe focuses an input in the iframe; the browser scrolls the *page* into view. We can't
+        // stop that focus, but we can freeze the document scroll briefly so you don't see a scroll
+        // then a snap back (cross-origin; pinching scrollTo after the fact felt janky).
+        var recoveryMs = 2800;
+        var lockY = window.scrollY || document.documentElement.scrollTop || 0;
+        document.documentElement.classList.add("checkout-viewport-locked");
+        document.body.classList.add("checkout-viewport-locked");
+        document.body.style.position = "fixed";
+        document.body.style.top = "-" + lockY + "px";
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.style.width = "100%";
+
+        setTimeout(function () {
+          document.documentElement.classList.remove("checkout-viewport-locked");
+          document.body.classList.remove("checkout-viewport-locked");
+          document.body.style.position = "";
+          document.body.style.top = "";
+          document.body.style.left = "";
+          document.body.style.right = "";
+          document.body.style.width = "";
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              window.scrollTo(0, 0);
+            });
+          });
+        }, recoveryMs);
       })
       .catch(function (err) {
         showError(err && err.message ? err.message : "Checkout couldn't start.");
