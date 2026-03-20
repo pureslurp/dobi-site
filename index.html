@@ -565,7 +565,7 @@
         </div>
       </div>
 
-      <a href="#" class="btn-buy" id="buy-btn-ssd">Buy Now</a>
+      <a href="checkout.html?platform=mac" class="btn-buy" id="buy-btn-ssd">Buy Now</a>
     </div>
 
     <!-- DoBi Nitro -->
@@ -603,14 +603,23 @@
     osRadios.forEach(function (r) { r.addEventListener("change", updateOsLink); });
 
     var ssdBtn = document.getElementById("buy-btn-ssd");
+    var ssdRadios = document.querySelectorAll('input[name="platform-ssd"]');
+    function updateSsdCheckoutHref() {
+      var selected = document.querySelector('input[name="platform-ssd"]:checked');
+      if (ssdBtn && selected && selected.value !== "windows") {
+        ssdBtn.href = "checkout.html?platform=" + encodeURIComponent(selected.value);
+      }
+    }
     if (ssdBtn) {
+      updateSsdCheckoutHref();
+      ssdRadios.forEach(function (r) {
+        r.addEventListener("change", updateSsdCheckoutHref);
+      });
       ssdBtn.addEventListener("click", function (e) {
-        e.preventDefault();
         var selected = document.querySelector('input[name="platform-ssd"]:checked');
         if (selected && selected.value === "windows") {
-          return;
+          e.preventDefault();
         }
-        openShippingModal();
       });
     }
   })();
@@ -630,37 +639,6 @@
       modal.classList.remove("modal-active");
       document.body.style.overflow = "";
     }
-  }
-
-  function openShippingModal() {
-    var modal = document.getElementById("shipping-modal");
-    var err = document.getElementById("shipping-zip-error");
-    var input = document.getElementById("shipping-zip-input");
-    if (modal) {
-      modal.classList.add("modal-active");
-      document.body.style.overflow = "hidden";
-      if (err) {
-        err.hidden = true;
-        err.textContent = "";
-      }
-      if (input) {
-        input.value = "";
-        input.focus();
-      }
-    }
-  }
-
-  function hideShippingModal() {
-    var modal = document.getElementById("shipping-modal");
-    if (modal) {
-      modal.classList.remove("modal-active");
-      document.body.style.overflow = "";
-    }
-  }
-
-  function selectedSsdPlatform() {
-    var selected = document.querySelector('input[name="platform-ssd"]:checked');
-    return selected ? selected.value : "mac";
   }
 
   function proceedToPurchase(installType) {
@@ -701,73 +679,9 @@
       });
     });
 
-    var shipModal = document.getElementById("shipping-modal");
-    var shipClose = shipModal ? shipModal.querySelector(".modal-close") : null;
-    var shipOverlay = shipModal ? shipModal.querySelector(".modal-overlay") : null;
-    var shipForm = document.getElementById("shipping-zip-form");
-    var shipErr = document.getElementById("shipping-zip-error");
-    var shipSubmit = document.getElementById("shipping-zip-submit");
-
-    if (shipClose) {
-      shipClose.addEventListener("click", hideShippingModal);
-    }
-    if (shipOverlay) {
-      shipOverlay.addEventListener("click", hideShippingModal);
-    }
-
-    if (shipForm) {
-      shipForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        var zipInput = document.getElementById("shipping-zip-input");
-        var zip = zipInput ? zipInput.value.trim() : "";
-        if (shipErr) {
-          shipErr.hidden = true;
-          shipErr.textContent = "";
-        }
-        if (shipSubmit) {
-          shipSubmit.disabled = true;
-        }
-        fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ zip: zip, platform: selectedSsdPlatform() })
-        })
-          .then(function(res) { return res.json().then(function(data) { return { res: res, data: data }; }); })
-          .then(function(_ref) {
-            var res = _ref.res;
-            var data = _ref.data;
-            if (!res.ok) {
-              throw new Error((data && data.error) || "Something went wrong");
-            }
-            if (data.url) {
-              window.location.href = data.url;
-              return;
-            }
-            throw new Error("No checkout URL returned");
-          })
-          .catch(function(err) {
-            if (shipErr) {
-              shipErr.textContent = err.message || "Could not start checkout.";
-              shipErr.hidden = false;
-            }
-          })
-          .finally(function() {
-            if (shipSubmit) {
-              shipSubmit.disabled = false;
-            }
-          });
-      });
-    }
-
     document.addEventListener("keydown", function(e) {
-      if (e.key !== "Escape") {
-        return;
-      }
-      if (modal && modal.classList.contains("modal-active")) {
+      if (e.key === "Escape" && modal && modal.classList.contains("modal-active")) {
         hideInstallModal();
-      }
-      if (shipModal && shipModal.classList.contains("modal-active")) {
-        hideShippingModal();
       }
     });
   });
@@ -789,22 +703,6 @@
   </div>
   <p>&copy; 2026 DoBi. All rights reserved.</p>
 </footer>
-
-<!-- ZIP for shipping (SSD checkout) -->
-<div id="shipping-modal" class="modal">
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <button type="button" class="modal-close" aria-label="Close">&times;</button>
-    <h3>Shipping ZIP code</h3>
-    <p class="modal-subtitle">US orders only. We use your ZIP to set zone-based ground shipping before Stripe checkout.</p>
-    <form id="shipping-zip-form" class="checkout-zip-form">
-      <label class="checkout-zip-label" for="shipping-zip-input">ZIP code</label>
-      <input type="text" id="shipping-zip-input" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10" class="checkout-zip-input" placeholder="e.g. 48103" required>
-      <p id="shipping-zip-error" class="checkout-zip-error" role="alert" hidden></p>
-      <button type="submit" id="shipping-zip-submit" class="checkout-zip-submit">Continue to checkout</button>
-    </form>
-  </div>
-</div>
 
 <!-- Installation Type Modal -->
 <div id="install-modal" class="modal">
