@@ -1057,6 +1057,7 @@ body.checkout-page .checkout-main {
 
 .checkout-panel {
   padding: 8px 0 24px;
+  text-align: center;
 }
 
 .checkout-panel-error .checkout-title {
@@ -1077,10 +1078,39 @@ body.checkout-page .checkout-main {
   margin: 0 0 20px;
 }
 
+/* Match section-title / section-subtitle rhythm (see .section-title) */
+.checkout-intro {
+  text-align: center;
+  margin-bottom: 8px;
+  padding: 8px 8px 0;
+}
+
+.checkout-intro .checkout-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
+.checkout-intro .checkout-title .highlight {
+  color: var(--accent);
+}
+
+.checkout-intro .checkout-lead {
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-width: 36rem;
+  margin: 0 auto 24px;
+}
+
 .checkout-loading-text {
   font-size: 16px;
   color: var(--text-dim);
   margin: 24px 0;
+  text-align: center;
 }
 
 .checkout-error-actions {
@@ -1088,6 +1118,7 @@ body.checkout-page .checkout-main {
   flex-wrap: wrap;
   gap: 12px;
   align-items: center;
+  justify-content: center;
 }
 
 .checkout-btn-primary {
@@ -1136,6 +1167,10 @@ body.checkout-page .checkout-main {
 }
 
 @media (max-width: 540px) {
+  .checkout-intro .checkout-title {
+    font-size: 26px;
+  }
+
   .checkout-embed-mount {
     padding: 8px;
     border-radius: 12px;
