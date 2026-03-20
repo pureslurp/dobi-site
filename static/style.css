@@ -117,6 +117,10 @@ section {
   margin: 0 auto 48px;
 }
 
+.section-title .highlight {
+  color: var(--accent);
+}
+
 /* ---- Peace of Mind Banner ---- */
 
 .peace-banner {
@@ -1078,32 +1082,21 @@ body.checkout-page .checkout-main {
   margin: 0 0 20px;
 }
 
-/* Match section-title / section-subtitle rhythm (see .section-title) */
-.checkout-intro {
+/* Same typography as FAQ / other pages — avoid mixing .checkout-lead (overrides subtitle size) */
+.checkout-page-head {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 0 28px;
+  margin: 0 auto;
   text-align: center;
-  margin-bottom: 8px;
-  padding: 8px 8px 0;
 }
 
-.checkout-intro .checkout-title {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin: 0 0 12px;
-  color: var(--text);
+.checkout-page-head .section-title {
+  margin-bottom: 12px;
 }
 
-.checkout-intro .checkout-title .highlight {
-  color: var(--accent);
-}
-
-.checkout-intro .checkout-lead {
-  font-size: 16px;
-  color: var(--text-dim);
-  line-height: 1.6;
-  max-width: 36rem;
-  margin: 0 auto 24px;
+.checkout-page-head .section-subtitle {
+  margin-bottom: 24px;
 }
 
 .checkout-loading-text {
@@ -1167,10 +1160,6 @@ body.checkout-page .checkout-main {
 }
 
 @media (max-width: 540px) {
-  .checkout-intro .checkout-title {
-    font-size: 26px;
-  }
-
   .checkout-embed-mount {
     padding: 8px;
     border-radius: 12px;
