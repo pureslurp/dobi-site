@@ -42,12 +42,11 @@ module.exports = async function handler(req, res) {
   }
 
   const platform = body.platform;
-  if (platform !== "mac" && platform !== "linux") {
+  if (platform !== "mac") {
     return res.status(400).json({ error: "Invalid platform" });
   }
 
-  const priceEnv =
-    platform === "mac" ? "STRIPE_PRICE_SSD_MAC" : "STRIPE_PRICE_SSD_LINUX";
+  const priceEnv = "STRIPE_PRICE_SSD_MAC";
   const priceId = process.env[priceEnv];
   if (!priceId || !priceId.startsWith("price_")) {
     return res.status(500).json({

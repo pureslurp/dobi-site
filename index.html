@@ -105,13 +105,13 @@
     <div class="feature-card">
       <div class="feature-icon">&#9889;</div>
       <h3>One-Click Launch</h3>
-        <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click on any Mac, Linux, or Windows machine. Ongoing updates and improvements are included with your purchase and delivered as simple file updates with step-by-step instructions.</p>
+        <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click. Ongoing updates and improvements are included with your purchase and delivered as simple file updates with step-by-step instructions.</p>
     </div>
 
     <div class="feature-card">
       <div class="feature-icon">&#128187;</div>
       <h3>Smart Hardware Detection</h3>
-      <p>DoBi automatically detects your computer and selects the best model for it. Works on everything from newer MacBooks to Linux desktops. No tweaking needed.</p>
+      <p>DoBi automatically detects your computer and selects the best model for it. Works on a wide range of hardware, from newer machines to older laptops. No tweaking needed.</p>
     </div>
 
     <div class="feature-card">
@@ -491,7 +491,7 @@
     <!-- DoBi OS -->
     <div class="pricing-card">
       <h3>DoBi OS</h3>
-      <p class="platform">Downloadable ZIP for Mac, Linux, or Windows</p>
+      <p class="platform">Downloadable ZIP</p>
       <div class="price">$79</div>
       <p class="price-note">One-time purchase &bull; Instant download</p>
       <ul>
@@ -508,15 +508,9 @@
             <input type="radio" name="platform-os" value="mac" checked>
             <span>Mac</span>
           </label>
-          <label class="platform-option">
-            <input type="radio" name="platform-os" value="linux">
-            <span>Linux</span>
-          </label>
-        </div>
-        <div class="platform-row">
-          <label class="platform-option platform-option-full platform-option-disabled">
+          <label class="platform-option platform-option-disabled" title="Coming soon">
             <input type="radio" name="platform-os" value="windows" disabled>
-            <span>Windows <span class="coming-soon">(Coming Soon)</span></span>
+            <span>Windows</span>
           </label>
         </div>
       </div>
@@ -524,8 +518,6 @@
       <a href="#" class="btn-buy" id="buy-btn-os"
          data-mac-pc-url="https://dobisurvival.gumroad.com/l/dobi-mac"
          data-mac-ssd-url="https://dobisurvival.gumroad.com/l/welbfh"
-         data-linux-pc-url="YOUR_LINK_OS_LINUX_PC"
-         data-linux-ssd-url="YOUR_LINK_OS_LINUX_SSD"
          data-windows-pc-url="YOUR_LINK_OS_WINDOWS_PC"
          data-windows-ssd-url="YOUR_LINK_OS_WINDOWS_SSD"
          onclick="event.preventDefault(); showInstallModal(); return false;">Buy Now</a>
@@ -535,14 +527,14 @@
     <div class="pricing-card featured">
       <span class="popular-badge">Most Popular</span>
       <h3>DoBi</h3>
-      <p class="platform">1 TB Portable SSD for Mac, Linux, or Windows</p>
+      <p class="platform">1 TB Portable SSD</p>
       <div class="price">$199</div>
       <p class="price-note">One-time purchase &bull; Plus shipping</p>
       <ul>
         <li>Complete 20,000+ page knowledge library included</li>
         <li>1 TB portable SSD with DoBi OS</li>
         <li>All three AI model tiers included</li>
-        <li>Plug into most computers</li>
+        <li>Plug into your Mac</li>
         <li>ships within 5&ndash;7 business days</li>
       </ul>
 
@@ -552,15 +544,9 @@
             <input type="radio" name="platform-ssd" value="mac" checked>
             <span>Mac</span>
           </label>
-          <label class="platform-option">
-            <input type="radio" name="platform-ssd" value="linux">
-            <span>Linux</span>
-          </label>
-        </div>
-        <div class="platform-row">
-          <label class="platform-option platform-option-full platform-option-disabled">
+          <label class="platform-option platform-option-disabled" title="Coming soon">
             <input type="radio" name="platform-ssd" value="windows" disabled>
-            <span>Windows <span class="coming-soon">(Coming Soon)</span></span>
+            <span>Windows</span>
           </label>
         </div>
       </div>
@@ -603,24 +589,8 @@
     osRadios.forEach(function (r) { r.addEventListener("change", updateOsLink); });
 
     var ssdBtn = document.getElementById("buy-btn-ssd");
-    var ssdRadios = document.querySelectorAll('input[name="platform-ssd"]');
-    function updateSsdCheckoutHref() {
-      var selected = document.querySelector('input[name="platform-ssd"]:checked');
-      if (ssdBtn && selected && selected.value !== "windows") {
-        ssdBtn.href = "checkout.html?platform=" + encodeURIComponent(selected.value);
-      }
-    }
     if (ssdBtn) {
-      updateSsdCheckoutHref();
-      ssdRadios.forEach(function (r) {
-        r.addEventListener("change", updateSsdCheckoutHref);
-      });
-      ssdBtn.addEventListener("click", function (e) {
-        var selected = document.querySelector('input[name="platform-ssd"]:checked');
-        if (selected && selected.value === "windows") {
-          e.preventDefault();
-        }
-      });
+      ssdBtn.href = "checkout.html?platform=mac";
     }
   })();
 
@@ -689,7 +659,7 @@
 
   <div class="fulfillment-note">
     <h3>Shipping &amp; Fulfillment</h3>
-    <p><strong>DoBi&nbsp;OS</strong> is available as an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5&ndash;7 business days</strong> from Michigan, USA. Each unit comes with a premium 1&nbsp;TB portable SSD, hand-prepared and 100% compatible with Mac, Linux, or Windows. <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. If DoBi doesn&rsquo;t work on your hardware, <a href="contact.html">reach out</a> within 30&nbsp;days for a full refund.</p>
+    <p><strong>DoBi&nbsp;OS</strong> is available as an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5&ndash;7 business days</strong> from Michigan, USA. Each unit comes with a premium 1&nbsp;TB portable SSD, hand-prepared for Mac; Windows support is coming soon. <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. If DoBi doesn&rsquo;t work on your hardware, <a href="contact.html">reach out</a> within 30&nbsp;days for a full refund.</p>
   </div>
 </section>
 

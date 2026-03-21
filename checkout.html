@@ -30,7 +30,7 @@
 
   <div id="checkout-state-badplatform" class="checkout-panel checkout-panel-error" hidden>
     <h1 class="checkout-title">Choose a platform first</h1>
-    <p class="checkout-lead">Select Mac or Linux on the pricing page, then use <strong>Buy Now</strong> to open checkout.</p>
+    <p class="checkout-lead">Select <strong>Mac</strong> on the pricing page, then use <strong>Buy Now</strong> to open checkout.</p>
     <a href="index.html#pricing" class="checkout-btn-primary">Back to pricing</a>
   </div>
 
@@ -73,7 +73,7 @@
 
   function parsePlatform() {
     var q = new URLSearchParams(window.location.search).get("platform");
-    if (q === "mac" || q === "linux") return q;
+    if (q === "mac") return q;
     return null;
   }
 
