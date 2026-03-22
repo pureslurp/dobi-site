@@ -1130,6 +1130,12 @@ body.checkout-page .checkout-main {
   margin-bottom: 24px;
 }
 
+.checkout-page-head .section-subtitle.checkout-platform-note {
+  margin-top: -8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
 .checkout-loading-text {
   font-size: 16px;
   color: var(--text-dim);
