@@ -220,7 +220,27 @@
   var platform = parsePlatform();
   var checkoutInstance = null;
   var checkoutFormInstance = null;
-  var hasCompletedShippingAddress = false;
+  var lastQuotedAddressKey = null;
+  var inFlightRequest = null;
+  var pendingEvent = null;
+
+  function makeAddressKey(shippingAddress) {
+    if (!shippingAddress || typeof shippingAddress !== "object") {
+      return null;
+    }
+    var addr = shippingAddress.address || shippingAddress;
+    if (!addr || typeof addr !== "object") {
+      return null;
+    }
+    var postal = String(addr.postal_code || addr.postalCode || addr.zip || "")
+      .replace(/\D/g, "")
+      .slice(0, 5);
+    var country = String(addr.country || addr.country_code || "").trim().toUpperCase();
+    if (!postal || postal.length !== 5 || !country) {
+      return null;
+    }
+    return postal + "|" + country;
+  }
 
   function destroyCheckout() {
     if (checkoutFormInstance && typeof checkoutFormInstance.unmount === "function") {
@@ -235,7 +255,9 @@
       } catch (e) {}
       checkoutInstance = null;
     }
-    hasCompletedShippingAddress = false;
+    lastQuotedAddressKey = null;
+    inFlightRequest = null;
+    pendingEvent = null;
     var mount = document.getElementById("checkout");
     if (mount) mount.innerHTML = "";
   }
@@ -290,64 +312,164 @@
         var checkoutForm = checkout.createForm();
         checkoutFormInstance = checkoutForm;
         
-        checkoutForm.on("change", function (event) {
-          var value = event.value;
-          var status = event.status;
+        function processShippingUpdate(shippingAddress) {
+          var previousKey = lastQuotedAddressKey;
+          var addressKey = makeAddressKey(shippingAddress);
+          lastQuotedAddressKey = addressKey;
           
-          if (status.shippingAddress && status.shippingAddress.complete && !hasCompletedShippingAddress) {
-            hasCompletedShippingAddress = true;
-            
-            checkout.loadActions().then(function (loadActionsResult) {
-              if (loadActionsResult.type === "error") {
-                console.error("Failed to load actions:", loadActionsResult.error);
-                return;
-              }
-              
-              var actions = loadActionsResult.actions;
-              var session = actions.getSession();
-              var sessionId = session && session.id;
-              var shippingDetails = value.shippingAddress;
-              
-              if (!sessionId || !shippingDetails) {
-                console.error("Missing session ID or shipping details");
-                return;
-              }
-              
-              actions.runServerUpdate(function () {
-                return updateShippingOptions(sessionId, shippingDetails);
-              }).catch(function (err) {
-                console.error("Failed to update shipping options:", err);
-                hasCompletedShippingAddress = false;
-              });
-            });
-          } else if (status.shippingAddress && !status.shippingAddress.complete && hasCompletedShippingAddress) {
-            hasCompletedShippingAddress = false;
-          }
-        });
-        
-        checkoutForm.on("confirm", function (event) {
-          checkout.loadActions().then(function (loadActionsResult) {
+          inFlightRequest = checkout.loadActions().then(function (loadActionsResult) {
             if (loadActionsResult.type === "error") {
-              console.error("Failed to load actions for confirm:", loadActionsResult.error);
-              var errorMsg = loadActionsResult.error && loadActionsResult.error.message ? loadActionsResult.error.message : "Payment confirmation failed. Please try again.";
-              reportClientError(errorMsg, "confirm-loadActions");
-              showError(errorMsg, "confirm-loadActions");
+              console.error("Failed to load actions:", loadActionsResult.error);
+              lastQuotedAddressKey = previousKey;
               return;
             }
             
             var actions = loadActionsResult.actions;
-            actions.confirm({ formConfirmEvent: event }).catch(function (err) {
-              console.error("Payment confirmation error:", err);
-              var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
-              reportClientError(errorMsg, "confirm");
-              showError(errorMsg, "confirm");
+            var session = actions.getSession();
+            var sessionId = session && session.id;
+            
+            if (!sessionId || !shippingAddress) {
+              console.error("Missing session ID or shipping details");
+              lastQuotedAddressKey = previousKey;
+              return;
+            }
+            
+            return actions.runServerUpdate(function () {
+              return updateShippingOptions(sessionId, shippingAddress);
+            }).catch(function (err) {
+              console.error("Failed to update shipping options:", err);
+              lastQuotedAddressKey = previousKey;
+              throw err;
             });
-          }).catch(function (err) {
-            console.error("Unexpected error during confirm:", err);
-            var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
-            reportClientError(errorMsg, "confirm-unexpected");
-            showError(errorMsg, "confirm-unexpected");
+          }).finally(function () {
+            inFlightRequest = null;
+            if (pendingEvent) {
+              var nextEvent = pendingEvent;
+              pendingEvent = null;
+              var nextStatus = nextEvent.status;
+              if (nextStatus.shippingAddress && nextStatus.shippingAddress.complete) {
+                var nextAddress = nextEvent.value.shippingAddress;
+                var nextKey = makeAddressKey(nextAddress);
+                if (nextKey && nextKey !== lastQuotedAddressKey) {
+                  processShippingUpdate(nextAddress);
+                }
+              }
+            }
           });
+        }
+        
+        checkoutForm.on("change", function (event) {
+          var value = event.value;
+          var status = event.status;
+          
+          if (status.shippingAddress && status.shippingAddress.complete) {
+            var shippingAddress = value.shippingAddress;
+            var addressKey = makeAddressKey(shippingAddress);
+            
+            if (!addressKey) {
+              return;
+            }
+            
+            if (addressKey === lastQuotedAddressKey) {
+              return;
+            }
+            
+            if (inFlightRequest) {
+              pendingEvent = event;
+              return;
+            }
+            
+            processShippingUpdate(shippingAddress);
+          }
+        });
+        
+        checkoutForm.on("confirm", function (event) {
+          var shippingAddress = event.value && event.value.shippingAddress;
+          var currentKey = makeAddressKey(shippingAddress);
+          
+          if (currentKey && currentKey !== lastQuotedAddressKey) {
+            var mount = document.getElementById("checkout");
+            if (mount) {
+              var msg = document.createElement("div");
+              msg.textContent = "Calculating shipping...";
+              msg.style.cssText = "position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:#fff;padding:12px 24px;border-radius:8px;z-index:1000;";
+              mount.appendChild(msg);
+            }
+            
+            if (!inFlightRequest) {
+              processShippingUpdate(shippingAddress);
+            }
+            
+            var waitForQuote = inFlightRequest || Promise.resolve();
+            waitForQuote.then(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              if (lastQuotedAddressKey !== currentKey) {
+                console.error("Shipping quote failed, cannot confirm");
+                showError("Shipping calculation failed. Please verify your address.", "confirm-no-quote");
+                return;
+              }
+              proceedWithConfirm();
+            }).catch(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              showError("Shipping calculation failed. Please verify your address.", "confirm-quote-error");
+            });
+            return;
+          }
+          
+          if (inFlightRequest) {
+            var mount = document.getElementById("checkout");
+            var msg;
+            if (mount) {
+              msg = document.createElement("div");
+              msg.textContent = "Calculating shipping...";
+              msg.style.cssText = "position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:#fff;padding:12px 24px;border-radius:8px;z-index:1000;";
+              mount.appendChild(msg);
+            }
+            
+            inFlightRequest.then(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              proceedWithConfirm();
+            }).catch(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              showError("Shipping calculation failed. Please verify your address.", "confirm-in-flight-error");
+            });
+            return;
+          }
+          
+          proceedWithConfirm();
+          
+          function proceedWithConfirm() {
+            checkout.loadActions().then(function (loadActionsResult) {
+              if (loadActionsResult.type === "error") {
+                console.error("Failed to load actions for confirm:", loadActionsResult.error);
+                var errorMsg = loadActionsResult.error && loadActionsResult.error.message ? loadActionsResult.error.message : "Payment confirmation failed. Please try again.";
+                reportClientError(errorMsg, "confirm-loadActions");
+                showError(errorMsg, "confirm-loadActions");
+                return;
+              }
+              
+              var actions = loadActionsResult.actions;
+              actions.confirm({ formConfirmEvent: event }).catch(function (err) {
+                console.error("Payment confirmation error:", err);
+                var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
+                reportClientError(errorMsg, "confirm");
+                showError(errorMsg, "confirm");
+              });
+            }).catch(function (err) {
+              console.error("Unexpected error during confirm:", err);
+              var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
+              reportClientError(errorMsg, "confirm-unexpected");
+              showError(errorMsg, "confirm-unexpected");
+            });
+          }
         });
         
         showEmbed();
