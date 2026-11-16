@@ -3,6 +3,7 @@ const {
   shippingZoneFromZip,
   buildShippingOptionsForZone,
 } = require("./lib/checkout-shipping");
+const { reportError } = require("./lib/error-reporter");
 
 const US_MSG = "We only ship to addresses in the United States.";
 const ZIP_MSG = "Please enter a valid 5-digit US ZIP code.";
@@ -171,6 +172,18 @@ module.exports = async function handler(req, res) {
       "type:",
       err && err.type
     );
+    
+    reportError({
+      endpoint: "update-checkout-shipping",
+      stripeError: err,
+      userAgent: req.headers["user-agent"],
+      additionalInfo: {
+        session_id: sessionId,
+        postal_code: postal,
+        zone: String(zone),
+      },
+    }).catch(() => {});
+    
     return res.status(500).json({ ok: false, error: UPDATE_FAIL_MSG });
   }
 };

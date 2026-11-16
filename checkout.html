@@ -96,12 +96,30 @@
     showEl("checkout-embed-wrap", false);
   }
 
-  function showError(msg) {
+  function reportClientError(error, context) {
+    try {
+      fetch("/api/report-client-error", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          error: String(error),
+          context: context,
+          platform: platform,
+        }),
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function showError(msg, context) {
     var m = document.getElementById("checkout-error-message");
     if (m) m.textContent = msg || "Checkout couldn't start. You can try again or return to the store.";
     showEl("checkout-state-loading", false);
     showEl("checkout-state-error", true);
     showEl("checkout-embed-wrap", false);
+    
+    if (context) {
+      reportClientError(msg, context);
+    }
   }
 
   function showEmbed() {
@@ -241,7 +259,16 @@
           );
         }
         return fetchClientSecret(platform).then(function (clientSecret) {
-          return stripe.initCheckoutFormSdk({ clientSecret: clientSecret }).then(function (checkout) {
+          var appearance = {
+            theme: "flat",
+            variables: {
+              colorPrimary: "#53d769",
+              colorBackground: "#16213e",
+              fontFamily: "Inter, system-ui, sans-serif",
+              borderRadius: "4px",
+            },
+          };
+          return stripe.initCheckoutFormSdk({ clientSecret: clientSecret, appearance: appearance }).then(function (checkout) {
             return { stripe: stripe, checkout: checkout };
           });
         });
@@ -317,7 +344,8 @@
         }, recoveryMs);
       })
       .catch(function (err) {
-        showError(err && err.message ? err.message : "Checkout couldn't start.");
+        var msg = err && err.message ? err.message : "Checkout couldn't start.";
+        showError(msg, "bootstrap");
       });
   }
 
