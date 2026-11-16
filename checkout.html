@@ -268,13 +268,12 @@
               borderRadius: "4px",
             },
           };
-          return stripe.initCheckoutFormSdk({ clientSecret: clientSecret, appearance: appearance }).then(function (checkout) {
-            return { stripe: stripe, checkout: checkout };
-          });
+          var checkout = stripe.initCheckoutFormSdk({ clientSecret: clientSecret, appearance: appearance });
+          return { stripe: stripe, checkout: checkout };
         });
       })
-      .then(function (_ref2) {
-        var checkout = _ref2.checkout;
+      .then(function (_ref) {
+        var checkout = _ref.checkout;
         checkoutInstance = checkout;
         var checkoutForm = checkout.createForm();
         checkoutFormInstance = checkoutForm;
