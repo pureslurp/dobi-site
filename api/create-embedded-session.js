@@ -81,12 +81,12 @@ module.exports = async function handler(req, res) {
   } catch (err) {
     console.error("create-embedded-session: Stripe error -", err && err.message, "code:", err && err.code, "type:", err && err.type);
     
-    reportError({
+    await reportError({
       endpoint: "create-embedded-session",
       stripeError: err,
       platform,
       userAgent: req.headers["user-agent"],
-    }).catch(() => {});
+    });
     
     return res.status(500).json({
       error: "Checkout couldn't start. Please try again in a moment.",

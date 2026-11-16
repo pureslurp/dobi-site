@@ -31,13 +31,13 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "Invalid JSON body" });
   }
 
-  const { error, context, platform } = body;
+  const { error, context, platform, _debug } = body;
 
   if (!error || typeof error !== "string") {
     return res.status(400).json({ error: "Missing error message" });
   }
 
-  reportError({
+  const result = await reportError({
     endpoint: "client-side-checkout",
     stripeError: {
       message: error.slice(0, 500),
@@ -49,7 +49,14 @@ module.exports = async function handler(req, res) {
     additionalInfo: {
       client_reported: "true",
     },
-  }).catch(() => {});
+  });
 
-  return res.status(200).json({ ok: true });
+  const response = { ok: true };
+  
+  // Include debug info if requested (for testing only)
+  if (_debug === true) {
+    response.debug = result;
+  }
+
+  return res.status(200).json(response);
 };

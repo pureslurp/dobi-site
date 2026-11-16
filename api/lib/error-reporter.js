@@ -6,9 +6,10 @@
  */
 
 const REPORT_EMAIL = "pureslurp@gmail.com";
-const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${REPORT_EMAIL}`;
+const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/${REPORT_EMAIL}`;
 const REPORT_TIMEOUT_MS = 3000;
 const DEDUPE_WINDOW_MS = 5 * 60 * 1000;
+const SITE_URL = "https://www.dobi-survival.com";
 
 const recentErrors = new Map();
 
@@ -54,7 +55,8 @@ async function reportError(options) {
   const errorType = stripeError?.type || "unknown";
   
   if (!shouldReport(endpoint, errorCode, errorType)) {
-    return;
+    console.log(`error-reporter: Skipped duplicate report for ${endpoint}:${errorCode}:${errorType}`);
+    return { skipped: true, reason: "dedupe" };
   }
   
   const timestamp = new Date().toISOString();
@@ -80,25 +82,42 @@ async function reportError(options) {
     ...additionalInfo,
   };
   
+  // Convert to URL-encoded form data (like the contact form)
+  const formBody = Object.keys(reportData)
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(reportData[key]))
+    .join('&');
+  
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), REPORT_TIMEOUT_MS);
   
   try {
+    console.log(`error-reporter: Sending report to FormSubmit for ${endpoint}`);
     const response = await fetch(FORMSUBMIT_ENDPOINT, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Origin": SITE_URL,
+        "Referer": SITE_URL,
       },
-      body: JSON.stringify(reportData),
+      body: formBody,
       signal: controller.signal,
     });
     
     const responseText = await response.text();
     const truncatedResponse = responseText.slice(0, 200);
     console.log(`error-reporter: FormSubmit status=${response.status} response="${truncatedResponse}"`);
+    
+    return {
+      success: response.ok,
+      status: response.status,
+      response: truncatedResponse,
+    };
   } catch (err) {
-    // Ignore errors - this is fire-and-forget
+    console.error(`error-reporter: FormSubmit request failed: ${err.message}`);
+    return {
+      success: false,
+      error: err.message,
+    };
   } finally {
     clearTimeout(timeoutId);
   }
