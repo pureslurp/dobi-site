@@ -220,7 +220,23 @@
   var platform = parsePlatform();
   var checkoutInstance = null;
   var checkoutFormInstance = null;
-  var hasCompletedShippingAddress = false;
+  var lastQuotedAddressKey = null;
+  var inFlightRequest = null;
+  var pendingEvent = null;
+
+  function makeAddressKey(shippingAddress) {
+    if (!shippingAddress || typeof shippingAddress !== "object") {
+      return null;
+    }
+    var postal = String(shippingAddress.postal_code || shippingAddress.postalCode || shippingAddress.zip || "")
+      .replace(/\D/g, "")
+      .slice(0, 5);
+    var country = String(shippingAddress.country || "").trim().toUpperCase();
+    if (!postal || postal.length !== 5 || !country) {
+      return null;
+    }
+    return postal + "|" + country;
+  }
 
   function destroyCheckout() {
     if (checkoutFormInstance && typeof checkoutFormInstance.unmount === "function") {
@@ -235,7 +251,9 @@
       } catch (e) {}
       checkoutInstance = null;
     }
-    hasCompletedShippingAddress = false;
+    lastQuotedAddressKey = null;
+    inFlightRequest = null;
+    pendingEvent = null;
     var mount = document.getElementById("checkout");
     if (mount) mount.innerHTML = "";
   }
@@ -290,38 +308,74 @@
         var checkoutForm = checkout.createForm();
         checkoutFormInstance = checkoutForm;
         
+        function processShippingUpdate(shippingAddress) {
+          var previousKey = lastQuotedAddressKey;
+          var addressKey = makeAddressKey(shippingAddress);
+          lastQuotedAddressKey = addressKey;
+          
+          inFlightRequest = checkout.loadActions().then(function (loadActionsResult) {
+            if (loadActionsResult.type === "error") {
+              console.error("Failed to load actions:", loadActionsResult.error);
+              lastQuotedAddressKey = previousKey;
+              return;
+            }
+            
+            var actions = loadActionsResult.actions;
+            var session = actions.getSession();
+            var sessionId = session && session.id;
+            
+            if (!sessionId || !shippingAddress) {
+              console.error("Missing session ID or shipping details");
+              lastQuotedAddressKey = previousKey;
+              return;
+            }
+            
+            return actions.runServerUpdate(function () {
+              return updateShippingOptions(sessionId, shippingAddress);
+            }).catch(function (err) {
+              console.error("Failed to update shipping options:", err);
+              lastQuotedAddressKey = previousKey;
+              throw err;
+            });
+          }).finally(function () {
+            inFlightRequest = null;
+            if (pendingEvent) {
+              var nextEvent = pendingEvent;
+              pendingEvent = null;
+              var nextStatus = nextEvent.status;
+              if (nextStatus.shippingAddress && nextStatus.shippingAddress.complete) {
+                var nextAddress = nextEvent.value.shippingAddress;
+                var nextKey = makeAddressKey(nextAddress);
+                if (nextKey && nextKey !== lastQuotedAddressKey) {
+                  processShippingUpdate(nextAddress);
+                }
+              }
+            }
+          });
+        }
+        
         checkoutForm.on("change", function (event) {
           var value = event.value;
           var status = event.status;
           
-          if (status.shippingAddress && status.shippingAddress.complete && !hasCompletedShippingAddress) {
-            hasCompletedShippingAddress = true;
+          if (status.shippingAddress && status.shippingAddress.complete) {
+            var shippingAddress = value.shippingAddress;
+            var addressKey = makeAddressKey(shippingAddress);
             
-            checkout.loadActions().then(function (loadActionsResult) {
-              if (loadActionsResult.type === "error") {
-                console.error("Failed to load actions:", loadActionsResult.error);
-                return;
-              }
-              
-              var actions = loadActionsResult.actions;
-              var session = actions.getSession();
-              var sessionId = session && session.id;
-              var shippingDetails = value.shippingAddress;
-              
-              if (!sessionId || !shippingDetails) {
-                console.error("Missing session ID or shipping details");
-                return;
-              }
-              
-              actions.runServerUpdate(function () {
-                return updateShippingOptions(sessionId, shippingDetails);
-              }).catch(function (err) {
-                console.error("Failed to update shipping options:", err);
-                hasCompletedShippingAddress = false;
-              });
-            });
-          } else if (status.shippingAddress && !status.shippingAddress.complete && hasCompletedShippingAddress) {
-            hasCompletedShippingAddress = false;
+            if (!addressKey) {
+              return;
+            }
+            
+            if (addressKey === lastQuotedAddressKey) {
+              return;
+            }
+            
+            if (inFlightRequest) {
+              pendingEvent = event;
+              return;
+            }
+            
+            processShippingUpdate(shippingAddress);
           }
         });
         
