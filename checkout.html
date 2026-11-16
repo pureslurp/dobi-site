@@ -325,6 +325,15 @@
           }
         });
         
+        checkoutForm.on("confirm", function (event) {
+          checkout.confirm({ formConfirmEvent: event }).catch(function (err) {
+            console.error("Payment confirmation error:", err);
+            var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
+            reportClientError(errorMsg, "confirm");
+            showError(errorMsg, "confirm");
+          });
+        });
+        
         showEmbed();
         var el = document.getElementById("checkout");
         if (el) checkoutForm.mount("#checkout");

@@ -54,7 +54,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const origin = baseUrl();
+  const origin = baseUrl(req);
   const stripe = new Stripe(secret, {
     apiVersion: "2026-03-25.dahlia",
   });
