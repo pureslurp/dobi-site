@@ -141,7 +141,9 @@ module.exports = async function handler(req, res) {
   }
 
   const shippingOptions = buildShippingOptionsForZone(zone);
-  const stripe = new Stripe(secret);
+  const stripe = new Stripe(secret, {
+    apiVersion: "2026-03-25.dahlia",
+  });
   const detailsForStripe = normalizeShippingDetailsForStripe(shippingDetails);
 
   try {

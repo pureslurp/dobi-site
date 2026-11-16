@@ -55,7 +55,9 @@ module.exports = async function handler(req, res) {
   }
 
   const origin = baseUrl();
-  const stripe = new Stripe(secret);
+  const stripe = new Stripe(secret, {
+    apiVersion: "2026-03-25.dahlia",
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({
