@@ -292,7 +292,9 @@
                 return;
               }
               
-              var sessionId = value.session && value.session.id;
+              var actions = loadActionsResult.actions;
+              var session = actions.getSession();
+              var sessionId = session && session.id;
               var shippingDetails = value.shippingAddress;
               
               if (!sessionId || !shippingDetails) {
@@ -300,7 +302,7 @@
                 return;
               }
               
-              loadActionsResult.actions.runServerUpdate(function () {
+              actions.runServerUpdate(function () {
                 return updateShippingOptions(sessionId, shippingDetails);
               }).catch(function (err) {
                 console.error("Failed to update shipping options:", err);
