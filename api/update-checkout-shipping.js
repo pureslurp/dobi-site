@@ -144,7 +144,6 @@ module.exports = async function handler(req, res) {
   const stripe = new Stripe(secret, {
     apiVersion: "2026-03-25.dahlia",
   });
-  const detailsForStripe = normalizeShippingDetailsForStripe(shippingDetails);
 
   try {
     const existing = await stripe.checkout.sessions.retrieve(sessionId);
@@ -157,9 +156,6 @@ module.exports = async function handler(req, res) {
     };
 
     await stripe.checkout.sessions.update(sessionId, {
-      collected_information: {
-        shipping_details: detailsForStripe,
-      },
       shipping_options: shippingOptions,
       metadata,
     });
