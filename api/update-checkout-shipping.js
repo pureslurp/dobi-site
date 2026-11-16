@@ -3,6 +3,7 @@ const {
   shippingZoneFromZip,
   buildShippingOptionsForZone,
 } = require("./lib/checkout-shipping");
+const { reportError } = require("./lib/error-reporter");
 
 const US_MSG = "We only ship to addresses in the United States.";
 const ZIP_MSG = "Please enter a valid 5-digit US ZIP code.";
@@ -140,8 +141,9 @@ module.exports = async function handler(req, res) {
   }
 
   const shippingOptions = buildShippingOptionsForZone(zone);
-  const stripe = new Stripe(secret);
-  const detailsForStripe = normalizeShippingDetailsForStripe(shippingDetails);
+  const stripe = new Stripe(secret, {
+    apiVersion: "2026-03-25.dahlia",
+  });
 
   try {
     const existing = await stripe.checkout.sessions.retrieve(sessionId);
@@ -154,9 +156,6 @@ module.exports = async function handler(req, res) {
     };
 
     await stripe.checkout.sessions.update(sessionId, {
-      collected_information: {
-        shipping_details: detailsForStripe,
-      },
       shipping_options: shippingOptions,
       metadata,
     });
@@ -164,10 +163,25 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error(
-      "update-checkout-shipping:",
+      "update-checkout-shipping: Stripe error -",
       err && err.message,
-      err && err.code
+      "code:",
+      err && err.code,
+      "type:",
+      err && err.type
     );
-    return res.status(502).json({ ok: false, error: UPDATE_FAIL_MSG });
+    
+    reportError({
+      endpoint: "update-checkout-shipping",
+      stripeError: err,
+      userAgent: req.headers["user-agent"],
+      additionalInfo: {
+        session_id: sessionId,
+        postal_code: postal,
+        zone: String(zone),
+      },
+    }).catch(() => {});
+    
+    return res.status(500).json({ ok: false, error: UPDATE_FAIL_MSG });
   }
 };

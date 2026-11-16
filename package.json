@@ -2,6 +2,6 @@
   "name": "dobi-site",
   "private": true,
   "dependencies": {
-    "stripe": "^17.7.0"
+    "stripe": "^23.1.0"
   }
 }

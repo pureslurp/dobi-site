@@ -31,7 +31,15 @@ function normalizeSiteUrlFromEnv(raw) {
   }
 }
 
-function baseUrl() {
+function baseUrl(req) {
+  if (process.env.VERCEL_ENV !== "production" && req) {
+    const host = req.headers["x-forwarded-host"] || req.headers["host"];
+    if (host) {
+      const proto = req.headers["x-forwarded-proto"] || "https";
+      return `${proto}://${host}`;
+    }
+  }
+  
   if (process.env.SITE_URL) {
     return normalizeSiteUrlFromEnv(process.env.SITE_URL);
   }

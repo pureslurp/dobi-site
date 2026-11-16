@@ -1,7 +1,7 @@
 const Stripe = require("stripe");
 const { baseUrl } = require("./lib/base-url");
 const { buildDummyShippingOptions } = require("./lib/checkout-shipping");
-const { getCheckoutBrandingSettings } = require("./lib/checkout-branding");
+const { reportError } = require("./lib/error-reporter");
 
 function parseBody(req) {
   let body = req.body;
@@ -54,20 +54,18 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const origin = baseUrl();
-  const stripe = new Stripe(secret);
+  const origin = baseUrl(req);
+  const stripe = new Stripe(secret, {
+    apiVersion: "2026-03-25.dahlia",
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      ui_mode: "embedded",
+      ui_mode: "form",
       line_items: [{ price: priceId, quantity: 1 }],
       shipping_address_collection: { allowed_countries: ["US"] },
       shipping_options: buildDummyShippingOptions(),
-      branding_settings: getCheckoutBrandingSettings(),
-      permissions: {
-        update_shipping_details: "server_only",
-      },
       return_url: `${origin}/order-success.html?session_id={CHECKOUT_SESSION_ID}`,
       metadata: { platform },
     });
@@ -81,8 +79,16 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({ clientSecret: session.client_secret });
   } catch (err) {
-    console.error("create-embedded-session:", err && err.message, err && err.code);
-    return res.status(502).json({
+    console.error("create-embedded-session: Stripe error -", err && err.message, "code:", err && err.code, "type:", err && err.type);
+    
+    reportError({
+      endpoint: "create-embedded-session",
+      stripeError: err,
+      platform,
+      userAgent: req.headers["user-agent"],
+    }).catch(() => {});
+    
+    return res.status(500).json({
       error: "Checkout couldn't start. Please try again in a moment.",
     });
   }
