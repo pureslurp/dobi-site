@@ -1,6 +1,9 @@
 {
   "name": "dobi-site",
   "private": true,
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
   "dependencies": {
     "stripe": "^23.1.0"
   }
