@@ -326,11 +326,27 @@
         });
         
         checkoutForm.on("confirm", function (event) {
-          checkout.confirm({ formConfirmEvent: event }).catch(function (err) {
-            console.error("Payment confirmation error:", err);
+          checkout.loadActions().then(function (loadActionsResult) {
+            if (loadActionsResult.type === "error") {
+              console.error("Failed to load actions for confirm:", loadActionsResult.error);
+              var errorMsg = loadActionsResult.error && loadActionsResult.error.message ? loadActionsResult.error.message : "Payment confirmation failed. Please try again.";
+              reportClientError(errorMsg, "confirm-loadActions");
+              showError(errorMsg, "confirm-loadActions");
+              return;
+            }
+            
+            var actions = loadActionsResult.actions;
+            actions.confirm({ formConfirmEvent: event }).catch(function (err) {
+              console.error("Payment confirmation error:", err);
+              var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
+              reportClientError(errorMsg, "confirm");
+              showError(errorMsg, "confirm");
+            });
+          }).catch(function (err) {
+            console.error("Unexpected error during confirm:", err);
             var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
-            reportClientError(errorMsg, "confirm");
-            showError(errorMsg, "confirm");
+            reportClientError(errorMsg, "confirm-unexpected");
+            showError(errorMsg, "confirm-unexpected");
           });
         });
         

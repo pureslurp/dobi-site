@@ -84,7 +84,7 @@ async function reportError(options) {
   const timeoutId = setTimeout(() => controller.abort(), REPORT_TIMEOUT_MS);
   
   try {
-    await fetch(FORMSUBMIT_ENDPOINT, {
+    const response = await fetch(FORMSUBMIT_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,6 +93,10 @@ async function reportError(options) {
       body: JSON.stringify(reportData),
       signal: controller.signal,
     });
+    
+    const responseText = await response.text();
+    const truncatedResponse = responseText.slice(0, 200);
+    console.log(`error-reporter: FormSubmit status=${response.status} response="${truncatedResponse}"`);
   } catch (err) {
     // Ignore errors - this is fire-and-forget
   } finally {
