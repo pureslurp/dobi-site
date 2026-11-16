@@ -1,7 +1,6 @@
 const Stripe = require("stripe");
 const { baseUrl } = require("./lib/base-url");
 const { buildDummyShippingOptions } = require("./lib/checkout-shipping");
-const { reportError } = require("./lib/error-reporter");
 
 function parseBody(req) {
   let body = req.body;
@@ -80,13 +79,6 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ clientSecret: session.client_secret });
   } catch (err) {
     console.error("create-embedded-session: Stripe error -", err && err.message, "code:", err && err.code, "type:", err && err.type);
-    
-    await reportError({
-      endpoint: "create-embedded-session",
-      stripeError: err,
-      platform,
-      userAgent: req.headers["user-agent"],
-    });
     
     return res.status(500).json({
       error: "Checkout couldn't start. Please try again in a moment.",

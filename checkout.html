@@ -106,16 +106,59 @@
     showEl("checkout-embed-wrap", false);
   }
 
-  function reportClientError(error, context) {
+  var FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/pureslurp@gmail.com";
+  var ERROR_DEDUPE_MS = 5 * 60 * 1000;
+
+  function getErrorFingerprint(error, context) {
+    return context + ":" + String(error).slice(0, 100);
+  }
+
+  function shouldReportError(error, context) {
     try {
-      fetch("/api/report-client-error", {
+      var fingerprint = getErrorFingerprint(error, context);
+      var now = Date.now();
+      var lastReported = sessionStorage.getItem("error_" + fingerprint);
+      
+      if (lastReported && now - parseInt(lastReported, 10) < ERROR_DEDUPE_MS) {
+        return false;
+      }
+      
+      sessionStorage.setItem("error_" + fingerprint, String(now));
+      return true;
+    } catch (e) {
+      return true;
+    }
+  }
+
+  function reportClientError(error, context, stripeSessionId) {
+    try {
+      if (!shouldReportError(error, context)) {
+        return;
+      }
+
+      var reportData = {
+        _subject: "Checkout Error: " + context,
+        _template: "table",
+        _captcha: "false",
+        error: String(error).slice(0, 500),
+        context: context,
+        platform: platform || "unknown",
+        page_url: window.location.href,
+        user_agent: navigator.userAgent.slice(0, 200),
+        timestamp: new Date().toISOString(),
+      };
+
+      if (stripeSessionId) {
+        reportData.stripe_session_id = stripeSessionId;
+      }
+
+      fetch(FORMSUBMIT_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          error: String(error),
-          context: context,
-          platform: platform,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(reportData),
       }).catch(function () {});
     } catch (e) {}
   }
@@ -186,6 +229,7 @@
       return res.json().then(function (data) {
         if (!res.ok || !data.clientSecret) {
           var err = (data && data.error) || "Checkout couldn't start. Please try again in a moment.";
+          reportClientError("Server error " + res.status + ": " + err, "create-session");
           throw new Error(err);
         }
         return data.clientSecret;
@@ -211,7 +255,9 @@
         var res = _ref.res;
         var data = _ref.data;
         if (!res.ok || !data.ok) {
-          throw new Error((data && data.error) || "Failed to update shipping options");
+          var err = (data && data.error) || "Failed to update shipping options";
+          reportClientError("Server error " + res.status + ": " + err, "update-shipping");
+          throw new Error(err);
         }
         return data;
       });
