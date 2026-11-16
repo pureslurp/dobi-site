@@ -171,7 +171,7 @@ module.exports = async function handler(req, res) {
       err && err.type
     );
     
-    await reportError({
+    reportError({
       endpoint: "update-checkout-shipping",
       stripeError: err,
       userAgent: req.headers["user-agent"],
@@ -180,7 +180,7 @@ module.exports = async function handler(req, res) {
         postal_code: postal,
         zone: String(zone),
       },
-    });
+    }).catch(() => {});
     
     return res.status(500).json({ ok: false, error: UPDATE_FAIL_MSG });
   }
