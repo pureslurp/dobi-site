@@ -60,14 +60,11 @@ module.exports = async function handler(req, res) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      ui_mode: "embedded",
+      ui_mode: "form",
       line_items: [{ price: priceId, quantity: 1 }],
       shipping_address_collection: { allowed_countries: ["US"] },
       shipping_options: buildDummyShippingOptions(),
       branding_settings: getCheckoutBrandingSettings(),
-      permissions: {
-        update_shipping_details: "server_only",
-      },
       return_url: `${origin}/order-success.html?session_id={CHECKOUT_SESSION_ID}`,
       metadata: { platform },
     });
@@ -81,8 +78,8 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({ clientSecret: session.client_secret });
   } catch (err) {
-    console.error("create-embedded-session:", err && err.message, err && err.code);
-    return res.status(502).json({
+    console.error("create-embedded-session: Stripe error -", err && err.message, "code:", err && err.code, "type:", err && err.type);
+    return res.status(500).json({
       error: "Checkout couldn't start. Please try again in a moment.",
     });
   }

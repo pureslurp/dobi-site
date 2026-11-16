@@ -164,10 +164,13 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error(
-      "update-checkout-shipping:",
+      "update-checkout-shipping: Stripe error -",
       err && err.message,
-      err && err.code
+      "code:",
+      err && err.code,
+      "type:",
+      err && err.type
     );
-    return res.status(502).json({ ok: false, error: UPDATE_FAIL_MSG });
+    return res.status(500).json({ ok: false, error: UPDATE_FAIL_MSG });
   }
 };

@@ -165,9 +165,7 @@
     });
   }
 
-  function onShippingDetailsChange(event) {
-    var checkoutSessionId = event.checkoutSessionId || event.checkout_session_id;
-    var shippingDetails = event.shippingDetails || event.shipping_details;
+  function updateShippingOptions(checkoutSessionId, shippingDetails) {
     return fetch("/api/update-checkout-shipping", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -184,35 +182,32 @@
       .then(function (_ref) {
         var res = _ref.res;
         var data = _ref.data;
-        var failMsg =
-          "We couldn't update shipping for that address. Check your ZIP code and try again.";
         if (!res.ok || !data.ok) {
-          return {
-            type: "reject",
-            errorMessage: (data && data.error) || failMsg,
-          };
+          throw new Error((data && data.error) || "Failed to update shipping options");
         }
-        return { type: "accept" };
-      })
-      .catch(function () {
-        return {
-          type: "reject",
-          errorMessage:
-            "We couldn't update shipping for that address. Check your ZIP code and try again.",
-        };
+        return data;
       });
   }
 
   var platform = parsePlatform();
   var checkoutInstance = null;
+  var checkoutFormInstance = null;
+  var hasCompletedShippingAddress = false;
 
   function destroyCheckout() {
+    if (checkoutFormInstance && typeof checkoutFormInstance.unmount === "function") {
+      try {
+        checkoutFormInstance.unmount();
+      } catch (e) {}
+      checkoutFormInstance = null;
+    }
     if (checkoutInstance && typeof checkoutInstance.destroy === "function") {
       try {
         checkoutInstance.destroy();
       } catch (e) {}
       checkoutInstance = null;
     }
+    hasCompletedShippingAddress = false;
     var mount = document.getElementById("checkout");
     if (mount) mount.innerHTML = "";
   }
@@ -240,23 +235,59 @@
           );
         }
         var stripe = window.Stripe(data.publishableKey);
-        if (typeof stripe.initEmbeddedCheckout !== "function") {
+        if (typeof stripe.initCheckoutFormSdk !== "function") {
           throw new Error(
-            "Embedded checkout is not available in this browser. Try another browser or device."
+            "Checkout form is not available in this browser. Try another browser or device."
           );
         }
-        return stripe.initEmbeddedCheckout({
-          fetchClientSecret: function () {
-            return fetchClientSecret(platform);
-          },
-          onShippingDetailsChange: onShippingDetailsChange,
+        return fetchClientSecret(platform).then(function (clientSecret) {
+          return stripe.initCheckoutFormSdk({ clientSecret: clientSecret }).then(function (checkout) {
+            return { stripe: stripe, checkout: checkout };
+          });
         });
       })
-      .then(function (checkout) {
+      .then(function (_ref2) {
+        var checkout = _ref2.checkout;
         checkoutInstance = checkout;
+        var checkoutForm = checkout.createForm();
+        checkoutFormInstance = checkoutForm;
+        
+        checkoutForm.on("change", function (event) {
+          var value = event.value;
+          var status = event.status;
+          
+          if (status.shippingAddress && status.shippingAddress.complete && !hasCompletedShippingAddress) {
+            hasCompletedShippingAddress = true;
+            
+            checkout.loadActions().then(function (loadActionsResult) {
+              if (loadActionsResult.type === "error") {
+                console.error("Failed to load actions:", loadActionsResult.error);
+                return;
+              }
+              
+              var sessionId = value.session && value.session.id;
+              var shippingDetails = value.shippingAddress;
+              
+              if (!sessionId || !shippingDetails) {
+                console.error("Missing session ID or shipping details");
+                return;
+              }
+              
+              loadActionsResult.actions.runServerUpdate(function () {
+                return updateShippingOptions(sessionId, shippingDetails);
+              }).catch(function (err) {
+                console.error("Failed to update shipping options:", err);
+                hasCompletedShippingAddress = false;
+              });
+            });
+          } else if (status.shippingAddress && !status.shippingAddress.complete && hasCompletedShippingAddress) {
+            hasCompletedShippingAddress = false;
+          }
+        });
+        
         showEmbed();
         var el = document.getElementById("checkout");
-        if (el) checkout.mount("#checkout");
+        if (el) checkoutForm.mount("#checkout");
         // Stripe focuses an input in the iframe; the browser scrolls the *page* into view. We can't
         // stop that focus, but we can freeze the document scroll briefly so you don't see a scroll
         // then a snap back (cross-origin; pinching scrollTo after the fact felt janky).
