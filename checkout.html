@@ -7,6 +7,16 @@
 <meta name="description" content="Complete your DoBi SSD purchase securely with Stripe.">
 <link rel="stylesheet" href="static/style.css?v=checkout4">
 <link rel="icon" href="static/dobi-avatar.png">
+<style>
+  .checkout-embed-mount {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+</style>
 </head>
 <body class="checkout-page">
 
@@ -260,16 +270,14 @@
         }
         return fetchClientSecret(platform).then(function (clientSecret) {
           var appearance = {
-            theme: "night",
+            theme: "stripe",
             variables: {
-              colorPrimary: "#53d769",
-              colorBackground: "#0f172a",
-              colorText: "#ffffff",
-              colorDanger: "#ef4444",
+              colorPrimary: "#0ea5e9",
+              colorBackground: "#ffffff",
+              colorText: "#0f172a",
+              colorDanger: "#dc2626",
               fontFamily: "Inter, system-ui, sans-serif",
               fontSizeBase: "16px",
-              borderRadius: "6px",
-              spacingUnit: "6px",
             },
           };
           var checkout = stripe.initCheckoutFormSdk({ clientSecret: clientSecret, appearance: appearance });
