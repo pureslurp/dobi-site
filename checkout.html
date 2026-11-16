@@ -260,12 +260,16 @@
         }
         return fetchClientSecret(platform).then(function (clientSecret) {
           var appearance = {
-            theme: "flat",
+            theme: "night",
             variables: {
               colorPrimary: "#53d769",
-              colorBackground: "#16213e",
+              colorBackground: "#0f172a",
+              colorText: "#ffffff",
+              colorDanger: "#ef4444",
               fontFamily: "Inter, system-ui, sans-serif",
-              borderRadius: "4px",
+              fontSizeBase: "16px",
+              borderRadius: "6px",
+              spacingUnit: "6px",
             },
           };
           var checkout = stripe.initCheckoutFormSdk({ clientSecret: clientSecret, appearance: appearance });
