@@ -228,10 +228,14 @@
     if (!shippingAddress || typeof shippingAddress !== "object") {
       return null;
     }
-    var postal = String(shippingAddress.postal_code || shippingAddress.postalCode || shippingAddress.zip || "")
+    var addr = shippingAddress.address || shippingAddress;
+    if (!addr || typeof addr !== "object") {
+      return null;
+    }
+    var postal = String(addr.postal_code || addr.postalCode || addr.zip || "")
       .replace(/\D/g, "")
       .slice(0, 5);
-    var country = String(shippingAddress.country || "").trim().toUpperCase();
+    var country = String(addr.country || addr.country_code || "").trim().toUpperCase();
     if (!postal || postal.length !== 5 || !country) {
       return null;
     }
@@ -380,28 +384,92 @@
         });
         
         checkoutForm.on("confirm", function (event) {
-          checkout.loadActions().then(function (loadActionsResult) {
-            if (loadActionsResult.type === "error") {
-              console.error("Failed to load actions for confirm:", loadActionsResult.error);
-              var errorMsg = loadActionsResult.error && loadActionsResult.error.message ? loadActionsResult.error.message : "Payment confirmation failed. Please try again.";
-              reportClientError(errorMsg, "confirm-loadActions");
-              showError(errorMsg, "confirm-loadActions");
-              return;
+          var shippingAddress = event.value && event.value.shippingAddress;
+          var currentKey = makeAddressKey(shippingAddress);
+          
+          if (currentKey && currentKey !== lastQuotedAddressKey) {
+            var mount = document.getElementById("checkout");
+            if (mount) {
+              var msg = document.createElement("div");
+              msg.textContent = "Calculating shipping...";
+              msg.style.cssText = "position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:#fff;padding:12px 24px;border-radius:8px;z-index:1000;";
+              mount.appendChild(msg);
             }
             
-            var actions = loadActionsResult.actions;
-            actions.confirm({ formConfirmEvent: event }).catch(function (err) {
-              console.error("Payment confirmation error:", err);
-              var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
-              reportClientError(errorMsg, "confirm");
-              showError(errorMsg, "confirm");
+            if (!inFlightRequest) {
+              processShippingUpdate(shippingAddress);
+            }
+            
+            var waitForQuote = inFlightRequest || Promise.resolve();
+            waitForQuote.then(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              if (lastQuotedAddressKey !== currentKey) {
+                console.error("Shipping quote failed, cannot confirm");
+                showError("Shipping calculation failed. Please verify your address.", "confirm-no-quote");
+                return;
+              }
+              proceedWithConfirm();
+            }).catch(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              showError("Shipping calculation failed. Please verify your address.", "confirm-quote-error");
             });
-          }).catch(function (err) {
-            console.error("Unexpected error during confirm:", err);
-            var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
-            reportClientError(errorMsg, "confirm-unexpected");
-            showError(errorMsg, "confirm-unexpected");
-          });
+            return;
+          }
+          
+          if (inFlightRequest) {
+            var mount = document.getElementById("checkout");
+            var msg;
+            if (mount) {
+              msg = document.createElement("div");
+              msg.textContent = "Calculating shipping...";
+              msg.style.cssText = "position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:#fff;padding:12px 24px;border-radius:8px;z-index:1000;";
+              mount.appendChild(msg);
+            }
+            
+            inFlightRequest.then(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              proceedWithConfirm();
+            }).catch(function () {
+              if (mount && msg && msg.parentNode) {
+                msg.parentNode.removeChild(msg);
+              }
+              showError("Shipping calculation failed. Please verify your address.", "confirm-in-flight-error");
+            });
+            return;
+          }
+          
+          proceedWithConfirm();
+          
+          function proceedWithConfirm() {
+            checkout.loadActions().then(function (loadActionsResult) {
+              if (loadActionsResult.type === "error") {
+                console.error("Failed to load actions for confirm:", loadActionsResult.error);
+                var errorMsg = loadActionsResult.error && loadActionsResult.error.message ? loadActionsResult.error.message : "Payment confirmation failed. Please try again.";
+                reportClientError(errorMsg, "confirm-loadActions");
+                showError(errorMsg, "confirm-loadActions");
+                return;
+              }
+              
+              var actions = loadActionsResult.actions;
+              actions.confirm({ formConfirmEvent: event }).catch(function (err) {
+                console.error("Payment confirmation error:", err);
+                var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
+                reportClientError(errorMsg, "confirm");
+                showError(errorMsg, "confirm");
+              });
+            }).catch(function (err) {
+              console.error("Unexpected error during confirm:", err);
+              var errorMsg = err && err.message ? err.message : "Payment confirmation failed. Please try again.";
+              reportClientError(errorMsg, "confirm-unexpected");
+              showError(errorMsg, "confirm-unexpected");
+            });
+          }
         });
         
         showEmbed();
