@@ -48,18 +48,19 @@ describe("Stripe Integration Tests", () => {
     const hasCredentials =
       process.env.STRIPE_SECRET_KEY &&
       process.env.STRIPE_SECRET_KEY.startsWith("sk_test_") &&
-      process.env.STRIPE_PRICE_SSD_MAC;
+      process.env.STRIPE_PRICE_SSD_MAC &&
+      process.env.STRIPE_PRICE_SSD_WINDOWS;
 
     if (!hasCredentials) {
       test.skip("skipping integration tests (missing test credentials)", () => {
         console.log(
-          "⚠️  Skipping Stripe API integration tests: STRIPE_SECRET_KEY or STRIPE_PRICE_SSD_MAC not set"
+          "⚠️  Skipping Stripe API integration tests: STRIPE_SECRET_KEY, STRIPE_PRICE_SSD_MAC, or STRIPE_PRICE_SSD_WINDOWS not set"
         );
       });
       return;
     }
 
-    test("create session via handler, update shipping for multiple ZIPs, verify metadata", async () => {
+    test("create session via handler (Mac), update shipping for multiple ZIPs, verify metadata", async () => {
       const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
         apiVersion: "2026-03-25.dahlia",
       });
@@ -199,6 +200,121 @@ describe("Stripe Integration Tests", () => {
             `amount_total should be ${expectedTotal} (product ${productAmount} + shipping ${cost})`
           );
         }
+      } finally {
+        if (sessionId) {
+          try {
+            await stripe.checkout.sessions.expire(sessionId);
+          } catch (err) {
+            console.error("Failed to expire test session:", err.message);
+          }
+        }
+      }
+    });
+
+    test("create session via handler (Windows), update shipping, verify metadata", async () => {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: "2026-03-25.dahlia",
+      });
+
+      let sessionId;
+
+      try {
+        const createReq = {
+          method: "POST",
+          body: { platform: "windows" },
+          headers: { "user-agent": "stripe-ci-test" },
+        };
+
+        const createRes = {
+          _statusCode: 200,
+          _headers: {},
+          _body: null,
+          setHeader(key, value) {
+            this._headers[key] = value;
+          },
+          status(code) {
+            this._statusCode = code;
+            return this;
+          },
+          json(data) {
+            this._body = data;
+            return this;
+          },
+          end() {
+            return this;
+          },
+        };
+
+        await createSessionHandler(createReq, createRes);
+
+        assert.strictEqual(createRes._statusCode, 200, "create session should return 200");
+        assert.ok(createRes._body?.clientSecret, "should return clientSecret");
+
+        const clientSecret = createRes._body.clientSecret;
+        sessionId = clientSecret.split("_secret_")[0];
+
+        assert.ok(sessionId.startsWith("cs_"), "session id should start with cs_");
+
+        const updateReq = {
+          method: "POST",
+          body: {
+            checkout_session_id: sessionId,
+            shipping_details: {
+              name: "Test Customer",
+              address: {
+                line1: "123 Test St",
+                city: "Test City",
+                state: "MI",
+                postal_code: "48201",
+                country: "US",
+              },
+            },
+          },
+          headers: { "user-agent": "stripe-ci-test" },
+        };
+
+        const updateRes = {
+          _statusCode: 200,
+          _headers: {},
+          _body: null,
+          setHeader(key, value) {
+            this._headers[key] = value;
+          },
+          status(code) {
+            this._statusCode = code;
+            return this;
+          },
+          json(data) {
+            this._body = data;
+            return this;
+          },
+          end() {
+            return this;
+          },
+        };
+
+        await updateShippingHandler(updateReq, updateRes);
+
+        assert.strictEqual(
+          updateRes._statusCode,
+          200,
+          "update shipping should return 200"
+        );
+        assert.strictEqual(
+          updateRes._body?.ok,
+          true,
+          "update should succeed"
+        );
+
+        const session = await stripe.checkout.sessions.retrieve(sessionId, {
+          expand: ["line_items"],
+        });
+
+        assert.strictEqual(
+          session.metadata.platform,
+          "windows",
+          "platform metadata should be windows"
+        );
       } finally {
         if (sessionId) {
           try {

@@ -486,9 +486,13 @@
   <h2 class="section-title">Choose Your Edition</h2>
   <p class="section-subtitle">
     One-time purchase. No subscriptions, no recurring fees. Every edition includes the complete 20,000+ page curated knowledge library, organized, searchable, and accessible offline.
-    <strong>DoBi&nbsp;OS</strong> and the <strong>DoBi</strong> SSD edition are built for an <strong>Apple Silicon Mac</strong>
+    <strong>Mac editions</strong> are built for <strong>Apple Silicon Macs</strong>
     <span style="font-weight: normal;">
       (Macs with Apple's M1, M2, or newer chips). Intel Macs are untested.
+    </span>
+    <strong>Windows editions</strong> require a <strong>64-bit Intel/AMD PC</strong>
+    <span style="font-weight: normal;">
+      with 16 GB RAM recommended.
     </span>
   </p>
 
@@ -498,7 +502,7 @@
     <div class="pricing-card">
       <h3>DoBi OS</h3>
       <p class="platform">Downloadable ZIP</p>
-      <div class="price">$79</div>
+      <div class="price">$69</div>
       <p class="price-note">One-time purchase &bull; Instant download</p>
       <ul>
         <li>Complete 20,000+ page knowledge library included</li>
@@ -514,8 +518,8 @@
             <input type="radio" name="platform-os" value="mac" checked>
             <span>Mac</span>
           </label>
-          <label class="platform-option platform-option-disabled" title="Coming soon">
-            <input type="radio" name="platform-os" value="windows" disabled>
+          <label class="platform-option">
+            <input type="radio" name="platform-os" value="windows">
             <span>Windows</span>
           </label>
         </div>
@@ -524,8 +528,8 @@
       <a href="#" class="btn-buy" id="buy-btn-os"
          data-mac-pc-url="https://dobisurvival.gumroad.com/l/dobi-mac"
          data-mac-ssd-url="https://dobisurvival.gumroad.com/l/welbfh"
-         data-windows-pc-url="YOUR_LINK_OS_WINDOWS_PC"
-         data-windows-ssd-url="YOUR_LINK_OS_WINDOWS_SSD"
+         data-windows-pc-url="https://dobisurvival.gumroad.com/l/dobi-windows"
+         data-windows-ssd-url="https://dobisurvival.gumroad.com/l/dobi-windows-ssd"
          onclick="event.preventDefault(); showInstallModal(); return false;">Buy Now</a>
     </div>
 
@@ -540,7 +544,7 @@
         <li>Complete 20,000+ page knowledge library included</li>
         <li>1 TB portable SSD with DoBi OS</li>
         <li>All three AI model tiers included</li>
-        <li>Plug into your Mac</li>
+        <li>Plug into your computer</li>
         <li>ships within 5 to 7 business days</li>
       </ul>
 
@@ -550,8 +554,8 @@
             <input type="radio" name="platform-ssd" value="mac" checked>
             <span>Mac</span>
           </label>
-          <label class="platform-option platform-option-disabled" title="Coming soon">
-            <input type="radio" name="platform-ssd" value="windows" disabled>
+          <label class="platform-option">
+            <input type="radio" name="platform-ssd" value="windows">
             <span>Windows</span>
           </label>
         </div>
@@ -594,10 +598,21 @@
     updateOsLink();
     osRadios.forEach(function (r) { r.addEventListener("change", updateOsLink); });
 
+    // DoBi SSD platform selector
+    var ssdRadios = document.querySelectorAll('input[name="platform-ssd"]');
     var ssdBtn = document.getElementById("buy-btn-ssd");
-    if (ssdBtn) {
-      ssdBtn.href = "checkout.html?platform=mac";
+
+    function updateSsdLink() {
+      if (ssdBtn) {
+        var selected = document.querySelector('input[name="platform-ssd"]:checked');
+        if (selected) {
+          ssdBtn.href = "checkout.html?platform=" + selected.value;
+        }
+      }
     }
+
+    updateSsdLink();
+    ssdRadios.forEach(function (r) { r.addEventListener("change", updateSsdLink); });
   })();
 
   // Installation type modal
@@ -665,7 +680,7 @@
 
   <div class="fulfillment-note">
     <h3>Shipping &amp; Fulfillment</h3>
-    <p><strong>DoBi&nbsp;OS</strong> is an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5 to 7 business days</strong> from Michigan, USA. Each unit includes a premium 1&nbsp;TB portable SSD, hand-prepared for Mac; Windows support for these editions is coming soon. <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. </p>
+    <p><strong>DoBi&nbsp;OS</strong> is an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5 to 7 business days</strong> from Michigan, USA. Each unit includes a premium 1&nbsp;TB portable SSD, hand-prepared for your selected platform (Mac or Windows). <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. </p>
   </div>
 </section>
 
@@ -690,8 +705,8 @@
     <div class="install-options">
       <button class="install-option" data-install-type="pc">
         <div class="install-icon">&#128187;</div>
-        <div class="install-label">On My Mac</div>
-        <div class="install-desc">Install directly on your Mac</div>
+        <div class="install-label">On My Computer</div>
+        <div class="install-desc">Install directly on your Mac or PC</div>
       </button>
       <button class="install-option" data-install-type="ssd">
         <div class="install-icon">&#128190;</div>
