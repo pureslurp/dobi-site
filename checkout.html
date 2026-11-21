@@ -11,14 +11,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/style.css?v=blaze1">
-<script src="static/site.js?v=blaze1" defer></script>
+<link rel="stylesheet" href="static/style.css?v=blaze2">
+<script src="static/site.js?v=blaze2" defer></script>
 <style>
   .checkout-embed-mount {
-    background: #ffffff;
+    background: #23211F;
+    border: 1px solid #3A3734;
     border-radius: 12px;
     padding: 32px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     max-width: 600px;
     margin: 0 auto;
   }
@@ -333,14 +334,17 @@
         }
         return fetchClientSecret(platform).then(function (clientSecret) {
           var appearance = {
-            theme: "stripe",
+            theme: "night",
             variables: {
-              colorPrimary: "#0ea5e9",
-              colorBackground: "#ffffff",
-              colorText: "#0f172a",
-              colorDanger: "#dc2626",
+              colorPrimary: "#FF6B00",
+              colorBackground: "#23211F",
+              colorText: "#F4EFE6",
+              colorTextSecondary: "#A8A29A",
+              colorTextPlaceholder: "#A8A29A",
+              colorDanger: "#FF8A7A",
               fontFamily: "Inter, system-ui, sans-serif",
               fontSizeBase: "16px",
+              borderRadius: "8px",
             },
           };
           var checkout = stripe.initCheckoutFormSdk({ clientSecret: clientSecret, appearance: appearance });
