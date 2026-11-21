@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" width="480" height="120">
+  <title>Placeholder: wide wordmark</title>
+  <rect x="2" y="2" width="476" height="116" fill="none" stroke="#7A7A7A" stroke-width="4" stroke-dasharray="10 8"/>
+  <text x="240" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="10" fill="#7A7A7A">WORDMARK</text>
+  <text x="240" y="98" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="3" fill="#7A7A7A">PLACEHOLDER</text>
+</svg>

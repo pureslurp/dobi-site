@@ -6,6 +6,7 @@ For each direction this writes to mockups/v2/screenshots/:
   <name>-mobile-full.png    390 wide (2x), full page, no height cap
   <name>-desktop-fold.png   1440x900 above the fold
   <name>-*-full-partN.png   the full shots split into parts when very tall
+  <name>-swaptest-*-fold.png  fold with a placeholder mark in the logo slot
 
 Full pages are captured in clipped chunks and stitched with PIL, which avoids
 Chromium's maximum texture height for single tall captures.
@@ -27,6 +28,7 @@ CHROME = "/usr/local/bin/google-chrome"
 PAGES = ["a-field", "b-blaze", "c-topo", "d-rescue"]
 CHUNK_CSS = 3000
 PART_MAX_PX = 6000
+SWAP_TESTS = ["badge", "wordmark"]
 
 
 def full_page(page, path, scale):
@@ -90,6 +92,13 @@ def main():
             files, h = full_page(desk, OUT / f"{name}-desktop-full.png", 1)
             written += [fold, *files]
             print(f"{name}: desktop {h}px tall")
+
+            for mark in SWAP_TESTS:
+                desk.goto(f"{url}?mark=logos/placeholder-{mark}.svg")
+                settle(desk)
+                swap = OUT / f"{name}-swaptest-{mark}-fold.png"
+                desk.screenshot(path=str(swap))
+                written.append(swap)
             desk.close()
 
             mob = browser.new_page(viewport={"width": 390, "height": 844},
