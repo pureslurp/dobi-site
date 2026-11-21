@@ -5,201 +5,195 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DoBi: Your Offline AI Survival Expert</title>
 <meta name="description" content="DoBi is a fully offline AI survival assistant. Download it, get it on a plug-and-play SSD, or order a pre-built mini PC. No internet required. Includes 20,000+ pages of expert material and lets you upload your own PDFs to build a personal knowledge base.">
-<link rel="stylesheet" href="static/style.css">
-<link rel="icon" href="static/dobi-avatar.png">
+<meta name="theme-color" content="#161513">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/style.css?v=blaze2">
+<script src="static/site.js?v=blaze2" defer></script>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <img src="static/dobi-avatar.png" alt="DoBi">
-    <span>DoBi</span>
-  </a>
-  <div class="nav-links">
-    <a href="#top">Home</a>
-    <a href="#value-stack">Knowledge Library</a>
-    <a href="#features">Features</a>
-    <a href="#how-it-works">How It Works</a>
-    <a href="#demo">Demo</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contact.html">Contact</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-med" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/><path d="M12 10.5v6M9 13.5h6"/></symbol>
+    <symbol id="i-jar" viewBox="0 0 24 24"><path d="M8 3.5h8V6H8z"/><path d="M7.5 6h9c.8 1 1.5 2 1.5 3.5V19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9.5C6 8 6.7 7 7.5 6z"/><path d="M6 11.5h12M6 16.5h12"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c2.8 3.6 6 7.4 6 11a6 6 0 0 1-12 0c0-3.6 3.2-7.4 6-11z"/><path d="M9 14.5a3 3 0 0 0 3 3"/></symbol>
+    <symbol id="i-tent" viewBox="0 0 24 24"><path d="M2.5 20h19"/><path d="M12 4 3.5 20"/><path d="m12 4 8.5 16"/><path d="M12 12.5 8.5 20M12 12.5l3.5 7.5"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8z"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c.5 3 4.5 5 4.5 10a4.5 4.5 0 0 1-9 0c0-2 .8-3.5 2-4.7.2 1.5 1 2.4 2 2.7-.6-3 0-5.6.5-8z"/></symbol>
+    <symbol id="i-offline" viewBox="0 0 24 24"><path d="m3 3 18 18"/><path d="M7 9.2A5 5 0 0 0 6.5 19H16"/><path d="M10.2 6.3A5.5 5.5 0 0 1 17.4 10H18a3.5 3.5 0 0 1 2.4 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M8.5 7.5h7M8.5 11h5"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.3 6.6a8 8 0 1 0 11.4 0"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9.5 9.5h5v5h-5z"/><path d="M9.5 2.5V6M14.5 2.5V6M9.5 18v3.5M14.5 18v3.5M2.5 9.5H6M2.5 14.5H6M18 9.5h3.5M18 14.5h3.5"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4.5h16v11H10l-4.5 4v-4H4z"/><path d="M8 8.5h8M8 11.5h5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9.5 5-9.5 5-9.5-5z"/><path d="m2.5 12 9.5 5 9.5-5"/><path d="m2.5 16 9.5 5 9.5-5"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M4 15v5h16v-5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4 16.5V20h16v-3.5"/></symbol>
+    <symbol id="i-drive" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2.5"/><path d="M10 17.5h4M9 7h6"/></symbol>
+    <symbol id="i-minipc" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 14.5h4M16.5 14.5h.01M6 18v2M18 18v2"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5v3.5h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="DoBi home">
+      <img class="brand-mark" src="static/dobi-logo.png" alt="" width="472" height="774">
+      <b>DoBi</b>
+    </a>
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#value-stack">Knowledge Library</a>
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#demo">Demo</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </div>
     <a href="#pricing" class="nav-cta">Buy Now</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <svg class="ic open" aria-hidden="true"><use href="#i-menu"/></svg><svg class="ic close" aria-hidden="true"><use href="#i-x"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#top">Home <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a href="#value-stack">Knowledge Library <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a href="#features">Features <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a href="#how-it-works">How It Works <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a href="#demo">Demo <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a href="faq.html">FAQ <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a href="contact.html">Contact <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li class="menu-cta"><a href="#pricing" class="btn">Choose your edition</a></li>
+    </ul>
   </div>
 </nav>
 
-<!-- Hero -->
-<div id="top" class="hero">
-  <img src="static/dobi-avatar.png" alt="DoBi" class="hero-avatar">
-  <h1>Meet <span class="highlight">DoBi</span></h1>
-  <p class="tagline">Your offline AI survival expert.</p>
-  <p class="hero-peace">I realized my family's safety was dependent on a Wi-Fi signal that could vanish in a second. That's why I built DoBi.</p>
-  <p class="hero-detail">
-    A fully offline AI assistant with over <strong>20,000 pages</strong> of expert survival knowledge.
-    No internet, no cloud, no subscriptions. Expand it with your own PDFs.
-    Available as a download, a plug-and-play SSD, or a pre-built mini computer.
-  </p>
-  <a href="#pricing" class="hero-cta">Secure Your Future</a>
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-head">
+      <p class="eyebrow label">Offline AI survival assistant</p>
+      <h1>Meet <span>DoBi</span></h1>
+      <p class="tagline">Your offline AI survival expert.</p>
+    </div>
+    <div class="hero-body">
+      <p class="peace">I realized my family’s safety was dependent on a Wi-Fi signal that could vanish in a second. That’s why I built DoBi.</p>
+      <p class="detail">A fully offline AI assistant with over <strong>20,000 pages</strong> of expert survival knowledge. No internet, no cloud, no subscriptions. Expand it with your own PDFs. Available as a download, a plug-and-play SSD, or a pre-built mini computer.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-hero">Choose your edition <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#demo" class="textlink">See DoBi in action</a>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="stage-art">
+        <img class="brand-mark" src="static/dobi-logo.png" alt="DoBi, your offline survival assistant" width="472" height="774">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="value-stack">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Knowledge library</p>
+      <h2>Your curated knowledge library</h2>
+      <p>We’ve done the research, organization, and integration, so you get instant access. Thousands of hours of research, all in one place.</p>
+    </div>
+    <div class="lib">
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-med"/></svg></span><h3>Emergency medical procedures</h3><p>Life-saving techniques when hospitals aren’t an option</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-jar"/></svg></span><h3>Long-term food storage</h3><p>Preservation methods that work without electricity</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-drop"/></svg></span><h3>Water purification systems</h3><p>Multiple methods to make any water source safe</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-tent"/></svg></span><h3>Shelter building</h3><p>Construct protection from whatever materials you have</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-compass"/></svg></span><h3>Navigation &amp; communication</h3><p>Find your way and stay connected when GPS fails</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg></span><h3>Fire &amp; energy</h3><p>Create heat, light, and power from basic resources</p></article>
+    </div>
+    <p class="note"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span><b>20,000+ pages of open-source survival knowledge</b>, organized and searchable. Included with every purchase at no additional cost.</span></p>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Features</p>
+      <h2>Be ready for anything</h2>
+      <p>When the grid goes down, the cloud goes with it. DoBi doesn’t need either.</p>
+    </div>
+    <div class="feat">
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-offline"/></svg></span><h3>100% offline</h3><p>No internet, no cloud, no phone-home. Everything runs locally on your machine. Your data stays yours.</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg></span><h3>Survival library</h3><p>DoBi ships with a powerful pre-trained AI model enhanced by over 20,000 pages of expert survival material. Upload your own PDFs to expand its knowledge with the references that matter most to you.</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-power"/></svg></span><h3>One-click launch</h3><p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click. Ongoing updates and improvements are included with your purchase and delivered as simple file updates with step-by-step instructions.</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-chip"/></svg></span><h3>Smart hardware detection</h3><p>DoBi reads your hardware and picks the best model tier automatically. No tweaking needed.</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg></span><h3>Real conversations</h3><p>Not just Q&amp;A. DoBi remembers context within a conversation, follows up on earlier topics, and provides sourced answers from its knowledgebase.</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></span><h3>Three model tiers</h3><p>Full (7B), Mid (3B), and Lite (1B) models included. Scale from a powerful Mac to a more modest one with as little as 4&nbsp;GB RAM (8&nbsp;GB or more is better for the Full tier).</p></article>
+    </div>
+  </div>
+</section>
+
+<div class="certainty" id="chaos">
+  <div class="wrap">
+    <div class="box">
+      <div>
+        <h2>Total certainty in an uncertain world</h2>
+        <p class="quote">In a crisis, you don’t rise to the occasion, you sink to the level of your preparation.</p>
+      </div>
+      <div>
+        <p class="q">Do you have the answer, or do you have a blank screen?</p>
+        <a href="#pricing" class="btn">Compare the editions <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Value Stack -->
-<section id="value-stack" class="value-stack-section">
-  <h2 class="section-title">Your Curated Knowledge Library</h2>
-  <p class="section-subtitle">We've done the research, organization, and integration, so you get instant access. Thousands of hours of research, all in one place.</p>
-  
-  <div class="value-stack-grid">
-    <div class="value-item">
-      <div class="value-icon">&#128137;</div>
-      <h3>Emergency Medical Procedures</h3>
-      <p>Life-saving techniques when hospitals aren't an option</p>
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">How it works</p>
+      <h2>Peace of mind in three steps</h2>
+      <p>No internet. No accounts. No nonsense.</p>
     </div>
-    <div class="value-item">
-      <div class="value-icon">&#127830;</div>
-      <h3>Long-Term Food Storage</h3>
-      <p>Preservation methods that work without electricity</p>
-    </div>
-    <div class="value-item">
-      <div class="value-icon">&#128167;</div>
-      <h3>Water Purification Systems</h3>
-      <p>Multiple methods to make any water source safe</p>
-    </div>
-    <div class="value-item">
-      <div class="value-icon">&#127968;</div>
-      <h3>Shelter Building</h3>
-      <p>Construct protection from whatever materials you have</p>
-    </div>
-    <div class="value-item">
-      <div class="value-icon">&#128506;</div>
-      <h3>Navigation & Communication</h3>
-      <p>Find your way and stay connected when GPS fails</p>
-    </div>
-    <div class="value-item">
-      <div class="value-icon">&#128293;</div>
-      <h3>Fire & Energy</h3>
-      <p>Create heat, light, and power from basic resources</p>
-    </div>
-  </div>
-  
-  <p class="value-stack-note">20,000+ pages of open-source survival knowledge, organized and searchable. Included with every purchase at no additional cost.</p>
-</section>
-
-<!-- Features -->
-<section id="features">
-  <h2 class="section-title">Be Ready for Anything</h2>
-  <p class="section-subtitle">
-    When the grid goes down, the cloud goes with it. DoBi doesn't need either.
-  </p>
-
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">&#128274;</div>
-      <h3>100% Offline</h3>
-      <p>No internet, no cloud, no phone-home. Everything runs locally on your machine. Your data stays yours.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#128218;</div>
-      <h3>Survival Library</h3>
-      <p>DoBi ships with a powerful pre-trained AI model enhanced by over 20,000 pages of expert survival material. Upload your own PDFs to expand its knowledge with the references that matter most to you.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#9889;</div>
-      <h3>One-Click Launch</h3>
-        <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click. Ongoing updates and improvements are included with your purchase and delivered as simple file updates with step-by-step instructions.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#128187;</div>
-      <h3>Smart Hardware Detection</h3>
-      <p>DoBi reads your hardware and picks the best model tier automatically. No tweaking needed.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#128172;</div>
-      <h3>Real Conversations</h3>
-      <p>Not just Q&A. DoBi remembers context within a conversation, follows up on earlier topics, and provides sourced answers from its knowledgebase.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#128736;</div>
-      <h3>Three Model Tiers</h3>
-      <p>Full (7B), Mid (3B), and Lite (1B) models included. Scale from a powerful Mac to a more modest one with as little as 4&nbsp;GB RAM (8&nbsp;GB or more is better for the Full tier).</p>
-    </div>
-  </div>
-</section>
-
-<!-- 3 Seconds of Chaos -->
-<section id="chaos" class="chaos-section">
-  <div class="chaos-content">
-    <h2 class="chaos-title">Total Certainty in an Uncertain World</h2>
-    <p class="chaos-subtitle">In a crisis, you don't rise to the occasion, you sink to the level of your preparation.</p>
-    <p class="chaos-question">Do you have the answer, or do you have a blank screen?</p>
-    <a href="#pricing" class="chaos-cta">Stop Hoping. Start Preparing.</a>
-  </div>
-</section>
-
-<!-- How It Works -->
-<section id="how-it-works" class="section-full">
-  <div class="section-inner">
-    <h2 class="section-title">Peace of Mind in Three Steps</h2>
-    <p class="section-subtitle">No internet. No accounts. No nonsense.</p>
-
     <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Choose Your Edition</h3>
-        <p>Download, plug in, or order pre-built. Whatever fits your needs.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Launch</h3>
-        <p>One click. It's ready.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Ask</h3>
-        <p>Get answers. Stay prepared.</p>
-      </div>
+      <div class="step"><span class="num">1</span><h3>Choose your edition</h3><p>Download, plug in, or order pre-built. Whatever fits your needs.</p></div>
+      <div class="step"><span class="num">2</span><h3>Launch</h3><p>One click. It’s ready.</p></div>
+      <div class="step"><span class="num">3</span><h3>Ask</h3><p>Get answers. Stay prepared.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Knowledge Base -->
 <section id="knowledge-base">
-  <div>
-    <h2 class="section-title">Make It Yours</h2>
-    <p class="section-subtitle">
-      DoBi ships with a carefully curated library of open source survival knowledge.
-      Want to go further? Upload your own purchased manuals, medical references, field guides,
-      or any other PDFs to make DoBi truly your own.
-    </p>
-
-    <div class="kb-grid">
-      <div class="kb-item">
-        <div class="kb-icon">&#128228;</div>
-        <h3>Drag &amp; Drop Upload</h3>
-        <p>Open the Knowledge Base section in DoBi's sidebar, then drag-and-drop or click to upload any text-based PDF. DoBi validates your files and gives clear feedback if something can't be used.</p>
-      </div>
-      <div class="kb-item">
-        <div class="kb-icon">&#9889;</div>
-        <h3>Instantly Available</h3>
-        <p>Uploaded PDFs are automatically indexed and become part of DoBi's knowledge base immediately. No restart, no rebuild, no waiting. Upload and ask.</p>
-      </div>
-      <div class="kb-item">
-        <div class="kb-icon">&#128274;</div>
-        <h3>Private &amp; Manageable</h3>
-        <p>All processing happens locally. Your files never leave your machine. View everything in your knowledge base, remove what you don't need, and add new material whenever you want.</p>
-      </div>
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Your own PDFs</p>
+      <h2>Make it yours</h2>
+      <p>DoBi ships with a carefully curated library of open source survival knowledge. Want to go further? Upload your own purchased manuals, medical references, field guides, or any other PDFs to make DoBi truly your own.</p>
     </div>
-
-    <p class="kb-note">DoBi works with text-based PDFs. Scanned image-only PDFs without embedded text won't be usable.</p>
+    <div class="kb">
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-upload"/></svg></span><h3>Drag &amp; drop upload</h3><p>Open the Knowledge Base section in DoBi’s sidebar, then drag-and-drop or click to upload any text-based PDF. DoBi validates your files and gives clear feedback if something can’t be used.</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg></span><h3>Instantly available</h3><p>Uploaded PDFs are automatically indexed and become part of DoBi’s knowledge base immediately. No restart, no rebuild, no waiting. Upload and ask.</p></article>
+      <article><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Private &amp; manageable</h3><p>All processing happens locally. Your files never leave your machine. View everything in your knowledge base, remove what you don’t need, and add new material whenever you want.</p></article>
+    </div>
+    <p class="note"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg><span>DoBi works with text-based PDFs. Scanned image-only PDFs without embedded text won’t be usable.</span></p>
   </div>
 </section>
 
 <!-- App Demo -->
 <section id="demo">
-  <h2 class="section-title">See DoBi in Action</h2>
-  <p class="section-subtitle">A real look at the interface. Browse conversations, ask questions, and manage your knowledge base, all while offline.</p>
+  <div class="wrap">
+  <div class="shead center">
+    <p class="label">Demo</p>
+    <h2>See DoBi in action</h2>
+    <p>A real look at the interface. Browse conversations, ask questions, and manage your knowledge base, all while offline.</p>
+  </div>
 
   <div class="demo-window">
     <div class="demo-titlebar">
@@ -215,9 +209,9 @@
       <!-- Header -->
       <div class="demo-header">
         <span class="demo-hamburger">&#9776;</span>
-        <img src="static/dobi-avatar.png" alt="DoBi" class="demo-header-avatar">
+        <img src="static/dobi-logo.png" alt="DoBi" class="demo-header-avatar" width="472" height="774">
         <span class="demo-logo">DoBi</span>
-        <span class="demo-model-badge">Full (8B)</span>
+        <span class="demo-model-badge">Full (7B)</span>
         <span class="demo-subtitle">Offline Survival Assistant</span>
         <span class="demo-new-chat">New Chat</span>
       </div>
@@ -295,11 +289,11 @@
 
               <div class="demo-kb-sub-label" style="margin-top:6px">Your Uploads</div>
               <div class="demo-kb-dropzone">
-                <span class="demo-kb-dropzone-icon">&#128196;</span>
+                <span class="demo-kb-dropzone-icon"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span>
                 Drop a PDF or EPUB here, or click to upload
               </div>
               <div class="demo-kb-file">
-                <span class="demo-kb-file-icon">&#128196;</span>
+                <span class="demo-kb-file-icon"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span>
                 <div class="demo-kb-file-info">
                   <div class="demo-kb-file-name">My Emergency Plan.pdf</div>
                   <div class="demo-kb-file-meta">2.4 MB &middot; just now</div>
@@ -307,7 +301,7 @@
                 <span class="demo-kb-file-delete">&times;</span>
               </div>
               <div class="demo-kb-file">
-                <span class="demo-kb-file-icon">&#128196;</span>
+                <span class="demo-kb-file-icon"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span>
                 <div class="demo-kb-file-info">
                   <div class="demo-kb-file-name">Family Medical Reference.pdf</div>
                   <div class="demo-kb-file-meta">5.1 MB &middot; just now</div>
@@ -473,249 +467,125 @@
     });
   })();
   </script>
+  </div>
 </section>
 
-<!-- Peace of Mind Banner -->
 <div class="peace-banner">
-  <p>The offline AI survival expert that gives you true peace of mind.<br>
-    You hope you never need it, but you'll thank yourself when you do.</p>
+  <p>The offline AI survival expert that gives you true peace of mind.<br>You hope you never need it, but you’ll thank yourself when you do.</p>
 </div>
 
-<!-- Pricing -->
 <section id="pricing">
-  <h2 class="section-title">Choose Your Edition</h2>
-  <p class="section-subtitle">
-    One-time purchase. No subscriptions, no recurring fees. Every edition includes the complete 20,000+ page curated knowledge library, organized, searchable, and accessible offline.
-    <strong>Mac editions</strong> are built for <strong>Apple Silicon Macs</strong>
-    <span style="font-weight: normal;">
-      (Macs with Apple's M1, M2, or newer chips). Intel Macs are untested.
-    </span>
-    <strong>Windows editions</strong> require a <strong>64-bit Intel/AMD PC</strong>
-    <span style="font-weight: normal;">
-      with 16 GB RAM recommended.
-    </span>
-  </p>
+  <div class="wrap">
+    <div class="shead">
+      <p class="label">Editions</p>
+      <h2>Choose your edition</h2>
+      <p>One-time purchase. No subscriptions, no recurring fees. Every edition includes the complete 20,000+ page curated knowledge library, organized, searchable, and accessible offline.</p>
+      <div class="compat">
+        <p><b>Mac editions</b> are built for <b>Apple Silicon Macs</b> (Macs with Apple’s M1, M2, or newer chips). Intel Macs are untested.</p>
+        <p><b>Windows editions</b> require a <b>64-bit Intel/AMD PC</b> with 16 GB RAM recommended.</p>
+      </div>
+    </div>
 
-  <div class="pricing-cards">
-
-    <!-- DoBi OS -->
-    <div class="pricing-card">
-      <h3>DoBi OS</h3>
-      <p class="platform">Downloadable ZIP</p>
-      <div class="price">$69</div>
-      <p class="price-note">One-time purchase &bull; Instant download</p>
-      <ul>
-        <li>Complete 20,000+ page knowledge library included</li>
-        <li>Download a ZIP, extract, and run</li>
-        <li>All three AI model tiers included</li>
-        <li>Use your own storage</li>
-        <li>Instant access after purchase</li>
-      </ul>
-
-      <div class="platform-select">
-        <div class="platform-row">
-          <label class="platform-option">
-            <input type="radio" name="platform-os" value="mac" checked>
-            <span>Mac</span>
-          </label>
-          <label class="platform-option">
-            <input type="radio" name="platform-os" value="windows">
-            <span>Windows</span>
-          </label>
-        </div>
+    <div class="compare">
+      <div class="col labels" aria-hidden="true">
+        <div>Compare editions</div>
+        <div>Knowledge library</div>
+        <div>What you get</div>
+        <div>AI models</div>
+        <div>Setup</div>
+        <div>Good to know</div>
+        <div></div>
       </div>
 
-      <a href="#" class="btn-buy" id="buy-btn-os"
-         data-mac-pc-url="https://dobisurvival.gumroad.com/l/dobi-mac"
-         data-mac-ssd-url="https://dobisurvival.gumroad.com/l/welbfh"
-         data-windows-pc-url="https://dobisurvival.gumroad.com/l/dobi-windows"
-         data-windows-ssd-url="https://dobisurvival.gumroad.com/l/dobi-windows-ssd"
-         onclick="event.preventDefault(); showInstallModal(); return false;">Buy Now</a>
-    </div>
-
-    <!-- DoBi (Most Popular) -->
-    <div class="pricing-card featured">
-      <span class="popular-badge">Most Popular</span>
-      <h3>DoBi</h3>
-      <p class="platform">1 TB Portable SSD</p>
-      <div class="price">$199</div>
-      <p class="price-note">One-time purchase &bull; Plus shipping</p>
-      <ul>
-        <li>Complete 20,000+ page knowledge library included</li>
-        <li>1 TB portable SSD with DoBi OS</li>
-        <li>All three AI model tiers included</li>
-        <li>Plug into your computer</li>
-        <li>ships within 5 to 7 business days</li>
-      </ul>
-
-      <div class="platform-select">
-        <div class="platform-row">
-          <label class="platform-option">
-            <input type="radio" name="platform-ssd" value="mac" checked>
-            <span>Mac</span>
-          </label>
-          <label class="platform-option">
-            <input type="radio" name="platform-ssd" value="windows">
-            <span>Windows</span>
-          </label>
+      <!-- DoBi OS -->
+      <article class="col ed">
+        <div class="ed-head">
+          <div class="top"><span class="label">Download</span><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></div>
+          <h3>DoBi OS</h3>
+          <p class="fmt">Downloadable ZIP</p>
+          <div class="price">$69</div>
+          <p class="pnote">One-time purchase • Instant download</p>
         </div>
+        <div class="cell"><span class="cl">Knowledge library</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Complete 20,000+ page knowledge library included</span></div>
+        <div class="cell"><span class="cl">What you get</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Download a ZIP, extract, and run</span></div>
+        <div class="cell"><span class="cl">AI models</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>All three AI model tiers included</span></div>
+        <div class="cell"><span class="cl">Setup</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Use your own storage</span></div>
+        <div class="cell"><span class="cl">Good to know</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Instant access after purchase</span></div>
+        <div class="buy" id="buy-btn-os"
+             data-mac-pc-url="https://dobisurvival.gumroad.com/l/dobi-mac"
+             data-mac-ssd-url="https://dobisurvival.gumroad.com/l/welbfh"
+             data-windows-pc-url="https://dobisurvival.gumroad.com/l/dobi-windows"
+             data-windows-ssd-url="https://dobisurvival.gumroad.com/l/dobi-windows-ssd">
+          <a class="btn two" href="https://dobisurvival.gumroad.com/l/dobi-mac" target="_blank" rel="noopener noreferrer">Buy for Mac <small>On my computer</small></a>
+          <a class="ssd-link" href="https://dobisurvival.gumroad.com/l/welbfh" target="_blank" rel="noopener noreferrer"><span>Mac, on an SSD instead</span></a>
+          <a class="btn two" href="https://dobisurvival.gumroad.com/l/dobi-windows" target="_blank" rel="noopener noreferrer">Buy for Windows <small>On my computer</small></a>
+          <a class="ssd-link" href="https://dobisurvival.gumroad.com/l/dobi-windows-ssd" target="_blank" rel="noopener noreferrer"><span>Windows, on an SSD instead</span></a>
+        </div>
+      </article>
+
+      <!-- DoBi (Most Popular) -->
+      <article class="col ed featured">
+        <div class="ed-head">
+          <div class="top"><span class="pill">Most Popular</span><svg class="ic" aria-hidden="true"><use href="#i-drive"/></svg></div>
+          <h3>DoBi</h3>
+          <p class="fmt">1 TB Portable SSD</p>
+          <div class="price">$199</div>
+          <p class="pnote">One-time purchase • Plus shipping</p>
+        </div>
+        <div class="cell"><span class="cl">Knowledge library</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Complete 20,000+ page knowledge library included</span></div>
+        <div class="cell"><span class="cl">What you get</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>1 TB portable SSD with DoBi OS</span></div>
+        <div class="cell"><span class="cl">AI models</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>All three AI model tiers included</span></div>
+        <div class="cell"><span class="cl">Setup</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Plug into your computer</span></div>
+        <div class="cell"><span class="cl">Good to know</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Ships within 5 to 7 business days</span></div>
+        <div class="buy" id="buy-btn-ssd">
+          <a class="btn" href="checkout.html?platform=mac">Buy for Mac</a>
+          <a class="btn" href="checkout.html?platform=windows">Buy for Windows</a>
+        </div>
+      </article>
+
+      <!-- DoBi Nitro -->
+      <article class="col ed">
+        <div class="ed-head">
+          <div class="top"><span class="label">Built to order</span><svg class="ic" aria-hidden="true"><use href="#i-minipc"/></svg></div>
+          <h3>DoBi Nitro</h3>
+          <p class="fmt">Pre-Built Mini PC, Built to Order. No limits.</p>
+          <div class="price">$699+</div>
+          <p class="pnote">Custom-built to order • By inquiry</p>
+        </div>
+        <div class="cell"><span class="cl">Knowledge library</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Complete 20,000+ page knowledge library included</span></div>
+        <div class="cell"><span class="cl">What you get</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Dedicated mini PC with DoBi OS</span></div>
+        <div class="cell"><span class="cl">AI models</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Advanced AI model tiers available</span></div>
+        <div class="cell"><span class="cl">Setup</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Custom-built to your needs. Just plug in power.</span></div>
+        <div class="cell"><span class="cl">Good to know</span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Hardware optimized for the best DoBi experience</span></div>
+        <div class="buy">
+          <a class="btn btn-light" href="contact.html">Request a Quote</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="fulfil">
+      <span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-truck"/></svg></span>
+      <div>
+        <h3>Shipping &amp; fulfillment</h3>
+        <p><strong>DoBi&nbsp;OS</strong> is an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5 to 7 business days</strong> from Michigan, USA. Each unit includes a premium 1&nbsp;TB portable SSD, hand-prepared for your selected platform (Mac or Windows). <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times.</p>
       </div>
-
-      <a href="checkout.html?platform=mac" class="btn-buy" id="buy-btn-ssd">Buy Now</a>
     </div>
-
-    <!-- DoBi Nitro -->
-    <div class="pricing-card">
-      <h3>DoBi Nitro</h3>
-      <p class="platform">Pre-Built Mini PC, Built to Order. No limits.</p>
-      <div class="price">$699+</div>
-      <p class="price-note">Custom-built to order &bull; By inquiry</p>
-      <ul>
-        <li>Complete 20,000+ page knowledge library included</li>
-        <li>Dedicated mini PC with DoBi OS</li>
-        <li>Advanced AI model tiers available</li>
-        <li>Hardware optimized for the best DoBi experience</li>
-        <li>Custom-built to your needs. Just plug in power.</li>
-      </ul>
-
-      <a href="contact.html" class="btn-inquiry">Request a Quote</a>
-    </div>
-
-  </div>
-
-  <script>
-  (function () {
-    // DoBi OS platform selector
-    var osRadios = document.querySelectorAll('input[name="platform-os"]');
-    var osBtn = document.getElementById("buy-btn-os");
-
-    function updateOsLink() {
-      if (osBtn) {
-        osBtn.href = "#";
-      }
-    }
-
-    updateOsLink();
-    osRadios.forEach(function (r) { r.addEventListener("change", updateOsLink); });
-
-    // DoBi SSD platform selector
-    var ssdRadios = document.querySelectorAll('input[name="platform-ssd"]');
-    var ssdBtn = document.getElementById("buy-btn-ssd");
-
-    function updateSsdLink() {
-      if (ssdBtn) {
-        var selected = document.querySelector('input[name="platform-ssd"]:checked');
-        if (selected) {
-          ssdBtn.href = "checkout.html?platform=" + selected.value;
-        }
-      }
-    }
-
-    updateSsdLink();
-    ssdRadios.forEach(function (r) { r.addEventListener("change", updateSsdLink); });
-  })();
-
-  // Installation type modal
-  function showInstallModal() {
-    var modal = document.getElementById("install-modal");
-    if (modal) {
-      modal.classList.add("modal-active");
-      document.body.style.overflow = "hidden";
-    }
-  }
-
-  function hideInstallModal() {
-    var modal = document.getElementById("install-modal");
-    if (modal) {
-      modal.classList.remove("modal-active");
-      document.body.style.overflow = "";
-    }
-  }
-
-  function proceedToPurchase(installType) {
-    var osBtn = document.getElementById("buy-btn-os");
-    if (osBtn) {
-      var selected = document.querySelector('input[name="platform-os"]:checked');
-      if (selected && installType) {
-        var parts = (selected.value + "-" + installType).split("-");
-        var dataKey = parts[0] + parts[1].charAt(0).toUpperCase() + parts[1].slice(1) + "Url";
-        var url = osBtn.dataset[dataKey];
-        if (url && url.indexOf("YOUR_") !== 0) {
-          window.open(url, "_blank", "noopener,noreferrer");
-        }
-      }
-    }
-    hideInstallModal();
-  }
-
-  // Modal event listeners
-  document.addEventListener("DOMContentLoaded", function() {
-    var modal = document.getElementById("install-modal");
-    var closeBtn = modal ? modal.querySelector(".modal-close") : null;
-    var overlay = modal ? modal.querySelector(".modal-overlay") : null;
-    var installOptions = modal ? modal.querySelectorAll(".install-option") : [];
-
-    if (closeBtn) {
-      closeBtn.addEventListener("click", hideInstallModal);
-    }
-
-    if (overlay) {
-      overlay.addEventListener("click", hideInstallModal);
-    }
-
-    installOptions.forEach(function(option) {
-      option.addEventListener("click", function() {
-        var installType = this.dataset.installType;
-        proceedToPurchase(installType);
-      });
-    });
-
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape" && modal && modal.classList.contains("modal-active")) {
-        hideInstallModal();
-      }
-    });
-  });
-  </script>
-
-  <div class="fulfillment-note">
-    <h3>Shipping &amp; Fulfillment</h3>
-    <p><strong>DoBi&nbsp;OS</strong> is an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5 to 7 business days</strong> from Michigan, USA. Each unit includes a premium 1&nbsp;TB portable SSD, hand-prepared for your selected platform (Mac or Windows). <strong>DoBi&nbsp;Nitro</strong> is custom-built to order; <a href="contact.html">contact us</a> for pricing and lead times. </p>
   </div>
 </section>
 
 <footer>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contact.html">Contact</a>
-    <a href="#pricing">Buy Now</a>
-    <a href="https://x.com/dobi_survival" target="_blank" rel="noopener noreferrer">X</a>
+  <div class="wrap">
+    <a class="name" href="index.html"><img class="brand-mark" src="static/dobi-logo.png" alt="" width="472" height="774">DoBi</a>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="#pricing">Buy Now</a>
+      <a href="https://x.com/dobi_survival" target="_blank" rel="noopener noreferrer">X</a>
+    </nav>
+    <p class="foot-legal">&copy; 2026 DoBi. All rights reserved.</p>
   </div>
-  <p>&copy; 2026 DoBi. All rights reserved.</p>
 </footer>
-
-<!-- Installation Type Modal -->
-<div id="install-modal" class="modal">
-  <div class="modal-overlay"></div>
-  <div class="modal-content">
-    <button class="modal-close">&times;</button>
-    <h3>Choose Installation Type</h3>
-    <p class="modal-subtitle">Where do you plan to install DoBi OS?</p>
-    <div class="install-options">
-      <button class="install-option" data-install-type="pc">
-        <div class="install-icon">&#128187;</div>
-        <div class="install-label">On My Computer</div>
-        <div class="install-desc">Install directly on your Mac or PC</div>
-      </button>
-      <button class="install-option" data-install-type="ssd">
-        <div class="install-icon">&#128190;</div>
-        <div class="install-label">On an SSD</div>
-        <div class="install-desc">Install on a portable SSD drive</div>
-      </button>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
