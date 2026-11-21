@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DoBi / Direction B: Blaze (mockup v2)</title>
+<link rel="icon" href="logos/blaze-tile.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #161513;
+    --surface: #23211F;
+    --card: #2F2C29;
+    --accent: #FF6B00;
+    --accent-dim: #E86000;
+    --text: #F4EFE6;
+    --dim: #A8A29A;
+    --border: #3A3734;
+    --on-accent: #1A130C;
+
+    --font: "Archivo", "Arial Narrow", sans-serif;
+    --wrap: 1320px;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+
+  .cond { font-stretch: 62%; font-weight: 800; text-transform: uppercase; letter-spacing: -.005em; }
+  .label { font-stretch: 100%; font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+
+  .ic { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; flex: none; }
+
+  /* Brand mark slot: swap the src in nav + hero; size with --mark-size only. */
+  .brand-mark { display: block; height: var(--mark-size); width: auto; max-width: min(100%, calc(var(--mark-size) * 2.6)); object-fit: contain; }
+
+  /* Nav */
+  nav.top { --mark-size: 40px; position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--border); }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand b { font-size: 34px; line-height: 1; }
+  .navlinks { display: flex; align-items: center; gap: 4px; }
+  .navlinks a { font-stretch: 75%; font-weight: 700; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 10px 14px; color: var(--text); }
+  .navlinks a:hover { color: var(--accent); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
+    background: var(--accent); color: var(--on-accent);
+    font-stretch: 75%; font-weight: 800; font-size: 18px; letter-spacing: .06em; text-transform: uppercase;
+    padding: 16px 24px; border: 0; transition: background .15s, transform .15s;
+  }
+  .btn:hover { background: var(--accent-dim); }
+  .btn .ic { width: 20px; height: 20px; stroke-width: 2.5; }
+  .navlinks .btn { margin-left: 12px; padding: 12px 18px; font-size: 16px; color: var(--on-accent); }
+  .navlinks .btn:hover { color: var(--on-accent); }
+  .btn.dark { background: var(--bg); color: var(--text); }
+  .btn.dark:hover { background: var(--surface); }
+  .btn.line { background: transparent; color: var(--text); box-shadow: inset 0 0 0 2px var(--text); }
+  .btn.line:hover { background: var(--text); color: var(--bg); }
+
+  /* Hero */
+  .hero { padding: clamp(36px, 4.4vw, 64px) 0 clamp(48px, 6vw, 80px); position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(28px, 4vw, 64px); align-items: end; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; color: var(--accent); margin-bottom: 26px; }
+  .eyebrow::before { content: ""; width: 36px; height: 3px; background: var(--accent); }
+  h1 { font-size: clamp(54px, 6.9vw, 104px); line-height: .88; }
+  h1 .hot { color: var(--accent); display: block; }
+  .hero-sub { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: end; margin-top: clamp(28px, 3.5vw, 44px); padding-top: 28px; border-top: 1px solid var(--border); }
+  .hero-sub p { font-size: clamp(18px, 1.5vw, 21px); color: var(--text); max-width: 32em; }
+  .hero-sub p span { color: var(--dim); }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .rail { display: flex; flex-direction: column; gap: 0; }
+  .mark-tile { --mark-size: clamp(120px, 11vw, 160px); background: var(--surface); padding: 28px; display: grid; place-items: center; box-shadow: 12px 12px 0 var(--accent); margin: 0 12px 40px 0; min-height: calc(var(--mark-size) + 56px); }
+  .stats { border-top: 3px solid var(--text); }
+  .stats div { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .stats b { font-size: 46px; line-height: 1; }
+  .stats span { color: var(--dim); text-align: right; font-size: 15px; line-height: 1.35; }
+
+  /* Hard band */
+  .band { background: var(--accent); color: var(--on-accent); overflow: hidden; }
+  .band ul { list-style: none; display: flex; justify-content: space-between; gap: 28px; padding: 18px var(--gutter); max-width: var(--wrap); margin: 0 auto; flex-wrap: wrap; }
+  .band li { display: flex; align-items: center; gap: 12px; font-size: 26px; line-height: 1; white-space: nowrap; }
+  .band li::before { content: ""; width: 10px; height: 10px; background: var(--on-accent); }
+
+  /* Section heads */
+  section { padding: clamp(72px, 9vw, 128px) 0 0; }
+  .head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; align-items: end; margin-bottom: clamp(32px, 4vw, 56px); }
+  h2 { font-size: clamp(48px, 6.4vw, 104px); line-height: .88; }
+  h2 .hot { color: var(--accent); }
+  .head p { color: var(--dim); font-size: 19px; max-width: 30em; }
+  .head .label { color: var(--accent); display: block; margin-bottom: 18px; }
+
+  /* Library bands */
+  .rows { border-top: 3px solid var(--text); }
+  .row { display: grid; grid-template-columns: 72px minmax(0, 1.25fr) minmax(0, 1fr) 48px; gap: 24px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--border); transition: background .15s, color .15s, padding .15s; }
+  .row .n { color: var(--accent); font-size: 28px; }
+  .row h3 { font-size: clamp(30px, 3.4vw, 52px); line-height: .95; }
+  .row p { color: var(--dim); font-size: 17px; }
+  .row .ic { width: 40px; height: 40px; color: var(--accent); justify-self: end; }
+  .row:hover { background: var(--accent); color: var(--on-accent); padding-left: 16px; padding-right: 16px; }
+  .row:hover .n, .row:hover p, .row:hover .ic { color: var(--on-accent); }
+  .lib-foot { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; margin-top: 28px; }
+  .lib-foot p { color: var(--dim); font-size: 17px; }
+  .lib-foot p b { color: var(--text); font-weight: 700; }
+  .lib-foot .label { color: var(--text); display: block; margin-bottom: 8px; }
+
+  /* Features: hard-edged tiles */
+  .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; background: var(--border); border: 3px solid var(--border); }
+  .tile { background: var(--surface); padding: 32px 30px 36px; position: relative; min-height: 290px; display: flex; flex-direction: column; }
+  .tile .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: auto; padding-bottom: 32px; }
+  .tile .ic { width: 44px; height: 44px; color: var(--accent); }
+  .tile .k { color: var(--dim); font-size: 22px; }
+  .tile h3 { font-size: 36px; line-height: .95; margin-bottom: 12px; }
+  .tile p { color: var(--dim); font-size: 16px; line-height: 1.5; }
+  .tile.hot { background: var(--accent); color: var(--on-accent); }
+  .tile.hot .ic, .tile.hot .k, .tile.hot p { color: var(--on-accent); }
+
+  .steps { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 3px; background: var(--card); }
+  .steps > * { padding: 24px 28px; border-left: 1px solid var(--border); }
+  .steps > :first-child { border-left: 0; background: var(--text); color: var(--bg); display: flex; align-items: center; }
+  .steps h3 { font-size: 28px; line-height: .95; }
+  .steps b { display: block; font-size: 30px; line-height: 1; }
+  .steps b em { font-style: normal; color: var(--accent); margin-right: 10px; }
+  .steps p { color: var(--dim); font-size: 16px; margin-top: 6px; }
+
+  /* Quote band */
+  .quote { margin-top: clamp(72px, 9vw, 128px); background: var(--accent); color: var(--on-accent); }
+  .quote .wrap { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 48px; align-items: end; padding-top: clamp(48px, 6vw, 88px); padding-bottom: clamp(48px, 6vw, 88px); }
+  .quote blockquote { font-size: clamp(40px, 5.4vw, 84px); line-height: .9; }
+  .quote p { font-size: 20px; font-weight: 600; margin-bottom: 22px; }
+
+  /* Editions */
+  .eds { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 3px; background: var(--border); border: 3px solid var(--border); }
+  .ed { background: var(--surface); padding: 32px; display: flex; flex-direction: column; }
+  .ed.hot { background: var(--accent); color: var(--on-accent); grid-row: span 2; padding: clamp(32px, 4vw, 52px); }
+  .ed .meta { display: flex; justify-content: space-between; align-items: center; color: var(--dim); }
+  .ed.hot .meta { color: var(--on-accent); }
+  .ed .meta .ic { width: 36px; height: 36px; color: var(--accent); }
+  .ed.hot .meta .ic { color: var(--on-accent); width: 48px; height: 48px; }
+  .flag { background: var(--on-accent); color: var(--accent); padding: 6px 10px; }
+  .ed h3 { font-size: 56px; line-height: .9; margin-top: 18px; }
+  .ed.hot h3 { font-size: clamp(72px, 8vw, 120px); }
+  .ed .fmt { color: var(--dim); font-size: 17px; margin-top: 6px; }
+  .ed.hot .fmt { color: var(--on-accent); font-size: 20px; font-weight: 600; }
+  .ed .price { display: flex; align-items: baseline; gap: 12px; margin-top: 18px; }
+  .ed .price b { font-size: 64px; line-height: 1; }
+  .ed.hot .price b { font-size: clamp(88px, 9vw, 136px); }
+  .ed .price span { color: var(--dim); }
+  .ed.hot .price span { color: var(--on-accent); }
+  .ed ul { list-style: none; margin-top: 20px; columns: 1; }
+  .ed.hot ul { margin-top: 28px; border-top: 2px solid var(--on-accent); }
+  .ed li { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 16px; }
+  .ed.hot li { border-bottom-color: rgba(26,19,12,.25); font-size: 18px; font-weight: 500; }
+  .ed li .ic { width: 18px; height: 18px; margin-top: 3px; color: var(--accent); stroke-width: 2.5; }
+  .ed.hot li .ic { color: var(--on-accent); }
+  .ed .buy { margin-top: auto; padding-top: 28px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .ed .buy .btn { flex: 1 1 200px; justify-content: space-between; }
+  .ed .buy .btn small { font-weight: 600; font-stretch: 100%; font-size: 13px; letter-spacing: .04em; text-transform: none; opacity: .9; }
+  .opts { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: var(--border); border: 3px solid var(--border); }
+  .opts a { background: var(--card); text-decoration: none; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; transition: background .15s, color .15s; }
+  .opts a b { font-stretch: 75%; font-weight: 800; font-size: 18px; letter-spacing: .04em; text-transform: uppercase; line-height: 1.1; display: block; }
+  .opts a span { color: var(--dim); font-size: 14px; display: block; }
+  .opts a .ic { width: 18px; height: 18px; color: var(--accent); }
+  .opts a:hover { background: var(--accent); color: var(--on-accent); }
+  .opts a:hover span, .opts a:hover .ic { color: var(--on-accent); }
+  .opts-label { color: var(--dim); margin-top: 22px; display: block; }
+  .ed.compact h3 { font-size: 44px; }
+  .ed.compact .price b { font-size: 52px; }
+
+  .fine { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin-top: 32px; }
+  .fine div { border-top: 3px solid var(--accent); padding-top: 16px; }
+  .fine .label { display: block; margin-bottom: 8px; }
+  .fine p { color: var(--dim); font-size: 16px; }
+  .fine a { color: var(--text); }
+
+  /* Footer */
+  footer { margin-top: clamp(80px, 10vw, 140px); border-top: 3px solid var(--accent); background: var(--surface); }
+  footer .wrap { padding-top: 48px; padding-bottom: 28px; }
+  .foot { display: grid; grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr)); gap: 40px; }
+  .foot .tag { font-size: 44px; line-height: .92; }
+  .foot .tag em { font-style: normal; color: var(--accent); }
+  .foot .label { color: var(--dim); display: block; margin-bottom: 14px; }
+  .foot ul { list-style: none; }
+  .foot li { padding: 4px 0; }
+  .foot a { text-decoration: none; }
+  .foot a:hover { color: var(--accent); }
+  .wordmark { font-size: clamp(120px, 24vw, 360px); line-height: .78; color: var(--card); margin-top: 40px; letter-spacing: -.01em; user-select: none; }
+  .legal { display: flex; justify-content: space-between; gap: 16px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--dim); font-size: 14px; flex-wrap: wrap; }
+
+  /* Responsive */
+  @media (max-width: 1080px) {
+    .navlinks a:not(.btn) { display: none; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .rail { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 32px; align-items: end; }
+    .mark-tile { margin-bottom: 12px; }
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .eds { grid-template-columns: 1fr; }
+    .ed.hot { grid-row: auto; }
+    .steps { grid-template-columns: 1fr 1fr 1fr; }
+    .steps > :first-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 760px) {
+    .hero-sub { grid-template-columns: 1fr; }
+    .head, .lib-foot, .quote .wrap { grid-template-columns: 1fr; gap: 20px; }
+    .row { grid-template-columns: 44px minmax(0, 1fr) 36px; gap: 14px; row-gap: 6px; }
+    .row p { grid-column: 2 / 3; grid-row: 2; }
+    .row .ic { grid-column: 3; grid-row: 1; width: 32px; height: 32px; }
+    .row .n { font-size: 22px; }
+    .tiles { grid-template-columns: 1fr; }
+    .tile { min-height: 0; }
+    .steps { grid-template-columns: 1fr; }
+    .steps > * { border-left: 0; border-top: 1px solid var(--border); }
+    .fine { grid-template-columns: 1fr; gap: 24px; }
+    .foot { grid-template-columns: 1fr 1fr; }
+    .foot > :first-child { grid-column: 1 / -1; }
+    .band li { font-size: 22px; }
+  }
+  @media (max-width: 520px) {
+    nav.top { --mark-size: 34px; }
+    nav.top .wrap { height: 64px; }
+    .brand b { font-size: 28px; }
+    .navlinks .btn { padding: 10px 14px; font-size: 15px; }
+    .rail { grid-template-columns: 1fr; gap: 28px; }
+    .mark-tile { justify-self: start; padding: 20px 28px; }
+    .stats b { font-size: 40px; }
+    .band ul { justify-content: flex-start; gap: 12px 24px; }
+    .ed, .ed.hot { padding: 26px 20px; }
+    .opts { grid-template-columns: 1fr; }
+    .ed h3 { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-med" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/><path d="M12 10.5v6M9 13.5h6"/></symbol>
+    <symbol id="i-jar" viewBox="0 0 24 24"><path d="M8 3.5h8V6H8z"/><path d="M7.5 6h9c.8 1 1.5 2 1.5 3.5V19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9.5C6 8 6.7 7 7.5 6z"/><path d="M6 11.5h12M6 16.5h12"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c2.8 3.6 6 7.4 6 11a6 6 0 0 1-12 0c0-3.6 3.2-7.4 6-11z"/><path d="M9 14.5a3 3 0 0 0 3 3"/></symbol>
+    <symbol id="i-tent" viewBox="0 0 24 24"><path d="M2.5 20h19"/><path d="M12 4 3.5 20"/><path d="m12 4 8.5 16"/><path d="M12 12.5 8.5 20M12 12.5l3.5 7.5"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8z"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c.5 3 4.5 5 4.5 10a4.5 4.5 0 0 1-9 0c0-2 .8-3.5 2-4.7.2 1.5 1 2.4 2 2.7-.6-3 0-5.6.5-8z"/></symbol>
+    <symbol id="i-offline" viewBox="0 0 24 24"><path d="m3 3 18 18"/><path d="M7 9.2A5 5 0 0 0 6.5 19H16"/><path d="M10.2 6.3A5.5 5.5 0 0 1 17.4 10H18a3.5 3.5 0 0 1 2.4 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14H6.5A2.5 2.5 0 0 0 4 19.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M8.5 7.5h7M8.5 11h5"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.3 6.6a8 8 0 1 0 11.4 0"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9.5 9.5h5v5h-5z"/><path d="M9.5 2.5V6M14.5 2.5V6M9.5 18v3.5M14.5 18v3.5M2.5 9.5H6M2.5 14.5H6M18 9.5h3.5M18 14.5h3.5"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4.5h16v11H10l-4.5 4v-4H4z"/><path d="M8 8.5h8M8 11.5h5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9.5 5-9.5 5-9.5-5z"/><path d="m2.5 12 9.5 5 9.5-5"/><path d="m2.5 16 9.5 5 9.5-5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4 16.5V20h16v-3.5"/></symbol>
+    <symbol id="i-drive" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2.5"/><path d="M10 17.5h4M9 7h6"/></symbol>
+    <symbol id="i-minipc" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 14.5h4M16.5 14.5h.01M6 18v2M18 18v2"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5v3.5h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+    <symbol id="i-refund" viewBox="0 0 24 24"><path d="M3.5 4v5h5"/><path d="M4.2 13.5A8 8 0 1 0 6 6.6L3.5 9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-out" viewBox="0 0 24 24"><path d="M8 16 16 8M9 8h7v7"/></symbol>
+  </defs>
+</svg>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="DoBi home">
+      <img class="brand-mark" src="logos/blaze.png" alt="">
+      <b class="cond">DoBi</b>
+    </a>
+    <div class="navlinks">
+      <a href="#library">Library</a>
+      <a href="#features">Features</a>
+      <a href="#editions">Editions</a>
+      <a href="../../faq.html">FAQ</a>
+      <a href="../../contact.html">Contact</a>
+      <a href="#editions" class="btn">Buy from $69</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow label">Meet DoBi / Your offline AI survival expert</p>
+      <h1 class="cond">When the grid goes down, the cloud goes with it. <span class="hot">DoBi doesn’t need either.</span></h1>
+      <div class="hero-sub">
+        <p>A fully offline AI assistant with over 20,000 pages of expert survival knowledge. <span>No internet, no cloud, no subscriptions. Expand it with your own PDFs.</span></p>
+        <div class="hero-actions">
+          <a href="#editions" class="btn">Secure your future <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="rail">
+      <div class="mark-tile">
+        <img class="brand-mark" src="logos/blaze.png" alt="DoBi">
+      </div>
+      <div class="stats">
+        <div><b class="cond">20,000+</b><span>pages of survival<br>knowledge</span></div>
+        <div><b class="cond">3</b><span>AI model tiers,<br>picked for your hardware</span></div>
+        <div><b class="cond">$69</b><span>one time,<br>no subscription</span></div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<div class="band" aria-label="Key facts">
+  <ul class="cond">
+    <li>No internet</li>
+    <li>No cloud</li>
+    <li>No subscriptions</li>
+    <li>Mac and Windows</li>
+    <li>Your own PDFs</li>
+  </ul>
+</div>
+
+<section id="library">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="label">Knowledge library</span>
+        <h2 class="cond">Your curated <span class="hot">knowledge library</span></h2>
+      </div>
+      <p>We’ve done the research, organization, and integration, so you get instant access. Thousands of hours of research, all in one place.</p>
+    </div>
+
+    <div class="rows">
+      <div class="row"><span class="n cond">01</span><h3 class="cond">Emergency medical procedures</h3><p>Life-saving techniques when hospitals aren’t an option.</p><svg class="ic"><use href="#i-med"/></svg></div>
+      <div class="row"><span class="n cond">02</span><h3 class="cond">Long-term food storage</h3><p>Preservation methods that work without electricity.</p><svg class="ic"><use href="#i-jar"/></svg></div>
+      <div class="row"><span class="n cond">03</span><h3 class="cond">Water purification</h3><p>Multiple methods to make any water source safe.</p><svg class="ic"><use href="#i-drop"/></svg></div>
+      <div class="row"><span class="n cond">04</span><h3 class="cond">Shelter building</h3><p>Construct protection from whatever materials you have.</p><svg class="ic"><use href="#i-tent"/></svg></div>
+      <div class="row"><span class="n cond">05</span><h3 class="cond">Navigation and communication</h3><p>Find your way and stay connected when GPS fails.</p><svg class="ic"><use href="#i-compass"/></svg></div>
+      <div class="row"><span class="n cond">06</span><h3 class="cond">Fire and energy</h3><p>Create heat, light, and power from basic resources.</p><svg class="ic"><use href="#i-flame"/></svg></div>
+    </div>
+
+    <div class="lib-foot">
+      <p><span class="label">Also inside</span>First aid, foraging and wild plants, canning, gardening, hunting and trapping, wilderness survival, military field operations, knots and ropework, nuclear preparedness, and much more.</p>
+      <p><b>20,000+ pages of open-source survival knowledge</b>, organized and searchable. Included with every purchase at no additional cost.</p>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="label">Features</span>
+        <h2 class="cond">Be ready <span class="hot">for anything</span></h2>
+      </div>
+      <p>No internet. No accounts. No nonsense. Everything runs on your own machine.</p>
+    </div>
+
+    <div class="tiles">
+      <article class="tile hot">
+        <div class="top"><svg class="ic"><use href="#i-offline"/></svg><span class="k cond">01</span></div>
+        <h3 class="cond">100% offline</h3>
+        <p>No internet, no cloud, no phone-home. Everything runs locally on your machine. Your data stays yours.</p>
+      </article>
+      <article class="tile">
+        <div class="top"><svg class="ic"><use href="#i-book"/></svg><span class="k cond">02</span></div>
+        <h3 class="cond">Survival library</h3>
+        <p>A pre-trained AI model enhanced by over 20,000 pages of expert survival material. Upload your own PDFs to add the references that matter to you.</p>
+      </article>
+      <article class="tile">
+        <div class="top"><svg class="ic"><use href="#i-power"/></svg><span class="k cond">03</span></div>
+        <h3 class="cond">One-click launch</h3>
+        <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click. Updates are included.</p>
+      </article>
+      <article class="tile">
+        <div class="top"><svg class="ic"><use href="#i-chip"/></svg><span class="k cond">04</span></div>
+        <h3 class="cond">Smart hardware detection</h3>
+        <p>DoBi reads your hardware and picks the best model tier automatically. No tweaking needed.</p>
+      </article>
+      <article class="tile">
+        <div class="top"><svg class="ic"><use href="#i-chat"/></svg><span class="k cond">05</span></div>
+        <h3 class="cond">Real conversations</h3>
+        <p>Not just Q&amp;A. DoBi remembers context within a conversation, follows up on earlier topics, and gives sourced answers from its knowledge base.</p>
+      </article>
+      <article class="tile">
+        <div class="top"><svg class="ic"><use href="#i-layers"/></svg><span class="k cond">06</span></div>
+        <h3 class="cond">Three model tiers</h3>
+        <p>Full (7B), Mid (3B) and Lite (1B) included. Runs on a Mac with as little as 4&nbsp;GB RAM; 8&nbsp;GB or more is better for Full.</p>
+      </article>
+    </div>
+
+    <div class="steps">
+      <div><h3 class="cond">Three steps</h3></div>
+      <div><b class="cond"><em>1</em>Choose</b><p>Download, plug in, or order pre-built.</p></div>
+      <div><b class="cond"><em>2</em>Launch</b><p>One click. It’s ready.</p></div>
+      <div><b class="cond"><em>3</em>Ask</b><p>Get answers. Stay prepared.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="quote">
+  <div class="wrap">
+    <blockquote class="cond">In a crisis, you don’t rise to the occasion. You sink to the level of your preparation.</blockquote>
+    <div>
+      <p>Do you have the answer, or do you have a blank screen?</p>
+      <a href="#editions" class="btn dark">Stop hoping. Start preparing. <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<section id="editions">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="label">Editions</span>
+        <h2 class="cond">Choose your <span class="hot">edition</span></h2>
+      </div>
+      <p>One-time purchase. No subscriptions, no recurring fees. Every edition includes the complete 20,000+ page knowledge library, organized, searchable, and accessible offline.</p>
+    </div>
+
+    <div class="eds">
+      <article class="ed hot">
+        <div class="meta"><span class="flag label">Most popular</span><svg class="ic"><use href="#i-drive"/></svg></div>
+        <h3 class="cond">DoBi</h3>
+        <p class="fmt">1 TB portable SSD. Plug it in and go.</p>
+        <div class="price"><b class="cond">$199</b><span class="label">One time, plus shipping</span></div>
+        <ul>
+          <li><svg class="ic"><use href="#i-check"/></svg>Complete 20,000+ page knowledge library</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>1 TB portable SSD with DoBi OS</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>All three AI model tiers</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Plug into your computer</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Ships within 5 to 7 business days</li>
+        </ul>
+        <div class="buy">
+          <a href="../../checkout.html?platform=mac" class="btn dark">Buy for Mac <small>Apple Silicon</small></a>
+          <a href="../../checkout.html?platform=windows" class="btn dark">Buy for Windows <small>64-bit PC</small></a>
+        </div>
+      </article>
+
+      <article class="ed">
+        <div class="meta"><span class="label">Download</span><svg class="ic"><use href="#i-download"/></svg></div>
+        <h3 class="cond">DoBi OS</h3>
+        <p class="fmt">Downloadable ZIP. Extract and run on your own storage. All three AI model tiers. Instant access after purchase.</p>
+        <div class="price"><b class="cond">$69</b><span class="label">One time</span></div>
+        <span class="opts-label label">Pick platform and install type</span>
+        <div class="opts">
+          <a href="https://dobisurvival.gumroad.com/l/dobi-mac" target="_blank" rel="noopener noreferrer"><div><b>Mac</b><span>On my computer</span></div><svg class="ic"><use href="#i-out"/></svg></a>
+          <a href="https://dobisurvival.gumroad.com/l/welbfh" target="_blank" rel="noopener noreferrer"><div><b>Mac</b><span>On an SSD</span></div><svg class="ic"><use href="#i-out"/></svg></a>
+          <a href="https://dobisurvival.gumroad.com/l/dobi-windows" target="_blank" rel="noopener noreferrer"><div><b>Windows</b><span>On my computer</span></div><svg class="ic"><use href="#i-out"/></svg></a>
+          <a href="https://dobisurvival.gumroad.com/l/dobi-windows-ssd" target="_blank" rel="noopener noreferrer"><div><b>Windows</b><span>On an SSD</span></div><svg class="ic"><use href="#i-out"/></svg></a>
+        </div>
+      </article>
+
+      <article class="ed compact">
+        <div class="meta"><span class="label">Mini PC, built to order</span><svg class="ic"><use href="#i-minipc"/></svg></div>
+        <h3 class="cond">DoBi Nitro</h3>
+        <p class="fmt">Dedicated mini PC with DoBi OS. Advanced AI model tiers available. Just plug in power.</p>
+        <div class="price"><b class="cond">$699+</b><span class="label">By inquiry</span></div>
+        <div class="buy"><a href="../../contact.html" class="btn line">Request a quote <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+      </article>
+    </div>
+
+    <div class="fine">
+      <div><span class="label">Compatibility</span><p>Mac editions are built for Apple Silicon (M1 or newer). Intel Macs are untested. Windows editions need a 64-bit Intel or AMD PC, with 16&nbsp;GB RAM recommended.</p></div>
+      <div><span class="label">Shipping</span><p>DoBi OS is an instant download. The DoBi SSD ships within 5 to 7 business days from Michigan, USA, hand-prepared for Mac or Windows.</p></div>
+      <div><span class="label">Refunds</span><p>Not working out? <a href="../../contact.html">Contact us</a> within 30 days for a full refund.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <p class="tag cond">The offline AI survival expert. <em>You hope you never need it.</em></p>
+      <div>
+        <span class="label">Site</span>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../faq.html">FAQ</a></li>
+          <li><a href="../../contact.html">Contact</a></li>
+          <li><a href="#editions">Buy now</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Reach us</span>
+        <ul>
+          <li><a href="mailto:support@dobi-survival.com">support@dobi-survival.com</a></li>
+          <li><a href="https://x.com/dobi_survival" target="_blank" rel="noopener noreferrer">X / @dobi_survival</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wordmark cond" aria-hidden="true">DoBi</div>
+    <div class="legal">
+      <span>&copy; 2026 DoBi. All rights reserved.</span>
+      <span>Mockup v2 / Direction B: Blaze</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Logo review helper: b-blaze.html?mark=logos/other.png swaps every .brand-mark.
+  (function () {
+    var m = new URLSearchParams(location.search).get("mark");
+    if (m) document.querySelectorAll(".brand-mark").forEach(function (el) { el.src = m; });
+  })();
+</script>
+</body>
+</html>

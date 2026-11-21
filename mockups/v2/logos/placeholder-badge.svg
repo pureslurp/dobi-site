@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <title>Placeholder: round badge mark</title>
+  <g fill="none" stroke="#7A7A7A" stroke-width="4">
+    <circle cx="100" cy="100" r="94"/>
+    <circle cx="100" cy="100" r="78" stroke-dasharray="6 6"/>
+  </g>
+  <text x="100" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3" fill="#7A7A7A">BADGE</text>
+  <text x="100" y="122" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" letter-spacing="2" fill="#7A7A7A">PLACEHOLDER</text>
+</svg>
