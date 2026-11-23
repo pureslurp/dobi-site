@@ -1,9 +1,10 @@
-/* Black Friday sale for DoBi OS.
-   America/Detroit is EST (UTC-5) for this whole window, so local midnight
-   is 05:00 UTC. The end instant is exclusive: the sale runs through
-   2026-12-01 23:59:59.999 Detroit and is off at 2026-12-02 00:00:00 Detroit.
-   Static HTML stays at $69. This script rewrites prices and Gumroad links
-   only while the sale is on, so no-JS keeps the regular price. */
+/* Black Friday sale for DoBi OS, live now through Cyber Monday.
+   America/Detroit is EST (UTC-5) for this whole window. The sale starts at
+   Detroit midnight on Nov 23 (2026-11-23T00:00:00-05:00) and runs through
+   2026-12-01 23:59:59.999 Detroit. It is off at 2026-12-02 00:00:00 Detroit,
+   which is 2026-12-02T05:00:00Z.
+   Static HTML stays at $69 with plain Gumroad links. This script rewrites
+   prices and links only while the sale is on, so no-JS keeps the regular price. */
 (function (factory) {
   var api = factory();
   if (typeof module === "object" && module.exports) module.exports = api;
@@ -12,7 +13,7 @@
   }
 })(function () {
   var BLACK_FRIDAY = {
-    start: "2026-11-27T05:00:00.000Z",
+    start: "2026-11-23T00:00:00-05:00",
     end: "2026-12-02T05:00:00.000Z",
     offerCode: "BLACKFRIDAY",
     listPrice: "$69",

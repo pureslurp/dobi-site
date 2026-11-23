@@ -6,11 +6,12 @@ const START = BLACK_FRIDAY.start;
 const END = BLACK_FRIDAY.end;
 
 test("the sale window is one pair of instants", () => {
-  assert.strictEqual(START, "2026-11-27T05:00:00.000Z");
+  assert.strictEqual(START, "2026-11-23T00:00:00-05:00");
   assert.strictEqual(END, "2026-12-02T05:00:00.000Z");
+  assert.strictEqual(Date.parse(START), Date.parse("2026-11-23T05:00:00.000Z"));
 });
 
-test("sale is on at Detroit midnight Nov 27 and off one millisecond earlier", () => {
+test("sale is on at Detroit midnight Nov 23 and off one millisecond earlier", () => {
   assert.strictEqual(isSaleOn(new Date(START)), true);
   assert.strictEqual(isSaleOn(new Date(Date.parse(START) - 1)), false);
 });
@@ -21,14 +22,16 @@ test("sale stays on through the last millisecond of Dec 1 Detroit and is off at 
 });
 
 test("a mid-window instant is on and a January instant is off", () => {
+  assert.strictEqual(isSaleOn(new Date("2026-11-23T14:00:00Z")), true);
   assert.strictEqual(isSaleOn(new Date("2026-11-29T18:00:00Z")), true);
   assert.strictEqual(isSaleOn(new Date("2026-01-01T00:00:00Z")), false);
+  assert.strictEqual(isSaleOn(new Date("2026-11-22T23:59:59-05:00")), false);
 });
 
 test("bf=on and bf=off override the clock, and now= sets the clock", () => {
   assert.strictEqual(isSaleOn(new Date("2020-01-01T00:00:00Z"), "?bf=on"), true);
   assert.strictEqual(isSaleOn(new Date(START), "?bf=off"), false);
-  assert.strictEqual(isSaleOn(new Date("2020-01-01T00:00:00Z"), "?now=2026-11-27T05:00:00Z"), true);
+  assert.strictEqual(isSaleOn(new Date("2020-01-01T00:00:00Z"), "?now=2026-11-23T00:00:00-05:00"), true);
   assert.strictEqual(isSaleOn(new Date(START), "?now=2026-12-02T05:00:00Z"), false);
   assert.strictEqual(isSaleOn(new Date(START), "?bf=off&now=2026-11-29T00:00:00Z"), false);
 });
