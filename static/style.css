@@ -291,10 +291,10 @@ h2 { font-stretch: 72%; font-weight: 700; font-size: clamp(42px, 5.2vw, 72px); l
 /* Row names stay available to screen readers. Small screens show them beside each line. */
 .ed .cl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .ed-head { padding-top: 26px !important; padding-bottom: 24px !important; }
-.ed-head .top { display: flex; justify-content: space-between; align-items: center; min-height: 28px; }
+.ed-head .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 28px; }
 .ed-head .top .ic { width: 28px; height: 28px; color: var(--accent); }
 .ed-head .top .label { color: var(--dim); font-size: 12px; }
-.pill { background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; }
+.pill { background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; white-space: nowrap; }
 .ed-head h3 { font-stretch: 72%; font-weight: 700; font-size: 40px; line-height: 1; margin-top: 14px; }
 .ed-head .fmt { color: var(--dim); font-size: 15px; margin-top: 6px; line-height: 1.45; }
 .ed-head .price { font-stretch: 72%; font-weight: 800; font-size: 60px; line-height: 1; margin-top: 18px; letter-spacing: -.01em; }
@@ -334,7 +334,7 @@ h2 { font-stretch: 72%; font-weight: 700; font-size: clamp(42px, 5.2vw, 72px); l
   .compare > .ed.featured { border-color: var(--accent); }
   .compare > .ed > * { border-top: 0; padding: 0; }
   .ed-head { padding: 0 0 6px !important; }
-  .ed-head .top { min-height: 24px; }
+  .ed-head .top { min-height: 26px; }
   .ed-head .top .ic { width: 22px; height: 22px; }
   .ed-head h3 { font-size: 26px; margin-top: 8px; }
   .ed-head .fmt { font-size: 13px; line-height: 1.35; margin-top: 2px; min-height: 2.7em; }
