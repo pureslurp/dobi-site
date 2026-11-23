@@ -277,6 +277,7 @@ h2 { font-stretch: 72%; font-weight: 700; font-size: clamp(42px, 5.2vw, 72px); l
 .compat p { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 18px; font-size: 15px; color: var(--dim); margin-top: 0; }
 .compat b { color: var(--text); }
 
+/* Phone and tablet keep a stacked comparison. Desktop (below) turns this into three equal cards. */
 .compare { display: grid; grid-template-columns: 190px repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(7, auto); column-gap: 14px; }
 .compare > .col { grid-row: 1 / span 7; display: grid; grid-template-rows: subgrid; border-radius: var(--r-lg); }
 .compare > .ed { background: var(--surface); border: 1px solid var(--border); }
@@ -287,7 +288,7 @@ h2 { font-stretch: 72%; font-weight: 700; font-size: clamp(42px, 5.2vw, 72px); l
 .labels > :first-child { align-items: flex-end; color: var(--text); }
 .ed .cell { font-size: 16px; display: flex; gap: 10px; align-items: flex-start; }
 .ed .cell .ic { width: 18px; height: 18px; color: var(--accent); margin-top: 3px; stroke-width: 2.5; }
-/* Row labels are visual in the label column on desktop; keep them for screen readers. */
+/* Row names stay available to screen readers. Small screens show them beside each line. */
 .ed .cl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .ed-head { padding-top: 26px !important; padding-bottom: 24px !important; }
 .ed-head .top { display: flex; justify-content: space-between; align-items: center; min-height: 28px; }
@@ -300,9 +301,61 @@ h2 { font-stretch: 72%; font-weight: 700; font-size: clamp(42px, 5.2vw, 72px); l
 .ed-head .pnote { color: var(--dim); font-size: 14px; margin-top: 6px; }
 .ed .buy { display: grid; gap: 10px; align-content: start; padding-top: 22px; padding-bottom: 26px; }
 .ed .buy .btn { width: 100%; }
+/* Wrappers exist so desktop can pair the buttons. On small screens they disappear and the links stack as before. */
+.buy-row, .buy-links { display: contents; }
 .ssd-link { font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; text-align: center; padding: 6px 0 10px; }
 .ssd-link span { border-bottom: 1.5px solid var(--dim); }
 .ssd-link:hover span { border-color: var(--text); }
+
+/* Desktop: three equal cards, the same shape as the pre-Blaze pricing row, dense enough for one screen. */
+@media (min-width: 981px) {
+  #pricing { padding-top: 28px; }
+  #pricing .shead { max-width: none; margin-bottom: 14px; }
+  #pricing h2 { font-size: 34px; margin-top: 4px; }
+  #pricing .shead > p { font-size: 15px; line-height: 1.4; margin-top: 8px; }
+  #pricing .compat { margin-top: 10px; gap: 8px; }
+  #pricing .compat p { padding: 8px 12px; font-size: 13px; line-height: 1.35; }
+
+  .compare { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; gap: 14px; align-items: stretch; }
+  .compare > .labels { display: none; }
+  .compare > .ed {
+    grid-row: auto;
+    display: flex;
+    flex-direction: column;
+    grid-template-rows: none;
+    border-width: 2px;
+    border-color: var(--border);
+    padding: 16px 16px 14px;
+  }
+  .compare > .ed.featured { border-color: var(--accent); }
+  .compare > .ed > * { border-top: 0; padding: 0; }
+  .ed-head { padding: 0 0 6px !important; }
+  .ed-head .top { min-height: 24px; }
+  .ed-head .top .ic { width: 22px; height: 22px; }
+  .ed-head h3 { font-size: 26px; margin-top: 8px; }
+  .ed-head .fmt { font-size: 13px; line-height: 1.35; margin-top: 2px; min-height: 2.7em; }
+  .ed-head .price { font-size: 36px; margin-top: 6px; }
+  .ed-head .pnote { font-size: 12px; margin-top: 2px; }
+  .ed .cell { padding: 5px 0; font-size: 13.5px; line-height: 1.3; border-top: 1px solid var(--border); gap: 8px; }
+  .ed .cell .ic { width: 15px; height: 15px; margin-top: 1px; }
+  .ed .buy {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 0 0;
+  }
+  /* Keep a link-row's worth of space under every card so the buttons share one baseline. */
+  .ed .buy::after { content: ""; height: 16px; flex: none; }
+  .ed .buy:has(.buy-links)::after { content: none; }
+  .buy-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .buy-links { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+  .ed .buy .btn { min-height: 44px; font-size: 14px; padding: 8px 8px; }
+  .ed .buy .btn.two { padding: 6px 8px; }
+  .ed .buy .btn small { font-size: 11px; line-height: 1.2; }
+  .ssd-link { font-size: 12px; line-height: 1.3; padding: 0; }
+}
 
 .fulfil { margin-top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 26px 30px; display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start; }
 .fulfil h3 { font-stretch: 80%; font-weight: 700; font-size: 24px; line-height: 1.2; }
