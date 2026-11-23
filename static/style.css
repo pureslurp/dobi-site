@@ -298,6 +298,10 @@ h2 { font-stretch: 72%; font-weight: 700; font-size: clamp(42px, 5.2vw, 72px); l
 .ed-head h3 { font-stretch: 72%; font-weight: 700; font-size: 40px; line-height: 1; margin-top: 14px; }
 .ed-head .fmt { color: var(--dim); font-size: 15px; margin-top: 6px; line-height: 1.45; }
 .ed-head .price { font-stretch: 72%; font-weight: 800; font-size: 60px; line-height: 1; margin-top: 18px; letter-spacing: -.01em; }
+.price-sale, .price[data-sale="black-friday"] { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+.price-was { font-size: 22px; font-weight: 700; color: var(--dim); text-decoration: line-through; text-decoration-thickness: 2px; }
+.price-now { font-size: 1em; }
+.bf-tag { color: #FF6B00; font-stretch: 100%; font-weight: 800; font-size: max(13px, .32em); letter-spacing: .08em; text-transform: uppercase; line-height: 1; }
 .ed-head .pnote { color: var(--dim); font-size: 14px; margin-top: 6px; }
 .ed .buy { display: grid; gap: 10px; align-content: start; padding-top: 22px; padding-bottom: 26px; }
 .ed .buy .btn { width: 100%; }
