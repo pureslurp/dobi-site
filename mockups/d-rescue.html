@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>DoBi: Rescue Direction Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white: #ffffff;
+  --light-bg: #f8f9fb;
+  --slate: #2c3e50;
+  --deep-slate: #1a252f;
+  --signal-red: #e63946;
+  --signal-yellow: #ffc300;
+  --light-slate: #7f8c9a;
+  --border-light: #e3e6ea;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--light-bg);
+  color: var(--slate);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  padding: 20px 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.08);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  filter: brightness(1) contrast(1.05);
+}
+
+.nav-logo span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--deep-slate);
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-links a {
+  color: var(--slate);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--signal-red); }
+
+.nav-cta {
+  padding: 11px 28px;
+  background: var(--signal-red);
+  color: var(--white);
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(230, 57, 70, 0.25);
+}
+
+.nav-cta:hover {
+  background: #d62839;
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.35);
+}
+
+/* Hero */
+.hero {
+  background: var(--white);
+  color: var(--slate);
+  padding: 110px 36px 120px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.hero-avatar {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  border: 5px solid var(--signal-red);
+  margin-bottom: 40px;
+  filter: brightness(1.02) contrast(1.08);
+  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.15);
+}
+
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 76px;
+  font-weight: 700;
+  color: var(--deep-slate);
+  margin-bottom: 22px;
+  line-height: 0.95;
+  letter-spacing: -2px;
+}
+
+.hero h1 .highlight {
+  color: var(--signal-red);
+}
+
+.hero .tagline {
+  font-size: 30px;
+  color: var(--light-slate);
+  margin-bottom: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.hero .hero-peace {
+  font-size: 18px;
+  color: var(--light-slate);
+  font-style: italic;
+  margin-bottom: 34px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+.hero .hero-detail {
+  font-size: 19px;
+  color: var(--slate);
+  max-width: 740px;
+  margin: 0 auto 50px;
+  line-height: 1.8;
+}
+
+.hero .hero-detail strong {
+  color: var(--deep-slate);
+  font-weight: 800;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 22px 56px;
+  background: var(--signal-red);
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.3);
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(230, 57, 70, 0.4);
+}
+
+/* Sections */
+section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 95px 36px;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--deep-slate);
+  text-align: center;
+  margin-bottom: 22px;
+  letter-spacing: -1.5px;
+}
+
+.section-subtitle {
+  font-size: 19px;
+  color: var(--light-slate);
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 68px;
+  line-height: 1.75;
+}
+
+/* Value Stack */
+.value-stack {
+  background: var(--slate);
+  color: var(--white);
+  padding: 95px 36px;
+}
+
+.value-stack .section-title {
+  color: var(--white);
+}
+
+.value-stack .section-subtitle {
+  color: var(--light-slate);
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 34px;
+  max-width: 1120px;
+  margin: 0 auto 50px;
+}
+
+.value-item {
+  background: var(--white);
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 40px 32px;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  color: var(--slate);
+}
+
+.value-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--signal-yellow);
+  box-shadow: 0 12px 32px rgba(255, 195, 0, 0.2);
+}
+
+.value-icon {
+  font-size: 52px;
+  margin-bottom: 22px;
+}
+
+.value-item h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--deep-slate);
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+.value-item p {
+  font-size: 16px;
+  color: var(--light-slate);
+  line-height: 1.75;
+}
+
+.value-note {
+  text-align: center;
+  font-size: 17px;
+  color: var(--deep-slate);
+  font-weight: 700;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 26px 32px;
+  background: var(--signal-yellow);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(255, 195, 0, 0.3);
+}
+
+/* Features */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 34px;
+}
+
+.feature-card {
+  background: var(--white);
+  border: 2px solid var(--border-light);
+  border-radius: 14px;
+  padding: 40px 36px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--signal-red);
+  box-shadow: 0 12px 32px rgba(230, 57, 70, 0.12);
+}
+
+.feature-icon {
+  font-size: 48px;
+  margin-bottom: 22px;
+}
+
+.feature-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--deep-slate);
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+.feature-card p {
+  font-size: 16px;
+  color: var(--light-slate);
+  line-height: 1.8;
+}
+
+/* Chaos / CTA Section */
+.chaos {
+  background: var(--signal-red);
+  color: var(--white);
+  padding: 115px 36px;
+  text-align: center;
+}
+
+.chaos-content {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.chaos-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 30px;
+  line-height: 1.05;
+  letter-spacing: -1.8px;
+}
+
+.chaos-subtitle {
+  font-size: 26px;
+  color: var(--white);
+  margin-bottom: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.chaos-question {
+  font-size: 21px;
+  color: var(--white);
+  margin-bottom: 50px;
+  line-height: 1.75;
+  opacity: 0.95;
+}
+
+.chaos-cta {
+  display: inline-block;
+  padding: 22px 56px;
+  background: var(--white);
+  color: var(--signal-red);
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
+}
+
+.chaos-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.4);
+}
+
+/* How It Works */
+.how-it-works {
+  background: var(--white);
+  padding: 95px 36px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 50px;
+  text-align: center;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.step-number {
+  width: 84px;
+  height: 84px;
+  line-height: 84px;
+  border-radius: 50%;
+  background: var(--signal-yellow);
+  color: var(--deep-slate);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  margin: 0 auto 26px;
+  box-shadow: 0 6px 20px rgba(255, 195, 0, 0.3);
+}
+
+.step h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+  color: var(--deep-slate);
+}
+
+.step p {
+  font-size: 17px;
+  color: var(--light-slate);
+  max-width: 330px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* Pricing */
+#pricing {
+  background: var(--light-bg);
+}
+
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 38px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: var(--white);
+  border: 3px solid var(--border-light);
+  border-radius: 16px;
+  padding: 48px 40px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--signal-red);
+  box-shadow: 0 16px 40px rgba(230, 57, 70, 0.15);
+}
+
+.pricing-card.featured {
+  border-color: var(--signal-red);
+  border-width: 4px;
+  box-shadow: 0 12px 36px rgba(230, 57, 70, 0.2);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--signal-red);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 9px 26px;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.35);
+}
+
+.pricing-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  color: var(--deep-slate);
+}
+
+.pricing-card .platform {
+  font-size: 15px;
+  color: var(--light-slate);
+  margin-bottom: 22px;
+  font-weight: 600;
+}
+
+.pricing-card .price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 68px;
+  font-weight: 700;
+  color: var(--signal-red);
+  margin-bottom: 10px;
+  letter-spacing: -2px;
+}
+
+.pricing-card .price-note {
+  font-size: 15px;
+  color: var(--light-slate);
+  margin-bottom: 32px;
+  font-weight: 600;
+}
+
+.pricing-card ul {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 36px;
+}
+
+.pricing-card li {
+  font-size: 16px;
+  color: var(--slate);
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border-light);
+  line-height: 1.65;
+}
+
+.pricing-card li::before {
+  content: "✓ ";
+  color: var(--signal-red);
+  font-weight: 800;
+  font-size: 19px;
+}
+
+.pricing-card li:last-child { border-bottom: none; }
+
+.btn-buy {
+  display: inline-block;
+  width: 100%;
+  padding: 19px;
+  background: var(--signal-red);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.3);
+}
+
+.btn-buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(230, 57, 70, 0.4);
+}
+
+.btn-inquiry {
+  display: inline-block;
+  width: 100%;
+  padding: 19px;
+  background: transparent;
+  color: var(--deep-slate);
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+  border: 4px solid var(--deep-slate);
+  border-radius: 10px;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-inquiry:hover {
+  background: var(--deep-slate);
+  color: var(--white);
+}
+
+.fulfillment-note {
+  max-width: 1120px;
+  margin: 38px auto 0;
+  padding: 30px 36px;
+  background: var(--white);
+  border: 2px solid var(--border-light);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.fulfillment-note h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 13px;
+  letter-spacing: -0.3px;
+  color: var(--deep-slate);
+}
+
+.fulfillment-note p {
+  font-size: 16px;
+  color: var(--light-slate);
+  line-height: 1.75;
+}
+
+.fulfillment-note strong {
+  font-weight: 700;
+  color: var(--slate);
+}
+
+/* Footer */
+footer {
+  background: var(--deep-slate);
+  padding: 52px 36px;
+  text-align: center;
+  color: var(--light-slate);
+}
+
+.footer-links {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--light-slate);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--signal-red); }
+
+footer p {
+  font-size: 15px;
+  color: var(--light-slate);
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav { padding: 18px 22px; gap: 16px; }
+  nav .nav-links { gap: 26px; }
+  nav .nav-links a:not(.nav-cta) { display: none; }
+  .nav-logo span { font-size: 24px; }
+
+  .hero { padding: 80px 22px 100px; }
+  .hero-avatar { width: 120px; height: 120px; }
+  .hero h1 { font-size: 52px; letter-spacing: -1.5px; }
+  .hero .tagline { font-size: 24px; }
+  .hero .hero-detail { font-size: 17px; }
+  .hero-cta { padding: 19px 42px; font-size: 18px; width: 100%; }
+
+  .section-title { font-size: 39px; letter-spacing: -1px; }
+  .section-subtitle { font-size: 17px; margin-bottom: 52px; }
+
+  section { padding: 75px 22px; }
+  .value-stack { padding: 75px 22px; }
+  .chaos { padding: 95px 22px; }
+  .how-it-works { padding: 75px 22px; }
+
+  .value-grid { grid-template-columns: 1fr; gap: 26px; }
+  .features-grid { grid-template-columns: 1fr; gap: 26px; }
+  .steps { grid-template-columns: 1fr; gap: 38px; }
+  .pricing-cards { grid-template-columns: 1fr; gap: 30px; max-width: 470px; margin: 0 auto; }
+
+  .chaos-title { font-size: 42px; letter-spacing: -1.2px; }
+  .chaos-subtitle { font-size: 21px; }
+  .chaos-question { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="../static/dobi-avatar.png" alt="DoBi">
+    <span>DoBi</span>
+  </a>
+  <div class="nav-links">
+    <a href="#top">Home</a>
+    <a href="#value">Library</a>
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="faq.html">FAQ</a>
+    <a href="#pricing" class="nav-cta">Buy Now</a>
+  </div>
+</nav>
+
+<div id="top" class="hero">
+  <div class="hero-content">
+    <img src="../static/dobi-avatar.png" alt="DoBi" class="hero-avatar">
+    <h1>Meet <span class="highlight">DoBi</span></h1>
+    <p class="tagline">Your offline AI survival expert.</p>
+    <p class="hero-peace">I realized my family's safety was dependent on a Wi-Fi signal that could vanish in a second. That's why I built DoBi.</p>
+    <p class="hero-detail">
+      A fully offline AI assistant with over <strong>20,000 pages</strong> of expert survival knowledge.
+      No internet, no cloud, no subscriptions. Expand it with your own PDFs.
+      Available as a download, a plug-and-play SSD, or a pre-built mini computer.
+    </p>
+    <a href="#pricing" class="hero-cta">Secure Your Future</a>
+  </div>
+</div>
+
+<section id="value" class="value-stack">
+  <h2 class="section-title">Your Curated Knowledge Library</h2>
+  <p class="section-subtitle">We've done the research, organization, and integration, so you get instant access. Thousands of hours of research, all in one place.</p>
+  
+  <div class="value-grid">
+    <div class="value-item">
+      <div class="value-icon">&#128137;</div>
+      <h3>Emergency Medical Procedures</h3>
+      <p>Life-saving techniques when hospitals aren't an option</p>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">&#127830;</div>
+      <h3>Long-Term Food Storage</h3>
+      <p>Preservation methods that work without electricity</p>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">&#128167;</div>
+      <h3>Water Purification Systems</h3>
+      <p>Multiple methods to make any water source safe</p>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">&#127968;</div>
+      <h3>Shelter Building</h3>
+      <p>Construct protection from whatever materials you have</p>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">&#128506;</div>
+      <h3>Navigation & Communication</h3>
+      <p>Find your way and stay connected when GPS fails</p>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">&#128293;</div>
+      <h3>Fire & Energy</h3>
+      <p>Create heat, light, and power from basic resources</p>
+    </div>
+  </div>
+  
+  <p class="value-note">20,000+ pages of open-source survival knowledge, organized and searchable. Included with every purchase at no additional cost.</p>
+</section>
+
+<section id="features">
+  <h2 class="section-title">Be Ready for Anything</h2>
+  <p class="section-subtitle">
+    When the grid goes down, the cloud goes with it. DoBi doesn't need either.
+  </p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">&#128274;</div>
+      <h3>100% Offline</h3>
+      <p>No internet, no cloud, no phone-home. Everything runs locally on your machine. Your data stays yours.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">&#128218;</div>
+      <h3>Survival Library</h3>
+      <p>DoBi ships with a powerful pre-trained AI model enhanced by over 20,000 pages of expert survival material. Upload your own PDFs to expand its knowledge with the references that matter most to you.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">&#9889;</div>
+      <h3>One-Click Launch</h3>
+      <p>Download the ZIP or plug in the SSD. Either way, DoBi launches with a single click. Ongoing updates and improvements are included with your purchase and delivered as simple file updates with step-by-step instructions.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">&#128187;</div>
+      <h3>Smart Hardware Detection</h3>
+      <p>DoBi reads your hardware and picks the best model tier automatically. No tweaking needed.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">&#128172;</div>
+      <h3>Real Conversations</h3>
+      <p>Not just Q&A. DoBi remembers context within a conversation, follows up on earlier topics, and provides sourced answers from its knowledgebase.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">&#128736;</div>
+      <h3>Three Model Tiers</h3>
+      <p>Full (7B), Mid (3B), and Lite (1B) models included. Scale from a powerful Mac to a more modest one with as little as 4 GB RAM (8 GB or more is better for the Full tier).</p>
+    </div>
+  </div>
+</section>
+
+<div class="chaos">
+  <div class="chaos-content">
+    <h2 class="chaos-title">Total Certainty in an Uncertain World</h2>
+    <p class="chaos-subtitle">In a crisis, you don't rise to the occasion, you sink to the level of your preparation.</p>
+    <p class="chaos-question">Do you have the answer, or do you have a blank screen?</p>
+    <a href="#pricing" class="chaos-cta">Stop Hoping. Start Preparing.</a>
+  </div>
+</div>
+
+<section id="how-it-works" class="how-it-works">
+  <h2 class="section-title">Peace of Mind in Three Steps</h2>
+  <p class="section-subtitle">No internet. No accounts. No nonsense.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Choose Your Edition</h3>
+      <p>Download, plug in, or order pre-built. Whatever fits your needs.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Launch</h3>
+      <p>One click. It's ready.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Ask</h3>
+      <p>Get answers. Stay prepared.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2 class="section-title">Choose Your Edition</h2>
+  <p class="section-subtitle">
+    One-time purchase. No subscriptions, no recurring fees. Every edition includes the complete 20,000+ page curated knowledge library, organized, searchable, and accessible offline.
+    <strong>Mac editions</strong> are built for <strong>Apple Silicon Macs</strong>
+    (Macs with Apple's M1, M2, or newer chips). Intel Macs are untested.
+    <strong>Windows editions</strong> require a <strong>64-bit Intel/AMD PC</strong>
+    with 16 GB RAM recommended.
+  </p>
+
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <h3>DoBi OS</h3>
+      <p class="platform">Downloadable ZIP</p>
+      <div class="price">$69</div>
+      <p class="price-note">One-time purchase &bull; Instant download</p>
+      <ul>
+        <li>Complete 20,000+ page knowledge library included</li>
+        <li>Download a ZIP, extract, and run</li>
+        <li>All three AI model tiers included</li>
+        <li>Use your own storage</li>
+        <li>Instant access after purchase</li>
+      </ul>
+      <a href="#" class="btn-buy">Buy Now</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <span class="popular-badge">Most Popular</span>
+      <h3>DoBi</h3>
+      <p class="platform">1 TB Portable SSD</p>
+      <div class="price">$199</div>
+      <p class="price-note">One-time purchase &bull; Plus shipping</p>
+      <ul>
+        <li>Complete 20,000+ page knowledge library included</li>
+        <li>1 TB portable SSD with DoBi OS</li>
+        <li>All three AI model tiers included</li>
+        <li>Plug into your computer</li>
+        <li>ships within 5 to 7 business days</li>
+      </ul>
+      <a href="#" class="btn-buy">Buy Now</a>
+    </div>
+
+    <div class="pricing-card">
+      <h3>DoBi Nitro</h3>
+      <p class="platform">Pre-Built Mini PC</p>
+      <div class="price">$699+</div>
+      <p class="price-note">Custom-built to order &bull; By inquiry</p>
+      <ul>
+        <li>Complete 20,000+ page knowledge library included</li>
+        <li>Dedicated mini PC with DoBi OS</li>
+        <li>Advanced AI model tiers available</li>
+        <li>Hardware optimized for the best DoBi experience</li>
+        <li>Custom-built to your needs. Just plug in power.</li>
+      </ul>
+      <a href="#" class="btn-inquiry">Request a Quote</a>
+    </div>
+  </div>
+
+  <div class="fulfillment-note">
+    <h3>Shipping &amp; Fulfillment</h3>
+    <p><strong>DoBi OS</strong> is an instant download after purchase. <strong>DoBi</strong> (SSD) ships within <strong>5 to 7 business days</strong> from Michigan, USA. Each unit includes a premium 1 TB portable SSD, hand-prepared for your selected platform (Mac or Windows). <strong>DoBi Nitro</strong> is custom-built to order; contact us for pricing and lead times.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">Home</a>
+    <a href="faq.html">FAQ</a>
+    <a href="#">Contact</a>
+    <a href="#pricing">Buy Now</a>
+  </div>
+  <p>&copy; 2026 DoBi. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
