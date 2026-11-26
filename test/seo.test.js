@@ -98,7 +98,8 @@ test("sitemap lists the clean indexable URLs and drops checkout", () => {
   }
   assert.strictEqual(xml.includes("index.html"), false);
   assert.strictEqual(xml.includes("checkout"), false);
-  assert.strictEqual(xml.includes("<lastmod>2026-11-26</lastmod>"), true);
+  assert.strictEqual(xml.includes("<lastmod>2026-11-25</lastmod>"), true);
+  assert.strictEqual(xml.includes("2026-11-26"), false);
 });
 
 test("local page links point at files that exist", () => {
