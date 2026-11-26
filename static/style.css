@@ -95,6 +95,7 @@ footer .name { display: flex; align-items: center; gap: 10px; font-stretch: 72%;
 .foot-links a { text-decoration: none; font-weight: 600; font-size: 16px; padding: 8px 0; }
 .foot-links a:hover { text-decoration: underline; }
 .foot-legal { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid var(--border); color: var(--dim); font-size: 14px; }
+.foot-note { grid-column: 1 / -1; margin: 8px 0 0; color: var(--dim); font-size: 12px; line-height: 1.45; }
 
 /* ---- Section heads ---- */
 
